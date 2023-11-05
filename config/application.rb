@@ -35,5 +35,13 @@ module MembersDatabase
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    config.generators do |generate|
+      generate.assets false
+      generate.helper false
+      generate.view_specs false
+    end
+
+    config.action_mailer.default_url_options = {host: "localhost", port: 3000}
   end
 end
