@@ -4,6 +4,8 @@ class User < ApplicationRecord
 
   enum :role, [:artist, :curator, :admin]
 
+  validates :email, :name, :role, presence: true
+
   def show_artworks?
     artist? || admin?
   end
