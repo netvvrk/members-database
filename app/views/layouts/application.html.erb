@@ -1,16 +1,22 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>MembersDatabase</title>
+    <title>Netvvrk Members Database</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
   </head>
-
   <body>
-    <%= yield %>
+    <%= render "layouts/navbar" %>
+    <div class="container mx-2 my-4">
+      <% flash.each do |_key, value| %>
+        <div class="text-danger fw-bold my-2">
+          <%= value %>
+        </div>
+      <% end %>
+      <%= yield %>
+    </div>
   </body>
 </html>
