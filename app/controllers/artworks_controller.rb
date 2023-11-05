@@ -1,5 +1,5 @@
 class ArtworksController < ApplicationController
-  before_action :set_artwork, only: %i[ show edit update destroy ]
+  before_action :set_artwork, only: %i[show edit update destroy]
 
   # GET /artworks
   def index
@@ -22,6 +22,7 @@ class ArtworksController < ApplicationController
   # POST /artworks
   def create
     @artwork = Artwork.new(artwork_params)
+    @artwork.user = current_user
 
     if @artwork.save
       redirect_to @artwork, notice: "Artwork was successfully created."
@@ -46,13 +47,14 @@ class ArtworksController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_artwork
-      @artwork = Artwork.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def artwork_params
-      params.require(:artwork).permit(:title, :medium, :description, :price, :visible, :duration, :units, :height, :width, :depth, :location, :user_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_artwork
+    @artwork = Artwork.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def artwork_params
+    params.require(:artwork).permit(:title, :medium, :description, :price, :visible, :duration, :units, :height, :width, :depth, :location, :user_id, :year)
+  end
 end
