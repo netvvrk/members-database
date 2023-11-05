@@ -1,17 +1,10 @@
 <div id="<%= dom_id user %>">
-  <p>
-    <strong>Email:</strong>
-    <%= user.email %>
-  </p>
-
-  <p>
-    <strong>Name:</strong>
-    <%= user.name %>
-  </p>
-
-  <p>
-    <strong>Role:</strong>
-    <%= user.role %>
-  </p>
-
+  <tr>
+    <td><%= user.id %></td>
+    <td><%= user.name %></td>
+    <td><%= user.email %></td>
+    <td><%= user.role %></td>
+    <td><%= user.active %></td>
+    <td><%= user.last_sign_in_at&.to_date&.to_fs(:long) %></td>
+  </tr>
 </div>

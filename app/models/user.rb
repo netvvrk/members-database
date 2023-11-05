@@ -15,4 +15,8 @@ class User < ApplicationRecord
   def show_users?
     admin?
   end
+
+  def active_for_authentication?
+    super && active?
+  end
 end

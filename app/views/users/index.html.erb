@@ -1,14 +1,19 @@
-<p style="color: green"><%= notice %></p>
-
-<h1>Users</h1>
-
-<div id="users">
-  <% @users.each do |user| %>
-    <%= render user %>
-    <p>
-      <%= link_to "Show this user", user %>
-    </p>
-  <% end %>
+<h4>Users</h4>
+<table id="users" class="table">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Name</th>
+      <th scope="col">E-mail</th>
+      <th scope="col">Role</th>
+      <th scope="col">Active</th>
+      <th scope="col">Last Signed In</th>
+      <th scope="col">&nbsp;</th>
+    </tr>
+  </thead>
+  <tbody id="users">
+    <% @users.each do |user| %>
+      <%= render user %>
+    <% end %>
+  </table>
 </div>
-
-<%= link_to "New user", new_user_path %>
