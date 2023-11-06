@@ -1,62 +1,9 @@
 <div id="<%= dom_id artwork %>">
-  <p>
-    <strong>Title:</strong>
-    <%= artwork.title %>
-  </p>
-
-  <p>
-    <strong>Medium:</strong>
-    <%= artwork.medium %>
-  </p>
-
-  <p>
-    <strong>Description:</strong>
-    <%= artwork.description %>
-  </p>
-
-  <p>
-    <strong>Price:</strong>
-    <%= artwork.price %>
-  </p>
-
-  <p>
-    <strong>Visible:</strong>
-    <%= artwork.visible %>
-  </p>
-
-  <p>
-    <strong>Duration:</strong>
-    <%= artwork.duration %>
-  </p>
-
-  <p>
-    <strong>Units:</strong>
-    <%= artwork.units %>
-  </p>
-
-  <p>
-    <strong>Height:</strong>
-    <%= artwork.height %>
-  </p>
-
-  <p>
-    <strong>Width:</strong>
-    <%= artwork.width %>
-  </p>
-
-  <p>
-    <strong>Depth:</strong>
-    <%= artwork.depth %>
-  </p>
-
-  <p>
-    <strong>Location:</strong>
-    <%= artwork.location %>
-  </p>
-
-  <p>
-    <strong>User:</strong>
-    <%= artwork.user_id %>
-  </p>
-
+  <tr>
+    <td><%= artwork.id %></td>
+    <td><%= link_to artwork.title, artwork %></td>
+    <td><%= artwork.medium %></td>
+    <td><%= artwork.description %></td>
+    <td><%= artwork.visible %></td>
+  </tr>
 </div>

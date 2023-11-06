@@ -1,0 +1,12 @@
+<div>
+  <% if @artwork.duration %>
+    <%= @artwork.duration %> minutes <br>
+  <% end %>
+  <% if @artwork.height %>
+    <%= @artwork.height %> x <%= @artwork.width %>
+    <% if @artwork.depth %>
+      x <%= @artwork.depth %>
+    <% end %>
+    <%= @artwork.units %>
+  <% end %>
+</div>
