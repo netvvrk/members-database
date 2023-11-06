@@ -1,4 +1,5 @@
-<%= bootstrap_form_with(model: artwork) do |f| %>
+  <%= bootstrap_form_with(model: artwork) do |f| %>
+  <%= f.alert_message "Please fix the errors below." %>
   <%= f.text_field :title %>
   <%= f.text_field :medium %>
   <%= f.text_area :description %>

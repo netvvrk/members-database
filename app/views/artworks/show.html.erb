@@ -5,13 +5,19 @@
 <div class="mt-1">
   Location: <%= @artwork.location %>
 </div>
+<div class="mt-1">
+  Price: <%= @artwork.price.present? ? @artwork.price : "none" %>
+</div>
+<div class="mt-1 text-warning fw-bold">
+  <%= @artwork.visible ? "Not " : "" %> Visible to Curators
+</div>
 <% if @artwork.description.present? %>
   <div class="mt-2">
     <div class="fw-bold">Description</div>
     <%= @artwork.description %>
   </div>
 <% end%>
-<div class="my-4">
+<div class="my-5">
   <%= link_to "Edit this artwork", edit_artwork_path(@artwork) %>
 </div>
-<%= button_to "Delete this artwork", @artwork, method: :delete, class: "btn btn-danger" %>
+<%= button_to "Delete this artwork", @artwork, method: :delete, class: "btn btn-danger", form: { data: { turbo_confirm: 'Are you sure?' } }, class: "btn btn-danger mx-1" %>
