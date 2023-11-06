@@ -6,6 +6,7 @@ gem "bootsnap", require: false
 gem "bootstrap_form"
 gem "cssbundling-rails"
 gem "devise"
+gem "imagekitio"
 gem "jsbundling-rails"
 gem "pg"
 gem "propshaft"
