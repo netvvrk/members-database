@@ -6,6 +6,7 @@ class Artwork < ApplicationRecord
   validate :dimensions
 
   belongs_to :user
+  has_many :images
 
   private
 

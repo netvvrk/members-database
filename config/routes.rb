@@ -1,13 +1,15 @@
 Rails.application.routes.draw do
-  resources :artworks
   root "pages#home"
+  resources :artworks do
+    resources :images
+  end
+  resources :users
+
   devise_for :users
   devise_scope :user do
     get "login", to: "devise/sessions#new"
     delete "logout", to: "devise/sessions#destroy"
   end
-
-  resources :users
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.

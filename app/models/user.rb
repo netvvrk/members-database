@@ -6,6 +6,8 @@ class User < ApplicationRecord
 
   validates :email, :name, :role, presence: true
 
+  has_many :artworks
+
   def show_artworks?
     artist? || admin?
   end

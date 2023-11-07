@@ -1,0 +1,7 @@
+<h4>Images</h4>
+<div id="images">
+  <% @images.each do |image| %>
+    <%= render image %>
+  <% end %>
+</div>
+<%= link_to "New image", new_artwork_image_path %>

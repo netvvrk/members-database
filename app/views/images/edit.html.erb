@@ -1,0 +1,7 @@
+<div class="container col-md-5">
+  <h4>Editing image for "<%= @artwork.title %>"</h4>
+  <%= render "form", image: @image %>
+  <br>
+  <div>
+    <%= link_to "Back to images", artwork_images_path(@artwork) %>
+  </div>
