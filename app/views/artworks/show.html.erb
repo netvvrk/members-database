@@ -31,7 +31,13 @@
         <% @artwork.images.each do |i| %>
           <div class="row" id="<%= dom_id(i) %>">
             <div class="float-left">
-              <%= image_tag(i.file.url(transformation: [{height: 150}]), alt: i.caption) %>
+              <% if i.is_video? %>
+                <video controls height="250">
+                  <source src="https://ik.imagekit.io/artvvrk/IMG_1926_WpI6x9p0jY.mov?updatedAt=1699831504831">
+                </video>
+              <% else %>
+                <%= image_tag(i.file.url(transformation: [{height: 150}]), alt: i.caption) %>
+              <% end %>
             </div>
             <div><%= i.caption %></div>
           </div>

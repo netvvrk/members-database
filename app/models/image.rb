@@ -3,9 +3,13 @@ class Image < ApplicationRecord
   has_one_attached :file
 
   validates :file, presence: true
-  validate :valid_image
+  # validate :valid_image
 
   before_destroy :purge_file
+
+  def is_video?
+    file.blob.content_type.include?("video")
+  end
 
   private
 
