@@ -43,7 +43,7 @@ class ImagesController < ApplicationController
   # DELETE /images/1
   def destroy
     @image.destroy!
-    redirect_to artwork_images_url(@artwork), notice: "Image was successfully destroyed.", status: :see_other
+    redirect_to @artwork, status: :see_other
   end
 
   private
