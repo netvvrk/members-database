@@ -8,6 +8,10 @@ class Artwork < ApplicationRecord
   belongs_to :user
   has_many :images
 
+  def more_images_allowed?
+    images.count < 3
+  end
+
   private
 
   def dimensions

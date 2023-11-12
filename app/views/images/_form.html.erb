@@ -1,6 +1,6 @@
 <%= bootstrap_form_with(model: [artwork, image]) do |f| %>
   <%= f.alert_message "Please fix the errors below." %>
-  <%= f.text_field :caption, label: "Caption (optional)" %>
-  <%= f.file_field :file %>
+  <%= f.text_field :caption, label: "Caption (optional)", class: "form-control-sm" %>
+  <%= f.file_field :file, class: "form-control-sm" %>
   <%= f.submit %>
 <% end %>

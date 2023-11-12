@@ -25,7 +25,7 @@ class ImagesController < ApplicationController
     @image = @artwork.images.new(image_params)
 
     if @image.save
-      redirect_to artwork_images_url(@artwork), notice: "Image was successfully created."
+      redirect_to @artwork
     else
       render :new, status: :unprocessable_entity
     end
