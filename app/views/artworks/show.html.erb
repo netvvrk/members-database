@@ -45,7 +45,7 @@
         <% end %>
       </div>
       <% if @artwork.more_images_allowed? %>
-        <h5 class="mt-2 text-warning">Add image</h5>
+        <h5 class="mt-2 text-warning">Add image or video</h5>
         <%= render "images/form", artwork: @artwork, image: @artwork.images.new %>
       <% end %>
     </div>

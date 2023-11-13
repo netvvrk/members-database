@@ -2,8 +2,8 @@ class Image < ApplicationRecord
   belongs_to :artwork
   has_one_attached :file
 
-  validates :file, presence: true
-  # validate :valid_image
+  validates :caption, :file, presence: true
+  validate :valid_image
 
   before_destroy :purge_file
 
@@ -19,9 +19,8 @@ class Image < ApplicationRecord
       errors.add(:file, "is too large")
     end
 
-    acceptable_types = ["image/jpeg", "image/png"]
-    unless acceptable_types.include?(file.content_type)
-      errors.add(:file, "must be a JPEG or PNG")
+    unless /^image|video/.match?(file.content_type)
+      errors.add(:file, "must be a JPEG, PNG, or Video")
     end
   end
 
