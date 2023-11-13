@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user!
+  before_action :confirm_admin
   before_action :set_user, only: %i[show edit update destroy]
 
   # GET /users
@@ -55,5 +57,11 @@ class UsersController < ApplicationController
   # Only allow a list of trusted parameters through.
   def user_params
     params.require(:user).permit(:email, :name, :role)
+  end
+
+  def confirm_admin
+    unless current_user.admin?
+      redirect_to root_url, notice: "You do not have access to that page"
+    end
   end
 end
