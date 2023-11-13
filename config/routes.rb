@@ -3,7 +3,10 @@ Rails.application.routes.draw do
   resources :artworks do
     resources :images
   end
-  resources :users
+
+  scope :admin do
+    resources :users
+  end
 
   devise_for :users
   devise_scope :user do
