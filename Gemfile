@@ -23,3 +23,8 @@ group :development do
   gem "standard"
   gem "web-console"
 end
+
+##### comment out unless generating fake data
+gem "down"
+gem "faker"
+#####
