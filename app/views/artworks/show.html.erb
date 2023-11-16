@@ -4,6 +4,11 @@
       <div><strong><%= @artwork.title %></strong> (<%= @artwork.year %>)<br>
         <%= @artwork.medium %>
       </div>
+      <% if @artwork.edition.present? %>
+        <div>
+          ed: <%= @artwork.edition %>
+        </div>
+      <% end %>
       <%= render "dimensions" %>
       <div class="mt-1">
         Location: <%= @artwork.location %>
