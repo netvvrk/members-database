@@ -5,7 +5,7 @@ class ArtworksController < ApplicationController
 
   # GET /artworks
   def index
-    @artworks = Artwork.all
+    @artworks = current_user.artworks
   end
 
   # GET /artworks/1
@@ -23,6 +23,8 @@ class ArtworksController < ApplicationController
 
   # POST /artworks
   def create
+    redirect_to artworks_url, notice: "You have uploaded the maximum number of artworks" unless current_user.more_artworks_allowed?
+
     @artwork = Artwork.new(artwork_params)
     @artwork.user = current_user
 

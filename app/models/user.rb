@@ -23,4 +23,8 @@ class User < ApplicationRecord
   def active_for_authentication?
     super && active?
   end
+
+  def more_artworks_allowed?
+    artworks.count < 10
+  end
 end
