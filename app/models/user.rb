@@ -6,7 +6,7 @@ class User < ApplicationRecord
 
   validates :email, :name, :role, presence: true
 
-  has_many :artworks
+  has_many :artworks, dependent: :destroy
 
   def show_artworks?
     artist? || admin?

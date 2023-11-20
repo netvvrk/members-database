@@ -6,7 +6,7 @@ class Artwork < ApplicationRecord
   validate :dimensions
 
   belongs_to :user
-  has_many :images
+  has_many :images, dependent: :destroy
 
   def more_images_allowed?
     images.count < 3
