@@ -16,9 +16,9 @@
               <%= link_to "Artworks", artworks_url, class: "nav-link" %>
             </li>
           <% end %>
-          <% if false && user.show_browse? %>
+          <% if user.show_browse? %>
             <li class="nav-item">
-              <%= link_to "Browse Artworks", "#", class: "nav-link" %>
+              <%= link_to "Browse Artworks", curator_artworks_url, class: "nav-link" %>
             </li>
           <% end %>
           <% if user.show_users? %>
@@ -30,6 +30,7 @@
       </ul>
       <div class="d-flex" role="search">
         <% if user_signed_in? %>
+          <span class="text-white"> <%#= current_user.email %></span>
           <%= button_to(
           "Log Out",
           logout_path,

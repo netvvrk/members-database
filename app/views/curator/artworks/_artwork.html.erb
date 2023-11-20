@@ -1,0 +1,11 @@
+<tr>
+  <td><%= artwork.id %></td>
+  <td><%= artwork.user.name %></td>
+  <td><%= link_to artwork.title, curator_artwork_url(artwork) %></td>
+  <td><%= artwork.medium %></td>
+  <td width="300px"><%= artwork.description %></td>
+  <td>
+    <% if artwork.images.any? %>
+      <%= image_tag artwork.images.first.file.url(transformation: [{height: 100}]) %>
+    <% end %>
+  </tr>

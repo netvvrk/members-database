@@ -1,11 +1,16 @@
 Rails.application.routes.draw do
   root "pages#home"
+
   resources :artworks do
     resources :images
   end
 
   scope :admin do
     resources :users
+  end
+
+  namespace :curator do
+    resources :artworks, only: [:index, :show]
   end
 
   devise_for :users

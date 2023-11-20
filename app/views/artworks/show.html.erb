@@ -37,8 +37,8 @@
           <div class="row" id="<%= dom_id(i) %>">
             <div class="float-left">
               <% if i.is_video? %>
-                <video controls height="250">
-                  <source src="https://ik.imagekit.io/artvvrk/IMG_1926_WpI6x9p0jY.mov?updatedAt=1699831504831">
+                <video controls height="400">
+                  <source src="<%= i.file.url %>">
                 </video>
               <% else %>
                 <%= image_tag(i.file.url(transformation: [{height: 150}]), alt: i.caption) %>

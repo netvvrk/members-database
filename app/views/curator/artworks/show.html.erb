@@ -1,0 +1,44 @@
+<div class="container">
+  <div class="row">
+    <div class="col-6">
+      <div><strong><%= @artwork.title %></strong> (<%= @artwork.year %>) by <%= @artwork.user.name %>
+        <%= @artwork.medium %>
+      </div>
+      <% if @artwork.edition.present? %>
+        <div>
+          ed: <%= @artwork.edition %>
+        </div>
+      <% end %>
+      <%= render "artworks/dimensions" %>
+      <div class="mt-1">
+        Location: <%= @artwork.location %>
+      </div>
+      <div class="mt-1">
+        Price: <%= @artwork.price.present? ? @artwork.price : "none" %>
+      </div>
+      <% if @artwork.description.present? %>
+        <div class="mt-2">
+          <div class="fw-bold">Description</div>
+          <%= @artwork.description %>
+        </div>
+      <% end%>
+    </div>
+    <div class="col-1">&nbsp;</div>
+    <div class="col-4">
+      <div id="images">
+        <% @artwork.images.each do |i| %>
+          <div class="float-left mb-2">
+            <% if i.is_video? %>
+              <video controls height=400">
+                <source src="<%= i.file.url %>">
+              </video>
+            <% else %>
+              <%= image_tag(i.file.url(transformation: [{height: 150}]), alt: i.caption) %>
+            <% end %>
+          </div>
+          <div class="mb-2"><%= i.caption %></div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
