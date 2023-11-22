@@ -44,5 +44,18 @@ module MembersDatabase
 
     config.action_mailer.default_url_options = {host: "localhost", port: 3000}
     config.active_storage.service = :imagekitio
+
+    config.action_mailer.delivery_method = :smtp
+    config.action_mailer.smtp_settings = {
+      address: "smtp.gmail.com",
+      port: 587,
+      domain: ENV.fetch("GMAIL_DOMAIN"),
+      user_name: ENV.fetch("GMAIL_ADDRESS"),
+      password: ENV.fetch("GMAIL_PASSWORD"),
+      aauthentication: "plain",
+      enable_starttls: true,
+      open_timeout: 5,
+      read_timeout: 5
+    }
   end
 end
