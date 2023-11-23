@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_13_014508) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_23_040102) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -73,7 +73,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_13_014508) do
 
   create_table "users", force: :cascade do |t|
     t.string "email", null: false
-    t.string "name", null: false
     t.integer "role", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -90,8 +89,11 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_13_014508) do
     t.string "unlock_token"
     t.datetime "locked_at"
     t.boolean "active", default: true, null: false
+    t.string "first_name", default: "", null: false
+    t.string "last_name", default: "", null: false
     t.index ["active"], name: "index_users_on_active"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["last_name", "first_name"], name: "index_users_on_last_name_and_first_name"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end

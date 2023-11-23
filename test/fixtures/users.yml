@@ -1,16 +1,19 @@
 artist:
   email: louise@gmail.com
-  name: "Louise the Artist"
+  first_name: Louise
+  last_name: The Artist
   encrypted_password: <%= Devise::Encryptor.digest(User, "password1") %>
   role: 0
 curator:
   email: lauren@gmail.com
-  name: "Lauren the Curator"
+  first_name: Lauren
+  last_name: The Curator
   encrypted_password: <%= Devise::Encryptor.digest(User, "password1") %>
   role: 1
 admin:
   email: paddy@gmail.com
-  name: "Paddy the Admin"
+  first_name: Paddy
+  last_name: The Admin
   encrypted_password: <%= Devise::Encryptor.digest(User, "password1") %>
   role: 2
 
