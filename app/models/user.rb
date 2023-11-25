@@ -4,9 +4,13 @@ class User < ApplicationRecord
 
   enum :role, [:artist, :curator, :admin]
 
-  validates :email, :name, :role, presence: true
+  validates :email, :last_name, :role, presence: true
 
   has_many :artworks, dependent: :destroy
+
+  def name
+    [first_name, last_name].compact.join(" ")
+  end
 
   def show_artworks?
     artist? || admin?
