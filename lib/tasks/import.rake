@@ -3,19 +3,21 @@ require "csv"
 namespace :import do
   desc "import chargebee users"
   task chargebee: :environment do
-    temp_file = Down.download(ENV["FILE"])
-    File.open(temp_file) do |file|
+    File.open("tmp/cb.csv") do |file|
       CSV.foreach(file, headers: true) do |row|
-        email = row["customers.email"].strip
+        email = row["customers.email"].strip.downcase
         next if User.where(email: email).count.positive?
+
+        password = SecureRandom.alphanumeric(12)
+        cb_customer_id = row["customers.id"]
 
         first = row["customers.first_name"]
         last = row["customers.last_name"]
-        name = [first, last].compact.join(" ")
-        name = "Artist" if name.blank?
-        password = SecureRandom.alphanumeric(12)
-        puts "#{name}:\t#{email}"
-        User.create!(email: email, name: name, password: password, password_confirmation: password, role: :artist)
+        last = "artist" if [first, last].compact.empty?
+        first ||= ""
+
+        puts email
+        User.create!(email: email, first_name: first, last_name: last, password: password, password_confirmation: password, role: :artist, cb_customer_id: cb_customer_id)
       end
     end
   end
