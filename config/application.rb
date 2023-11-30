@@ -47,15 +47,13 @@ module MembersDatabase
 
     config.action_mailer.delivery_method = :smtp
     config.action_mailer.smtp_settings = {
-      address: "smtp.gmail.com",
+      address: "smtp.sendgrid.net",
       port: 587,
       domain: ENV.fetch("GMAIL_DOMAIN"),
-      user_name: ENV.fetch("GMAIL_ADDRESS"),
-      password: ENV.fetch("GMAIL_PASSWORD"),
+      user_name: "apikey",
+      password: ENV.fetch("SENDGRID_KEY"),
       aauthentication: "plain",
-      enable_starttls: true,
-      open_timeout: 5,
-      read_timeout: 5
+      enable_starttls: true
     }
   end
 end
