@@ -5,7 +5,7 @@ class UsersController < ApplicationController
 
   # GET /users
   def index
-    @users = User.all.order(id: :desc)
+    @users = User.all.order(id: :desc).limit(100)
   end
 
   # GET /users/1
