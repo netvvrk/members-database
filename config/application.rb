@@ -50,7 +50,7 @@ module MembersDatabase
     config.action_mailer.smtp_settings = {
       address: "smtp.sendgrid.net",
       port: 587,
-      domain: ENV.fetch("GMAIL_DOMAIN"),
+      domain: ENV.fetch("DOMAIN"),
       user_name: "apikey",
       password: ENV.fetch("SENDGRID_KEY"),
       aauthentication: "plain",
