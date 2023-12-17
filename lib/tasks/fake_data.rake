@@ -5,7 +5,7 @@ task fake_data: :environment do
   2.times do
     email = "#{Faker::Alphanumeric.alphanumeric(number: 10)}@#{Faker::Alphanumeric.alphanumeric(number: 10)}.com"
     password = Faker::Alphanumeric.alphanumeric(number: 20)
-    user = User.create!(email: email, name: Faker::Name.name, password: password, password_confirmation: password)
+    user = User.create!(email: email, first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, password: password, password_confirmation: password)
 
     2.times do
       attr = {
