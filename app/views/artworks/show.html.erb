@@ -1,5 +1,17 @@
 <div class="container">
-  <div class="row">
+  <section class="image-grid">
+    <div class="row gy-4">
+      <% @artwork.images.each do |i| %>
+        <div class="col-4">
+          <a class="d-block" href="">
+            <%= image_tag large_url(i), alt: i.caption, class: "img-fluid" %>
+          </a>
+          <%= i.caption %>
+        </div>
+      <% end %>
+    </div>
+  </section>
+  <div class="row mt-4">
     <div class="col-4">
       <div><strong><%= @artwork.title %></strong> (<%= @artwork.year %>)<br>
         <%= @artwork.medium %>
@@ -32,23 +44,6 @@
     </div>
     <div class="col-1">&nbsp;</div>
     <div class="col-3">
-      <div id="images">
-        <% @artwork.images.each do |i| %>
-          <div class="row" id="<%= dom_id(i) %>">
-            <div class="float-left">
-              <% if i.is_video? %>
-                <video controls height="400">
-                  <source src="<%= i.file.url %>">
-                </video>
-              <% else %>
-                <%= image_tag(i.file.url(transformation: [{height: 150}]), alt: i.caption) %>
-              <% end %>
-            </div>
-            <div><%= i.caption %></div>
-          </div>
-          <%= button_to "Delete image/video", [@artwork, i], method: :delete, class: "btn btn-danger btn-sm mt-2 mb-4", form: { data: { turbo_confirm: 'Are you sure?' } } %>
-        <% end %>
-      </div>
     </div>
     <div class="col-3">
       <% if @artwork.more_images_allowed? %>
