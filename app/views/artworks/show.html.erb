@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col-6">
+    <div class="col-4">
       <div><strong><%= @artwork.title %></strong> (<%= @artwork.year %>)<br>
         <%= @artwork.medium %>
       </div>
@@ -16,7 +16,7 @@
       <div class="mt-1">
         Price: <%= @artwork.price.present? ? @artwork.price : "none" %>
       </div>
-      <div class="mt-1 text-warning fw-bold">
+      <div class="mt-1 pink">
         <%= @artwork.visible ? "Not " : "" %> Visible to Curators
       </div>
       <% if @artwork.description.present? %>
@@ -31,7 +31,7 @@
       <%= button_to "Delete this artwork", @artwork, method: :delete, class: "btn btn-danger", form: { data: { turbo_confirm: 'Are you sure?' } }, class: "btn btn-danger mx-1" %>
     </div>
     <div class="col-1">&nbsp;</div>
-    <div class="col-4">
+    <div class="col-3">
       <div id="images">
         <% @artwork.images.each do |i| %>
           <div class="row" id="<%= dom_id(i) %>">
@@ -46,11 +46,13 @@
             </div>
             <div><%= i.caption %></div>
           </div>
-          <%= button_to "Delete", [@artwork, i], method: :delete, class: "btn btn-danger btn-sm mt-2 mb-4", form: { data: { turbo_confirm: 'Are you sure?' } } %>
+          <%= button_to "Delete image/video", [@artwork, i], method: :delete, class: "btn btn-danger btn-sm mt-2 mb-4", form: { data: { turbo_confirm: 'Are you sure?' } } %>
         <% end %>
       </div>
+    </div>
+    <div class="col-3">
       <% if @artwork.more_images_allowed? %>
-        <h5 class="mt-2 text-warning">Add image or video</h5>
+        <h5 class="pink pb-2">Add up to 3 images or videos</h5>
         <%= render "images/form", artwork: @artwork, image: @artwork.images.new %>
       <% end %>
     </div>

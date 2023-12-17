@@ -7,12 +7,13 @@
       <td><%= artwork.description %></td>
       <td><%= artwork.visible %></td>
       <td>
-        <% if artwork.images.any? %>
-          <%= image_tag artwork.images.first.file.url(transformation: [{height: 100}]) %>
+        <% artwork.images.each do |image| %>
+          <%= image_tag thumbnail_url(image)  %>
         <% end %>
-        <td>
-          <%= button_to "Delete", artwork, method: :delete, form: { data: { turbo_confirm: 'Are you sure?' } }, class: "btn btn-danger mx-1" %>
-        </td>
-      </tr>
-    </div>
-  <% end %>
+      </td>
+      <td>
+        <%= button_to "Delete artwork", artwork, method: :delete, form: { data: { turbo_confirm: 'Are you sure?' } }, class: "btn btn-danger mx-1" %>
+      </td>
+    </tr>
+  </div>
+<% end %>

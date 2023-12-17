@@ -29,7 +29,7 @@ class ArtworksController < ApplicationController
     @artwork.user = current_user
 
     if @artwork.save
-      redirect_to artworks_url, notice: "Artwork was successfully created."
+      redirect_to @artwork, notice: "Artwork was successfully created."
     else
       render :new, status: :unprocessable_entity
     end
@@ -38,7 +38,7 @@ class ArtworksController < ApplicationController
   # PATCH/PUT /artworks/1
   def update
     if @artwork.update(artwork_params)
-      redirect_to artworks_url, notice: "Artwork was successfully updated.", status: :see_other
+      redirect_to @artwork, notice: "Artwork was successfully updated.", status: :see_other
     else
       render :edit, status: :unprocessable_entity
     end
