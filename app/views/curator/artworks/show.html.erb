@@ -3,9 +3,7 @@
     <div class="row gy-4">
       <% @artwork.images.each do |i| %>
         <div class="col-4">
-          <a class="d-block" href="">
-            <%= image_tag large_url(i), alt: i.caption, class: "img-fluid" %>
-          </a>
+          <%= image_tag large_url(i), alt: i.caption, class: "img-fluid" %>
           <i><%= i.caption %></i>
         </div>
       <% end %>
