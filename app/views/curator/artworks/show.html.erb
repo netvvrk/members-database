@@ -13,7 +13,7 @@
   </section>
   <div class="row mt-4">
     <div class="col-6">
-      <div><strong><%= @artwork.title %></strong> (<%= @artwork.year %>) by <%= @artwork.user.name %>
+      <div><strong><%= @artwork.title %></strong> (<%= @artwork.year %>) by <%= @artwork.user.name %><br>
         <%= @artwork.medium %>
       </div>
       <% if @artwork.edition.present? %>
@@ -22,10 +22,10 @@
         </div>
       <% end %>
       <%= render "artworks/dimensions" %>
-      <div class="mt-1">
+      <div>
         Location: <%= @artwork.location %>
       </div>
-      <div class="mt-1">
+      <div>
         Price: <%= @artwork.price.present? ? @artwork.price : "none" %>
       </div>
       <% if @artwork.description.present? %>

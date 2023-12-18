@@ -1,17 +1,25 @@
 <div class="container">
   <section class="image-grid">
     <div class="row gy-4">
-      <% @artwork.images.each do |i| %>
-        <div class="col-4">
-          <a class="d-block" href="">
-            <%= image_tag large_url(i), alt: i.caption, class: "img-fluid" %>
-          </a>
-          <%= i.caption %>
-        </div>
+      <% images = @artwork.images %>
+      <% if images[0] %>
+        <%= render "image", i: images[0] %>
       <% end %>
+      <% if images[1] %>
+        <%= render "image", i: images[1] %>
+      <% end %>
+      <% if images[2] %>
+        <%= render "image", i: images[2] %>
+      <% end %>
+      <div class="col-3">
+        <% if @artwork.more_images_allowed? %>
+          <h5 class="pink pb-2">Add up to 3 images or videos</h5>
+          <%= render "images/form", artwork: @artwork, image: @artwork.images.new %>
+        <% end %>
+      </div>
     </div>
   </section>
-  <div class="row mt-4">
+  <div class="row mt-2">
     <div class="col-4">
       <div><strong><%= @artwork.title %></strong> (<%= @artwork.year %>)<br>
         <%= @artwork.medium %>
@@ -22,13 +30,13 @@
         </div>
       <% end %>
       <%= render "dimensions" %>
-      <div class="mt-1">
+      <div>
         Location: <%= @artwork.location %>
       </div>
-      <div class="mt-1">
-        Price: <%= @artwork.price.present? ? @artwork.price : "none" %>
+      <div>
+        Price: <%= @artwork.price.present? ? number_to_currency(@artwork.price, unit: "", precision: 0) : "none" %>
       </div>
-      <div class="mt-1 pink">
+      <div class="pink">
         <%= @artwork.visible ? "Not " : "" %> Visible to Curators
       </div>
       <% if @artwork.description.present? %>
@@ -37,19 +45,10 @@
           <%= @artwork.description %>
         </div>
       <% end%>
-      <div class="my-5">
-        <%= link_to "Edit this artwork", edit_artwork_path(@artwork) %>
-      </div>
-      <%= button_to "Delete this artwork", @artwork, method: :delete, class: "btn btn-danger", form: { data: { turbo_confirm: 'Are you sure?' } }, class: "btn btn-danger mx-1" %>
     </div>
-    <div class="col-1">&nbsp;</div>
-    <div class="col-3">
-    </div>
-    <div class="col-3">
-      <% if @artwork.more_images_allowed? %>
-        <h5 class="pink pb-2">Add up to 3 images or videos</h5>
-        <%= render "images/form", artwork: @artwork, image: @artwork.images.new %>
-      <% end %>
+    <div class="col-4 mt-2">
+      <%= button_to "Edit this artwork", edit_artwork_path(@artwork), class: "btn btn-primary mb-4" %>
+      <%= button_to "Delete this artwork", @artwork, method: :delete, class: "btn btn-danger", form: { data: { turbo_confirm: 'Are you sure?' } }, class: "btn btn-danger mt-4" %>
     </div>
   </div>
 </div>
