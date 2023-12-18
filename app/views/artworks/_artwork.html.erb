@@ -5,7 +5,7 @@
       <td><%= link_to artwork.title, artwork %></td>
       <td><%= artwork.medium %></td>
       <td><%= artwork.description %></td>
-      <td><%= artwork.visible %></td>
+      <td><%= artwork.visible ? "yes" : "no" %></td>
       <td>
         <% artwork.images.each do |image| %>
           <%= image_tag thumbnail_url(image)  %>
