@@ -351,6 +351,7 @@ __metadata:
     bootstrap: ^5.3.2
     bootstrap-icons: ^1.11.1
     esbuild: ^0.19.5
+    fslightbox: ^3.4.1
     nodemon: ^3.0.1
     postcss: ^8.4.31
     postcss-cli: ^10.1.0
@@ -825,6 +826,13 @@ __metadata:
   dependencies:
     node-gyp: latest
   conditions: os=darwin
+  languageName: node
+  linkType: hard
+
+"fslightbox@npm:^3.4.1":
+  version: 3.4.1
+  resolution: "fslightbox@npm:3.4.1"
+  checksum: 1fbe8243350fe3123cfeadf9d1e1ed59b13b2f1d0804b1cc0b6e989e437b774d217116958c6c54dff1145d11c5dc6aa4d2e298d6ac4aee3a4acde1cdec7353bb
   languageName: node
   linkType: hard
 

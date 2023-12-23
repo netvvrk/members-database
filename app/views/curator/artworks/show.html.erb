@@ -3,7 +3,9 @@
     <div class="row gy-4">
       <% @artwork.images.each do |i| %>
         <div class="col-4">
-          <%= image_tag large_url(i), alt: i.caption, class: "img-fluid" %>
+          <a data-fslightbox href="<%= i.file.url %>">
+            <%= image_tag large_url(i), alt: i.caption, class: "img-fluid" %>
+          </a>
           <i><%= i.caption %></i>
         </div>
       <% end %>
