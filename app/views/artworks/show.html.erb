@@ -1,6 +1,6 @@
 <div class="container">
   <section class="image-grid">
-    <div class="row gy-4" data-controller="lightbox">
+    <div class="row gy-4">
       <% images = @artwork.images %>
       <% if images[0] %>
         <%= render "image", i: images[0] %>
