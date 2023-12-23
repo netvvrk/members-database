@@ -4,8 +4,9 @@
       <% @artwork.images.each do |i| %>
         <div class="col-4">
           <a data-fslightbox href="<%= i.file.url %>">
-            <%= image_tag large_url(i), alt: i.caption, class: "img-fluid" %>
+            <%= image_tag large_url(i), alt: i.caption %>
           </a>
+          <br>
           <i><%= i.caption %></i>
         </div>
       <% end %>
@@ -37,3 +38,4 @@
     </div>
   </div>
 </div>
+<%= javascript_include_tag "lightbox-refresh" %>
