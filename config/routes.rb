@@ -2,6 +2,9 @@ Rails.application.routes.draw do
   root "pages#home"
 
   resources :artworks do
+    member do
+      get :preview
+    end
     resources :images
   end
 

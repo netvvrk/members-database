@@ -1,23 +1,16 @@
 <div class="container">
-  <%= link_to "preview", preview_artwork_url(@artwork) %>
+  <%= link_to "exit preview", @artwork %>
   <section class="image-grid mt-2">
     <div class="row gy-4">
-      <% images = @artwork.images %>
-      <% if images[0] %>
-        <%= render "image", i: images[0] %>
+      <% @artwork.images.each do |i| %>
+        <div class="col-4">
+          <a data-fslightbox href="<%= i.file.url %>">
+            <%= image_tag large_url(i), alt: i.caption %>
+          </a>
+          <br>
+          <i><%= i.caption %></i>
+        </div>
       <% end %>
-      <% if images[1] %>
-        <%= render "image", i: images[1] %>
-      <% end %>
-      <% if images[2] %>
-        <%= render "image", i: images[2] %>
-      <% end %>
-      <div class="col-3">
-        <% if @artwork.more_images_allowed? %>
-          <h5 class="pink pb-2">Add up to 3 images or videos</h5>
-          <%= render "images/form", artwork: @artwork, image: @artwork.images.new %>
-        <% end %>
-      </div>
     </div>
   </section>
   <div class="row mt-2">
@@ -46,10 +39,6 @@
           <%= @artwork.description %>
         </div>
       <% end%>
-    </div>
-    <div class="col-4 mt-2">
-      <%= link_to "Edit this artwork", edit_artwork_path(@artwork), class: "btn btn-primary mb-4" %>
-      <%= button_to "Delete this artwork", @artwork, method: :delete, class: "btn btn-danger", form: { data: { turbo_confirm: 'Are you sure?' } }, class: "btn btn-danger mt-4" %>
     </div>
   </div>
 </div>
