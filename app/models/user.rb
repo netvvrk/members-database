@@ -4,6 +4,10 @@ class User < ApplicationRecord
 
   enum :role, [:artist, :curator, :admin]
 
+  ARTIST = 0
+  CURATOR = 1
+  ADMIN = 2
+
   validates :email, :last_name, :role, presence: true
 
   has_many :artworks, dependent: :destroy
