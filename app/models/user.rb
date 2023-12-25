@@ -12,6 +12,8 @@ class User < ApplicationRecord
 
   has_many :artworks, dependent: :destroy
 
+  scope :is_active, -> { where(active: true) }
+
   def name
     [first_name, last_name].compact.join(" ")
   end

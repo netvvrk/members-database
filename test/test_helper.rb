@@ -12,5 +12,9 @@ module ActiveSupport
 
     # Add more helper methods to be used by all tests here...
     include Devise::Test::IntegrationHelpers
+
+    def create_artwork(user)
+      user.artworks.create!(title: "Title", medium: "medium", visible: true, height: 2, width: 3, location: "Brooklyn", year: 2025)
+    end
   end
 end

@@ -8,6 +8,8 @@ class Artwork < ApplicationRecord
   belongs_to :user
   has_many :images, dependent: :destroy
 
+  scope :is_visible, -> { joins(:user).where("visible = true").merge(User.is_active) }
+
   def more_images_allowed?
     images.count < 3
   end
