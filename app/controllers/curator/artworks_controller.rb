@@ -4,7 +4,7 @@ class Curator::ArtworksController < ApplicationController
 
   # GET /curator/artworks
   def index
-    @artworks = Artwork.all.limit(30)
+    @artworks = Artwork.is_visible.joins(:user).where("role = ?", User::ARTIST).all.limit(20)
   end
 
   # GET /curator/artworks/1
@@ -13,16 +13,6 @@ class Curator::ArtworksController < ApplicationController
   end
 
   private
-
-  # Use callbacks to share common setup or constraints between actions.
-  def set_curator_artwork
-    @curator_artwork = Curator::Artwork.find(params[:id])
-  end
-
-  # Only allow a list of trusted parameters through.
-  def curator_artwork_params
-    params.fetch(:curator_artwork, {})
-  end
 
   def confirm_curator
     current_user.show_browse?
