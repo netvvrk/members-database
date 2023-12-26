@@ -4,7 +4,8 @@ class Curator::ArtworksController < ApplicationController
 
   # GET /curator/artworks
   def index
-    @artworks = Artwork.is_visible.joins(:user).where("role = ?", User::ARTIST).all.limit(20)
+    @page = params[:page]&.to_i || 0
+    @artworks = Artwork.is_visible.order(:id).all.page(@page)
   end
 
   # GET /curator/artworks/1
