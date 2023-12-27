@@ -1,12 +1,12 @@
-<tr>
-  <td><%= artwork.id %></td>
-  <td><%= artwork.user.name %></td>
-  <td><%= link_to artwork.title, curator_artwork_url(artwork) %></td>
-  <td><%= artwork.medium %></td>
-  <td width="300px"><%= artwork.description %></td>
-  <td>
+<div class="row border-bottom my-4 py-4">
+  <div class="col-1"><%= artwork.id %></div>
+  <div class="col-2"><%= artwork.user.name %></div>
+  <div class="col-3"><%= link_to artwork.title, curator_artwork_url(artwork) %></div>
+  <div class="col-1"><%= artwork.medium %></div>
+  <div class="col-2"><%= artwork.description %></div>
+  <div class="col-3">
     <% artwork.images.each do |image| %>
       <%= image_tag thumbnail_url(image)  %>
     <% end %>
-  </td>
-</tr>
+  </div>
+</div>

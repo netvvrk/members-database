@@ -1,19 +1,18 @@
-<h4>Artworks</h4>
-<%= paginate @artworks %>
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">ID</th>
-      <th scope="col">Artist</th>
-      <th scope="col">Title</th>
-      <th scope="col">Medium</th>
-      <th scope="col">Description</th>
-      <th scope="col">&nbsp;</th>
-    </tr>
-  </thead>
-  <tbody id="artworks">
-    <% @artworks.each do |artwork| %>
-      <%= render artwork %>
+<div class="row my-4">
+  <div class="col-4">
+    <h4>Artworks</h4>
+    <%= paginate @artworks %>
+  </div>
+  <div class="col-4">&nbsp </div>
+  <div class="col-4 align-bottom">
+    <%= bootstrap_form_tag method: :get do |f| %>
+      <%= f.text_field :search, value: @search_term  %>
     <% end %>
-  </table>
+    <% if @search_term.present? %>
+      <%= link_to "clear search", curator_artworks_path %>
+    <% end %>
+  </div>
 </div>
+<% @artworks.each do |artwork| %>
+  <%= render artwork %>
+<% end %>

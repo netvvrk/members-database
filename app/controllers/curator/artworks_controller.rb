@@ -5,7 +5,11 @@ class Curator::ArtworksController < ApplicationController
   # GET /curator/artworks
   def index
     @page = params[:page]&.to_i || 0
+    @search_term = params[:search]
     @artworks = Artwork.is_visible.order(:id).all.page(@page)
+    if @search_term.present?
+      @artworks = @artworks.search(@search_term)
+    end
   end
 
   # GET /curator/artworks/1

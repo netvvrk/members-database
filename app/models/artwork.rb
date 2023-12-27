@@ -1,4 +1,6 @@
 class Artwork < ApplicationRecord
+  include PgSearch::Model
+
   validates :title, :medium, :location, :year, presence: true
   validates :units, inclusion: {in: %w[in cm],
                                 message: "%{value} is not a valid unit"}
@@ -7,6 +9,8 @@ class Artwork < ApplicationRecord
 
   belongs_to :user
   has_many :images, dependent: :destroy
+
+  pg_search_scope :search, against: [:title, :medium]
 
   scope :is_visible, -> { joins(:user).where("visible = true").merge(User.is_active) }
 
