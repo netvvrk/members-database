@@ -6,9 +6,10 @@ class Curator::ArtworksController < ApplicationController
   def index
     @page = params[:page]&.to_i || 0
     @search_term = params[:search]
-    @artworks = Artwork.is_visible.order(:id).all.page(@page)
+    @artworks = Artwork.is_visible.all.page(@page)
     if @search_term.present?
       @artworks = @artworks.search(@search_term)
+      Rails.logger.debug(@artworks.to_sql)
     end
   end
 

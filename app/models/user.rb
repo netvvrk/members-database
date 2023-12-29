@@ -14,6 +14,8 @@ class User < ApplicationRecord
 
   scope :is_active, -> { where(active: true) }
 
+  after_save :update_artworks
+
   def name
     [first_name, last_name].compact.join(" ")
   end
@@ -36,5 +38,11 @@ class User < ApplicationRecord
 
   def more_artworks_allowed?
     artworks.count < 10
+  end
+
+  def update_artworks
+    if !active
+      Artwork.where(user: self).update_all(visible: false)
+    end
   end
 end

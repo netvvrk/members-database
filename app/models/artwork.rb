@@ -13,7 +13,7 @@ class Artwork < ApplicationRecord
   # pg_search_scope :search, against: [:title, :medium]
   pg_search_scope :search, against: [:title, :medium], associated_against: {user: [:first_name, :last_name]}
 
-  scope :is_visible, -> { joins(:user).where("visible = true").merge(User.is_active) }
+  scope :is_visible, -> { where("visible = true") }
 
   def more_images_allowed?
     images.count < 3
