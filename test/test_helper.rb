@@ -14,7 +14,8 @@ module ActiveSupport
     include Devise::Test::IntegrationHelpers
 
     def create_artwork(user)
-      user.artworks.create!(title: "Title", medium: "medium", visible: true, height: 2, width: 3, location: "Brooklyn", year: 2025)
+      r = Random.new
+      user.artworks.create!(title: "Title#{r.rand(100)}", medium: "medium#{r.rand(100)}", visible: true, height: 2, width: 3, location: "Brooklyn", year: 2025)
     end
   end
 end
