@@ -30,3 +30,5 @@ end
 gem "down"
 gem "faker"
 #####
+
+gem "tailwindcss-rails", "~> 2.3"
