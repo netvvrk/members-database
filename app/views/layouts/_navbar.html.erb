@@ -1,4 +1,4 @@
-<nav class="bg-white shadow-sm border-b-slate-200 border-1">
+<nav class="bg-white shadow-md shadow-slate-200 border-b-slate-200 border-1">
   <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
     <div class="relative flex h-16 items-center justify-between">
 
@@ -28,21 +28,21 @@
 
             <% end %>
             </div>
-            <div class=" inset-y-0 right-0 flex items-center static inset-auto pr-0 ml-2 mt-0 lg:mt-4">
+            <div class=" inset-y-0 right-0 flex items-center static inset-auto pr-0 ml-2 xmt-4 lg:mt-0">
             <% if user_signed_in? %>
               <span class="text-white"> <%#= current_user.email %></span>
                 <%= button_to(
                   "Log Out",
                   logout_path,
                   method: :delete,
-                  class: "btn btn-secondary"
+                  class: "tw-btn-secondary"
                 ) %>
             <% else %>
                 <%= button_to(
                 "Log In",
                 login_path,
                 method: :get,
-                class: "btn btn-secondary"
+                class: "tw-btn-secondary"
               ) %>
             <% end %>
             </div>            
