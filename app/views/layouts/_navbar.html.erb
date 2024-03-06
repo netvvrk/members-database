@@ -39,6 +39,11 @@
                   method: :delete,
                   class: "tw-btn-secondary"
                 ) %>
+                <%= link_to(
+                  "edit profile",
+                  edit_profile_path(current_user.profile),
+                  class: "tw-btn-secondary"
+        ) %>                
             <% else %>
                 <%= button_to(
                 "Log In",
