@@ -32,12 +32,13 @@
             </div>
             <div class="inset-y-0 right-0 flex items-start gap-y-2 lg:gap-y-0 lg:items-center flex-col lg:flex-row  static inset-auto pr-0 ml-2 xmt-4 lg:mt-0">
             <% if user_signed_in? %>
-              <span class="text-white"> <%#= current_user.email %></span>
-                <%= link_to(
-                  "edit profile",
-                  edit_profile_path(current_user.profile),
-                  class: "tw-btn-secondary lg:mr-2"
-                ) %>                
+                <% if current_user.artist? %>              
+                  <%= link_to(
+                    "edit profile",
+                    edit_profile_path(current_user.profile),
+                    class: "tw-btn-secondary lg:mr-2"
+                  ) %>  
+                <% end %>
                 <%= button_to(
                   "Log Out",
                   logout_path,
