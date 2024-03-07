@@ -2,6 +2,14 @@
 @import "bootstrap-icons/font/bootstrap-icons";
 // @import "rails_bootstrap_forms";
 
+.navbar img {
+  display: inline; // for tw/bs compatibility. remove when navbar is migrated to tw
+}
+
+.navbar .collapse {
+  visibility: unset !important; // for tw/bs compatibility. remove when navbar is migrated to tw
+}
+
 li.page-item a,
 a {
   text-decoration: none;
