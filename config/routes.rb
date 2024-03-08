@@ -22,6 +22,8 @@ Rails.application.routes.draw do
     delete "logout", to: "devise/sessions#destroy"
   end
 
+  post "webhook/chargebee", to: "webhook#chargebee"
+
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", :as => :rails_health_check
