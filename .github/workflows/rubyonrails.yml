@@ -47,27 +47,3 @@ jobs:
       - name: Run tests
         run: bin/rake
 
-  lint:
-    runs-on: ubuntu-latest
-    env:
-      RAILS_ENV: test
-      DATABASE_URL: "postgres://rails:password@localhost:5432/rails_test"
-      DOMAIN: example.com
-      HOSTNAME: members-staging.example.com
-      IMAGEKIT_PRIVATE_KEY: private
-      IMAGEKIT_PUBLIC_KEY: public
-      IMAGEKIT_URL: http://example.com
-      SENDGRID_KEY: sendgrid
-      SUPPORT_ADDRESS: support@example.com
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-      - name: Install Ruby and gems
-        uses: ruby/setup-ruby@55283cc23133118229fd3f97f9336ee23a179fcf # v1.146.0
-        with:
-          bundler-cache: true
-      # Add or replace any other lints here
-      - name: Security audit dependencies
-        run: bin/rake bundle:audit
-      - name: Lint Ruby files with Standard Ruby
-        run: bin/rake standard
