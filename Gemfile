@@ -22,6 +22,7 @@ group :development, :test do
 end
 
 group :development do
+  gem "bundler-audit"
   gem "standard"
   gem "web-console"
 end
