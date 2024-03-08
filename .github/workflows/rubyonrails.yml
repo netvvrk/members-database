@@ -25,7 +25,13 @@ jobs:
     env:
       RAILS_ENV: test
       DATABASE_URL: "postgres://rails:password@localhost:5432/rails_test"
-      DOMAIN: vvrkshop.art
+      DOMAIN: example.com
+      HOSTNAME: members-staging.example.com
+      IMAGEKIT_PRIVATE_KEY: private
+      IMAGEKIT_PUBLIC_KEY: public
+      IMAGEKIT_URL: http://example.com
+      SENDGRID_KEY: sendgrid
+      SUPPORT_ADDRESS: support@example.com
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -43,6 +49,16 @@ jobs:
 
   lint:
     runs-on: ubuntu-latest
+    env:
+      RAILS_ENV: test
+      DATABASE_URL: "postgres://rails:password@localhost:5432/rails_test"
+      DOMAIN: example.com
+      HOSTNAME: members-staging.example.com
+      IMAGEKIT_PRIVATE_KEY: private
+      IMAGEKIT_PUBLIC_KEY: public
+      IMAGEKIT_URL: http://example.com
+      SENDGRID_KEY: sendgrid
+      SUPPORT_ADDRESS: support@example.com
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
