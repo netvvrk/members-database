@@ -6,7 +6,9 @@
 
 @layer components {
   .tw-btn-secondary {
-    @apply px-2 py-1 border text-black hover:text-slate-600 hover:border-slate-400 rounded border-black px-2 py-1 border text-black hover:text-slate-600 hover:border-slate-400 rounded-md border-black;
+    @apply px-2 py-1 border text-black hover:text-slate-600 hover:border-slate-400 rounded
+       border-black px-2 py-1 border text-black hover:text-slate-600 hover:border-slate-400 
+       rounded-md border-black text-nowrap;
   }
 }
 
