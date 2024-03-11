@@ -23,7 +23,18 @@ class ProfilesControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to profile_url(@profile)
   end
 
+  test "non-admin users cannot edit someone else's profile" do
+    another_user = users(:curator)
+    sign_in another_user
+    get edit_profile_url(@profile)
+    assert_response :redirect
+  end
 
-
+  test "admins can edit someone else's profile" do
+    admin_user = users(:admin)
+    sign_in admin_user
+    get edit_profile_url(@profile)
+    assert_response :success
+  end
 
 end
