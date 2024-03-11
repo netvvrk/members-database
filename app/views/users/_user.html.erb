@@ -10,7 +10,7 @@
       <% if user.artist? %>
         <%= link_to(
           "edit profile",
-          edit_profile_path(user.profile),
+          edit_profile_path(Profile.find_or_create_by(user_id: user.id)),
           class: "tw-btn-secondary lg:mr-2"
         ) %>
       <% end %>
