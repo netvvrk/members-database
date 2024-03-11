@@ -7,11 +7,13 @@
     <td><%= user.active %></td>
     <td><%= user.last_sign_in_at&.to_date&.to_fs(:long) %></td>
     <td>
+      <% if user.artist? %>
         <%= link_to(
           "edit profile",
           edit_profile_path(user.profile),
           class: "tw-btn-secondary lg:mr-2"
         ) %>
+      <% end %>
     </td>
   </tr>
 </div>
