@@ -14,9 +14,29 @@
   </div>
 </div>
 
-<div class="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-    <% @artworks.each do |artwork| %>
-      <%= render artwork %>
-    <% end %>
+<% 
+  # number_of_cols = 4
+  items_per_column = @artworks.length / 4 + 1 # TODO: better formula
+
+%>
+
+<div class="flex justify-center">
+  <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 ">
+      <% @artworks.each_with_index do |artwork, index| %>
+        <% if index % items_per_column == 0 %>
+          <div class="grid gap-4 content-baseline">
+        <% end %>
+            <%= render artwork %>
+        <% if index % items_per_column == items_per_column - 1 %>
+          </div>
+        <% end %>
+
+      <% end %>
+
+  </div>
+</div>
+
+
+
 
 </div>
