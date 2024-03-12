@@ -1,18 +1,22 @@
-<div class="row my-4 border-bottom">
+<div class="row">
   <div class="col-4">
     <h4>Artworks</h4>
     <%= paginate @artworks %>
   </div>
   <div class="col-4">&nbsp </div>
-  <div class="col-4 mb-3">
+  <div class="col-4">
     <%= bootstrap_form_tag method: :get do |f| %>
-      <%= f.text_field :search, value: @search_term  %>
+      <%= f.text_field :search, value: @search_term, placeholder: "search", label: '&nbsp;'.html_safe   %>
     <% end %>
     <% if @search_term.present? %>
       <%= link_to "clear search", curator_artworks_path %>
     <% end %>
   </div>
 </div>
-<% @artworks.each do |artwork| %>
-  <%= render artwork %>
-<% end %>
+
+<div class="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+    <% @artworks.each do |artwork| %>
+      <%= render artwork %>
+    <% end %>
+
+</div>
