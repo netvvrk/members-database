@@ -11,7 +11,7 @@ class CreateProfiles < ActiveRecord::Migration[7.1]
       t.timestamps
     end
 
-    User.all.each { |u| u.profile = Profile.new }
+    User.all.each { |u| u.profile = Profile.create }
   end
 
   def down 
