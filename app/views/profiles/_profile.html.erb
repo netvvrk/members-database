@@ -1,7 +1,9 @@
 <div id="<%= dom_id profile %>" class="lg:grid lg:auto-rows-min lg:grid-cols-12 lg:gap-x-8">
   <div class="mt-8 p-1 flex flex-1 gap-y-4 flex-col lg:col-span-4 lg:col-start-1 lg:row-span-3 lg:row-start-1 lg:mt-0">
-  <div class="border-1 border-slate-400 w-full h-32 my-2">
-    <img class="rounded" src="" />
+  <div class="w-full my-2">
+    <% if profile.avatar %>
+      <%= image_tag profile.avatar %>
+    <% end %>
   </div>
   <h3><%=profile.user.name %></h3>
   <p class="my-3 ">
