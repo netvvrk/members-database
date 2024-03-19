@@ -1,7 +1,12 @@
 <div id="<%= dom_id user %>">
   <tr>
     <td><%= user.id %></td>
-    <td><%= user.name %></td>
+    <td><%= link_to_if(
+      user.artist?,
+      user.name,
+      profile_path(Profile.find_or_create_by(user_id: user.id))
+      ) %>
+    </td>
     <td><%= user.email %></td>
     <td><%= user.role %></td>
     <td><%= user.active %></td>
