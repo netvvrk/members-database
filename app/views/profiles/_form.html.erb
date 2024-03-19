@@ -40,13 +40,23 @@
       <div class="col-span-full">
         <%= form.label :avatar, class: "block text-sm font-medium leading-6 text-gray-900 mb-2" %>
         <div class="block w-full max-w-96 lg:w-1/2">
-          <% if profile.avatar %>
-            <%= image_tag profile.avatar, class: "h-64" %>
+          <% if profile.avatar.attached? %>
+            <%= image_tag profile.avatar.variant(:thumb), class: "h-64" %>
           <% end %>
           <%= form.file_field :avatar, class: "py-1.5 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6" %>
       
         </div>
       </div>
+
+      <div class="col-span-full">
+        <%= form.label :cv, class: "block text-sm font-medium leading-6 text-gray-900 mb-2" %>
+        <div class="block w-full max-w-96 lg:w-1/2">
+          
+          <%= form.file_field :cv, class: "py-1.5 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6" %>
+      
+        </div>
+      </div>
+
 
       <div class="col-span-full">
         <%= form.submit class: "tw-btn-secondary" %>

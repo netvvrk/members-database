@@ -1,10 +1,10 @@
 <div id="<%= dom_id profile %>" class="lg:grid lg:auto-rows-min lg:grid-cols-12 lg:gap-x-8">
   <div class="mt-8 p-1 flex flex-1 gap-y-4 flex-col lg:col-span-4 lg:col-start-1 lg:row-span-3 lg:row-start-1 lg:mt-0">
+  <% if profile.avatar.attached? %>
   <div class="w-full my-2">
-    <% if profile.avatar %>
       <%= image_tag profile.avatar %>
-    <% end %>
   </div>
+  <% end %>
   <h3><%=profile.user.name %></h3>
   <p class="my-3 ">
     <%= profile.bio.nil? ? 'No bio' : profile.bio  %>
@@ -27,9 +27,11 @@
       </svg> 
     </a>     
   </div>
+  <% if profile.cv.attached? %>
   <div class="my-3">
-    <button class="tw-btn-secondary mx-auto w-32">CV</button>
+    <a href="<%= profile.cv.url %>" target="_blank" class="block tw-btn-secondary text-center w-32">CV</a>
   </div>
+  <% end %>
   <div class="mt-auto">
     <% if profile.user.id === current_user.id || current_user.admin? %>
       <%= link_to(
