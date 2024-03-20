@@ -8,6 +8,8 @@ Rails.application.routes.draw do
     resources :images
   end
 
+  resources :profiles
+
   scope :admin do
     resources :users
   end

@@ -5,7 +5,7 @@ class UsersController < ApplicationController
 
   # GET /users
   def index
-    @users = User.where("role in (?,?)", User::ADMIN, User::CURATOR).order(id: :desc).limit(50)
+    @users = User.order(id: :desc).limit(50)
   end
 
   # GET /users/1

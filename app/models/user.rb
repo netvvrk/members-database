@@ -12,6 +12,8 @@ class User < ApplicationRecord
 
   has_many :artworks, dependent: :destroy
 
+  has_one :profile
+
   scope :is_active, -> { where(active: true) }
 
   after_save :update_artworks
