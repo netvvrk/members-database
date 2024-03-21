@@ -1,41 +1,93 @@
-<div class="container">
-  <section class="image-grid mt-2">
-    <div class="row gy-4">
-      <% @artwork.images.each do |i| %>
-        <div class="col-4">
-          <a data-fslightbox href="<%= i.file.url %>">
-            <%= image_tag large_url(i), alt: i.caption %>
-          </a>
-          <br>
-          <i><%= i.caption %></i>
-        </div>
-      <% end %>
+
+<div class="grid grid-cols-1 grid-rows-3 lg:grid-rows-3 lg:grid-cols-4 gap-5 h-auto lg:h-screen">
+  <div class="lg:col-span-3 lg:row-span-2">
+
+
+
+
+    <div id="default-carousel" class="w-full h-full overflow-y-hidden" data-carousel="slide">
+        <!-- Carousel wrapper -->
+        <div class="relative h-full">
+          <div class="relative rounded">
+              <% @artwork.images.each do |image| %>
+              <a data-fslightbox href="<%= image.file.url %>">
+                <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                  <%= image_tag image.file.url, alt: image.caption, class: "absolute block w-full -translate-x-1/2  left-1/2" %>
+                  
+                </div>
+              </a>
+              <% end %>
+
+          </div>
+          <% if @artwork.images.length > 1  %>
+          <!-- Slider indicators -->
+          <div class="absolute z-30 flex -translate-x-1/2 bottom-2 left-1/2 space-x-3 rtl:space-x-reverse">
+              <% @artwork.images.each_with_index do |artwork, i| %>
+                <button type="button" class="w-3 h-3 rounded-full bg-slate-100 border border-slate-500" aria-current="true" aria-label="Slide <%= i %>" data-carousel-slide-to="<%= i %>"></button>
+              <% end %>
+          </div>
+          <!-- Slider controls -->
+          <button type="button" class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
+              <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-1 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                  <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
+                  </svg>
+                  <span class="sr-only">Previous</span>
+              </span>
+          </button>
+          <button type="button" class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
+              <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-1 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                  <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+                  </svg>
+                  <span class="sr-only">Next</span>
+              </span>
+          </button>
+          <% end %>
+      </div>
     </div>
-  </section>
-  <div class="row mt-4">
-    <div class="col-6">
-      <div><strong><%= @artwork.title %></strong> (<%= @artwork.year %>) by <%= @artwork.user.name %><br>
+  </div>
+
+
+
+  <div class="row-start-2 lg:row-start-1 col-start-1 lg:col-start-4 lg:row-span-2">
+    <div class="">
+      <h1 class="text-2xl mb-0 font-normal">
+        <%= @artwork.user.name %>
+      </h1>
+      <h2 class="text-2xl font-normal italic text-slate-500">
+        <%= @artwork.title %>, (<%= @artwork.year %>)
+      </h2>
+      <div class="text-slate-500">
         <%= @artwork.medium %>
       </div>
       <% if @artwork.edition.present? %>
-        <div>
+        <div class="text-slate-500">
           ed: <%= @artwork.edition %>
         </div>
       <% end %>
       <%= render "artworks/dimensions" %>
-      <div>
+      <div class="text-slate-500">
         Location: <%= @artwork.location %>
       </div>
-      <div>
-        Price: <%= @artwork.price.present? ? @artwork.price : "none" %>
+      <div class="text-2xl py-2">
+        Price: <%= @artwork.price.present? ? @artwork.price : "N/A" %>
       </div>
       <% if @artwork.description.present? %>
-        <div class="mt-2">
+        <div class="mt-2 text-slate-500">
           <div class="fw-bold">Description</div>
           <%= @artwork.description %>
         </div>
       <% end%>
     </div>
   </div>
+  <section class="col-span-1 row-start-3 lg:col-span-3 lg:row-start-3 lg:row-span-4">
+      <div class="pb-2">
+      About artist:
+      </div>
+      <%= @artwork.user.profile&.bio %>
+  </section>  
 </div>
+
 <%= javascript_include_tag "lightbox-refresh" %>
+<%= javascript_include_tag "carousel" %>
