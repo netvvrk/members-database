@@ -48,8 +48,8 @@
       <% end%>
     </div>
     <div class="col-4 mt-2">
-      <%= link_to "Edit this artwork", edit_artwork_path(@artwork), class: "btn btn-primary mb-4" %>
-      <%= button_to "Delete this artwork", @artwork, method: :delete, class: "btn btn-danger", form: { data: { turbo_confirm: 'Are you sure?' } }, class: "btn btn-danger mt-4" %>
+      <%= link_to "Edit this artwork", edit_artwork_path(@artwork), class: "tw-btn-secondary" %>
+      <%= button_to "Delete this artwork", @artwork, method: :delete, class: "tw-btn-danger", form: { data: { turbo_confirm: 'Are you sure?' } }, class: "tw-btn-danger mt-4" %>
     </div>
   </div>
 </div>

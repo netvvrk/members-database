@@ -4,7 +4,7 @@
 
       <div class="flex flex-1 items-center justify-between sm:items-stretch ">
         <div class="flex flex-shrink-0 items-center">
-          <a class="flex items-center" href="/">
+          <a class="flex items-center hover:no-underline" href="/">
             <img class="h-8 w-auto" src="/logo.png" alt="Netvvrk Members Database" >
             <span class="px-2 text-black">Netvvrk Members Database</span>
           </a>
@@ -19,13 +19,13 @@
             <div class="flex lg:flex-1 flex-col pt-12 lg:pt-0 lg:flex-row">
             <% if user_signed_in? %>
               <% if current_user.show_artworks? %>
-                <%= link_to "Artworks", artworks_url, class: "text-black hover:text-black rounded-md px-3 py-2 text-base font-medium" %>
+                <%= link_to "Artworks", artworks_url, class: "text-black hover:no-underline hover:text-slate-600 hover:text-black rounded-md px-3 py-2 text-base font-medium" %>
               <% end %>
               <% if current_user.show_browse? %>
-                <%= link_to "Browse Artworks", curator_artworks_url, class: "text-black hover:text-black rounded-md px-3 py-2 text-base font-medium" %>
+                <%= link_to "Browse Artworks", curator_artworks_url, class: "text-black hover:no-underline hover:text-slate-600 hover:text-black rounded-md px-3 py-2 text-base font-medium" %>
               <% end %>
               <% if current_user.show_users? %>
-                <%= link_to "Users", users_url, class: "text-black hover:text-black rounded-md px-3 py-2 text-base font-medium" %>
+                <%= link_to "Users", users_url, class: "text-black hover:no-underline hover:text-slate-600 hover:text-black rounded-md px-3 py-2 text-base font-medium" %>
               <% end %>
 
             <% end %>
