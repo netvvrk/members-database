@@ -15,6 +15,10 @@ class Artwork < ApplicationRecord
 
   scope :is_visible, -> { where("visible = true") }
 
+  scope :with_images, -> {
+                        joins(:images).group("artworks.id").having("count(artwork_id) > 0")
+                      }
+
   def more_images_allowed?
     images.count < 3
   end
