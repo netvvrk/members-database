@@ -1,6 +1,9 @@
+$enable-important-utilities: false;
+
 @import "bootstrap/scss/bootstrap";
 @import "bootstrap-icons/font/bootstrap-icons";
 // @import "rails_bootstrap_forms";
+
 
 .navbar img {
   display: inline; // for tw/bs compatibility. remove when navbar is migrated to tw

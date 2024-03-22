@@ -5,7 +5,7 @@
     <div class="field">
       <%= f.email_field :email, autofocus: true, autocomplete: "email", label: "E-mail address"  %>
     </div>
-    <%= f.submit "Send me reset password instructions" %>
+    <%= f.submit "Send me reset password instructions", class: "tw-btn-primary" %>
   <% end %>
   <%= render "devise/shared/links" %>
 </div>

@@ -1,12 +1,10 @@
-<div class="row border-bottom my-4 py-4">
-  <div class="col-1"><%= artwork.id %></div>
-  <div class="col-2"><%= artwork.user.name %></div>
-  <div class="col-3"><%= link_to artwork.title, curator_artwork_url(artwork) %></div>
-  <div class="col-1"><%= artwork.medium %></div>
-  <div class="col-2"><%= artwork.description %></div>
-  <div class="col-3">
-    <% artwork.images.each do |image| %>
-      <%= image_tag thumbnail_url(image)  %>
-    <% end %>
-  </div>
+<div>
+    <a class="text-black" href="<%= curator_artwork_url(artwork) %>">
+      <img class="h-auto max-w-full" src="<%= large_url(artwork.images.first) if artwork.images.length %>" alt="<%= artwork.title %>">
+      <section class="pt-2">
+        <div class=""><%= artwork.user.name %></div>
+        <div class="text-gray-500 italic"><%= artwork.title %></div>
+        <div class=" text-sm text-gray-700"><%= artwork.description %></div>
+      </section>
+    </a>
 </div>

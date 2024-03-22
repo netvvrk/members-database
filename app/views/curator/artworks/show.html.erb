@@ -1,41 +1,141 @@
-<div class="container">
-  <section class="image-grid mt-2">
-    <div class="row gy-4">
-      <% @artwork.images.each do |i| %>
-        <div class="col-4">
-          <a data-fslightbox href="<%= i.file.url %>">
-            <%= image_tag large_url(i), alt: i.caption %>
-          </a>
-          <br>
-          <i><%= i.caption %></i>
-        </div>
+
+<div class="flex flex-col lg:grid lg:grid-rows-3 lg:grid-cols-4 gap-6 h-auto">
+  <div class="lg:col-span-3 lg:row-span-2">
+
+    <div
+      id="default-carousel"
+      data-carousel="slide"
+      class="relative">
+
+
+      <!--Carousel items-->
+      <div
+        class="relative w-full overflow-hidden after:clear-both after:block after:content-['']">
+        <% @artwork.images.each_with_index do | image, i | %>
+        <a data-fslightbox href="<%= image.file.url %>">
+          <div
+            class="relative float-left -mr-[100%] w-full transition-transform duration-[600ms] 
+            ease-in-out motion-reduce:transition-none <%= "!block" if i == 0 %>"
+            data-carousel-item
+            style="backface-visibility: hidden">
+            <%= image_tag image.file.url, alt: image.caption, class: "block w-full" %>
+            <div
+              class="absolute inset-x-[15%] bottom-0 py-5 text-center text-white block">
+              <h5 class="text-slate-200"><%= image.caption %></h5>
+
+            </div>
+          </div>    
+        </a>
+        <% end %>    
+        
+      <% if @artwork.images.length > 1 %>
+      <!--Carousel indicators-->
+      <div
+        class="absolute bottom-6 left-0 right-0 z-[2] mx-[15%] mb-4 flex list-none justify-center p-0"
+        data-twe-carousel-indicators>
+        <% @artwork.images.each_with_index do |artwork, i| %>
+          <button
+            type="button"
+            aria-label="Slide <%= i %>" data-carousel-slide-to="<%= i %>"
+            class="mx-[3px] box-content h-[3px] w-[30px] flex-initial cursor-pointer 
+                  border-0 border-y-[10px] border-solid border-transparent bg-white
+                  bg-clip-padding p-0 -indent-[999px] opacity-50 transition-opacity
+                  duration-[600ms] ease-[cubic-bezier(0.25,0.1,0.25,1.0)] motion-reduce:transition-none <%= '!opacity-100' if i == 0 %>"></button>
+        <% end %>
+      </div>        
+
+      <!--Carousel controls - prev item-->
+      <button
+        class="absolute bottom-0 left-0 top-0 z-[1] flex w-[15%] items-center justify-center border-0 bg-none p-0 text-center text-white opacity-50 transition-opacity duration-150 ease-[cubic-bezier(0.25,0.1,0.25,1.0)] hover:text-white hover:no-underline hover:opacity-90 hover:outline-none focus:text-white focus:no-underline focus:opacity-90 focus:outline-none motion-reduce:transition-none"
+        type="button"
+        data-carousel-prev>
+        <span class="inline-block h-8 w-8">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="h-6 w-6">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M15.75 19.5L8.25 12l7.5-7.5" />
+          </svg>
+        </span>
+        <span
+          class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"
+          >Previous</span
+        >
+      </button>
+      <!--Carousel controls - next item-->
+      <button
+        class="absolute bottom-0 right-0 top-0 z-[1] flex w-[15%] items-center justify-center border-0 bg-none p-0 text-center text-white opacity-50 transition-opacity duration-150 ease-[cubic-bezier(0.25,0.1,0.25,1.0)] hover:text-white hover:no-underline hover:opacity-90 hover:outline-none focus:text-white focus:no-underline focus:opacity-90 focus:outline-none motion-reduce:transition-none"
+        type="button"
+        data-carousel-next>
+        <span class="inline-block h-8 w-8">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="h-6 w-6">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+          </svg>
+        </span>
+        <span
+          class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"
+          >Next</span
+        >
+      </button>
       <% end %>
     </div>
-  </section>
-  <div class="row mt-4">
-    <div class="col-6">
-      <div><strong><%= @artwork.title %></strong> (<%= @artwork.year %>) by <%= @artwork.user.name %><br>
+   </div>
+        
+  </div>
+
+  <div class="lg:row-start-1 lg:col-start-4 lg:row-span-2">
+    <div class="">
+      <h1 class="text-2xl mb-0 font-normal">
+        <%= @artwork.user.name %>
+      </h1>
+      <h2 class="text-2xl font-normal italic text-slate-500">
+        <%= @artwork.title %>, (<%= @artwork.year %>)
+      </h2>
+      <div class="text-slate-500">
         <%= @artwork.medium %>
       </div>
       <% if @artwork.edition.present? %>
-        <div>
+        <div class="text-slate-500">
           ed: <%= @artwork.edition %>
         </div>
       <% end %>
       <%= render "artworks/dimensions" %>
-      <div>
+      <div class="text-slate-500">
         Location: <%= @artwork.location %>
       </div>
-      <div>
-        Price: <%= @artwork.price.present? ? @artwork.price : "none" %>
+      <div class="text-2xl py-2">
+        Price: <%= @artwork.price.present? ? @artwork.price : "N/A" %>
       </div>
       <% if @artwork.description.present? %>
-        <div class="mt-2">
+        <div class="mt-2 text-slate-500">
           <div class="fw-bold">Description</div>
           <%= @artwork.description %>
         </div>
       <% end%>
     </div>
   </div>
+  <section class="lg:col-span-3 lg:row-start-3 lg:row-span-4">
+      <div class="pb-2">
+      About artist:
+      </div>
+      <%= @artwork.user.profile&.bio %>
+  </section>  
 </div>
+
 <%= javascript_include_tag "lightbox-refresh" %>
+<%= javascript_include_tag "carousel" %>
