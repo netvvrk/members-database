@@ -1,54 +1,102 @@
 
-<div class="grid grid-cols-1 grid-rows-3 lg:grid-rows-3 lg:grid-cols-4 gap-5 h-auto lg:h-screen">
+<div class="grid grid-cols-1 grid-rows-3 lg:grid-rows-3 lg:grid-cols-4 gap-5 h-auto">
   <div class="lg:col-span-3 lg:row-span-2">
 
+    <div
+      id="default-carousel"
+      data-carousel="slide"
+      class="relative">
 
 
+      <!--Carousel items-->
+      <div
+        class="relative w-full overflow-hidden after:clear-both after:block after:content-['']">
+        <% @artwork.images.each_with_index do | image, i | %>
+        <a data-fslightbox href="<%= image.file.url %>">
+          <div
+            class="relative float-left -mr-[100%] w-full transition-transform duration-[600ms] 
+            ease-in-out motion-reduce:transition-none <%= "!block" if i == 0 %>"
+            data-carousel-item
+            style="backface-visibility: hidden">
+            <%= image_tag image.file.url, alt: image.caption, class: "block w-full" %>
+            <div
+              class="absolute inset-x-[15%] bottom-0 hidden py-5 text-center text-white md:block">
+              <h5 class="text-slate-200"><%= image.caption %></h5>
 
-    <div id="default-carousel" class="w-full h-full overflow-y-hidden" data-carousel="slide">
-        <!-- Carousel wrapper -->
-        <div class="relative h-full">
-          <div class="relative rounded">
-              <% @artwork.images.each do |image| %>
-              <a data-fslightbox href="<%= image.file.url %>">
-                <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                  <%= image_tag image.file.url, alt: image.caption, class: "absolute block w-full -translate-x-1/2  left-1/2" %>
-                  
-                </div>
-              </a>
-              <% end %>
+            </div>
+          </div>    
+        </a>
+        <% end %>    
+        
+      <% if @artwork.images.length > 1 %>
+      <!--Carousel indicators-->
+      <div
+        class="absolute bottom-6 left-0 right-0 z-[2] mx-[15%] mb-4 flex list-none justify-center p-0"
+        data-twe-carousel-indicators>
+        <% @artwork.images.each_with_index do |artwork, i| %>
+          <button
+            type="button"
+            aria-label="Slide <%= i %>" data-carousel-slide-to="<%= i %>"
+            class="mx-[3px] box-content h-[3px] w-[30px] flex-initial cursor-pointer 
+                  border-0 border-y-[10px] border-solid border-transparent bg-white
+                  bg-clip-padding p-0 -indent-[999px] opacity-50 transition-opacity
+                  duration-[600ms] ease-[cubic-bezier(0.25,0.1,0.25,1.0)] motion-reduce:transition-none <%= '!opacity-100' if i == 0 %>"></button>
+        <% end %>
+      </div>        
 
-          </div>
-          <% if @artwork.images.length > 1  %>
-          <!-- Slider indicators -->
-          <div class="absolute z-30 flex -translate-x-1/2 bottom-2 left-1/2 space-x-3 rtl:space-x-reverse">
-              <% @artwork.images.each_with_index do |artwork, i| %>
-                <button type="button" class="w-3 h-3 rounded-full bg-slate-100 border border-slate-500" aria-current="true" aria-label="Slide <%= i %>" data-carousel-slide-to="<%= i %>"></button>
-              <% end %>
-          </div>
-          <!-- Slider controls -->
-          <button type="button" class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
-              <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-1 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-                  <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
-                  </svg>
-                  <span class="sr-only">Previous</span>
-              </span>
-          </button>
-          <button type="button" class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
-              <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-1 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-                  <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
-                  </svg>
-                  <span class="sr-only">Next</span>
-              </span>
-          </button>
-          <% end %>
-      </div>
+      <!--Carousel controls - prev item-->
+      <button
+        class="absolute bottom-0 left-0 top-0 z-[1] flex w-[15%] items-center justify-center border-0 bg-none p-0 text-center text-white opacity-50 transition-opacity duration-150 ease-[cubic-bezier(0.25,0.1,0.25,1.0)] hover:text-white hover:no-underline hover:opacity-90 hover:outline-none focus:text-white focus:no-underline focus:opacity-90 focus:outline-none motion-reduce:transition-none"
+        type="button"
+        data-carousel-prev>
+        <span class="inline-block h-8 w-8">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="h-6 w-6">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M15.75 19.5L8.25 12l7.5-7.5" />
+          </svg>
+        </span>
+        <span
+          class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"
+          >Previous</span
+        >
+      </button>
+      <!--Carousel controls - next item-->
+      <button
+        class="absolute bottom-0 right-0 top-0 z-[1] flex w-[15%] items-center justify-center border-0 bg-none p-0 text-center text-white opacity-50 transition-opacity duration-150 ease-[cubic-bezier(0.25,0.1,0.25,1.0)] hover:text-white hover:no-underline hover:opacity-90 hover:outline-none focus:text-white focus:no-underline focus:opacity-90 focus:outline-none motion-reduce:transition-none"
+        type="button"
+        data-carousel-next>
+        <span class="inline-block h-8 w-8">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="h-6 w-6">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+          </svg>
+        </span>
+        <span
+          class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"
+          >Next</span
+        >
+      </button>
+      <% end %>
     </div>
+   </div>
+        
   </div>
-
-
 
   <div class="row-start-2 lg:row-start-1 col-start-1 lg:col-start-4 lg:row-span-2">
     <div class="">
