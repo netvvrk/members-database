@@ -1,8 +1,8 @@
-// TODO: animation. source: https://tw-elements.com/docs/standard/components/carousel/
+// source of tw classes: https://tw-elements.com/docs/standard/components/carousel/
 
 const BUTTON_ACTIVE_CLASS = "!opacity-100";
-const INACTIVE_CLASSES = ["hidden"];
-const ACTIVE_CLASSES = [] //"!block"];
+const INACTIVE_CLASSES = [];
+const ACTIVE_CLASSES = ["!opacity-100"];
 
 const containers = document.querySelectorAll("[data-carousel]");
 
@@ -24,13 +24,15 @@ containers.forEach((container) => {
   };
   const activateIndex = (index) => {
     if (prevIndex !== -1) {
-      items[prevIndex].classList.add(INACTIVE_CLASSES);
-      // items[prevIndex].classList.remove(ACTIVE_CLASSES);
+      // items[prevIndex].classList.add(INACTIVE_CLASSES);
+      items[prevIndex].classList.remove(ACTIVE_CLASSES);
+      
       buttons[prevIndex].classList.remove(BUTTON_ACTIVE_CLASS);
     }
     if (index < itemsCount) {
-      items[index].classList.remove(INACTIVE_CLASSES);
-      // items[index].classList.add(ACTIVE_CLASSES);
+      // items[index].classList.remove(INACTIVE_CLASSES);
+      items[index].classList.add(ACTIVE_CLASSES);
+      
       buttons[index].classList.add(BUTTON_ACTIVE_CLASS);
     }
   };
