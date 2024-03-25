@@ -1,56 +1,39 @@
-<div class="container">
-  <%= link_to "preview", preview_artwork_url(@artwork) %>
-  <section class="image-grid mt-2">
-    <div class="row gy-4">
-      <% images = @artwork.images %>
-      <% if images[0] %>
-        <%= render "image", i: images[0] %>
+<div class="flex flex-col lg:grid lg:grid-rows-3 lg:grid-cols-4 gap-6 h-auto">
+  <!-- info -->
+  <div class="lg:col-span-3">
+    <% artwork = @artwork %>
+    <%= render "curator/artworks/info" %>
+  </div>
+  <!-- actions -->
+  <div class="lg:col-start-4 lg:row-start-1 flex content-center lg:flex-col gap-3">
+    <div class=" text-slate-700">
+      <svg width="20" height="20" class="<%= @artwork.visible ? "fill-slate-800" : "fill-slate-300" %>" viewBox="0 0 16 16">
+        <title class="w-full h-full"><%= @artwork.visible ? "" : "Not " %> visible to curators</title>
+        <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/>
+        <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7"/>
+      </svg>
+    </div>
+    
+      <%= link_to "Preview", preview_artwork_url(@artwork), class: "tw-btn-primary" %>
+    
+    <%= link_to "Edit this artwork", edit_artwork_path(@artwork), class: "tw-btn-secondary" %>
+    <%= button_to "Delete this artwork", @artwork, method: :delete, class: "tw-btn-danger", form: { data: { turbo_confirm: 'Are you sure?' } } %>
+
+  </div>
+  <!-- images -->
+  <div class="mt-4 lg:row-start-2 lg:row-span-2 lg:col-span-4 flex gap-4 lg:gap-6 flex-col lg:flex-row">
+    
+      <% @artwork.images.each do | image |  %>
+      <div>
+        <%= render "image", i: image %>
+      </div>
       <% end %>
-      <% if images[1] %>
-        <%= render "image", i: images[1] %>
-      <% end %>
-      <% if images[2] %>
-        <%= render "image", i: images[2] %>
-      <% end %>
-      <div class="col-3">
-        <% if @artwork.more_images_allowed? %>
-          <h5 class="pink pb-2">Add up to 3 images or videos</h5>
+      <% if @artwork.more_images_allowed? %>
+      <div>
+          <h5>Add a new image</h5>
           <%= render "images/form", artwork: @artwork, image: @artwork.images.new %>
-        <% end %>
-      </div>
-    </div>
-  </section>
-  <div class="row mt-2">
-    <div class="col-4">
-      <div><strong><%= @artwork.title %></strong> (<%= @artwork.year %>)<br>
-        <%= @artwork.medium %>
-      </div>
-      <% if @artwork.edition.present? %>
-        <div>
-          ed: <%= @artwork.edition %>
-        </div>
+      </div> 
       <% end %>
-      <%= render "dimensions" %>
-      <div>
-        Location: <%= @artwork.location %>
-      </div>
-      <div>
-        Price: <%= @artwork.price.present? ? number_to_currency(@artwork.price, unit: "", precision: 0) : "none" %>
-      </div>
-      <div class="pink">
-        <%= @artwork.visible ? "Not " : "" %> Visible to Curators
-      </div>
-      <% if @artwork.description.present? %>
-        <div class="mt-2">
-          <div class="fw-bold">Description</div>
-          <%= @artwork.description %>
-        </div>
-      <% end%>
-    </div>
-    <div class="col-4 mt-2">
-      <%= link_to "Edit this artwork", edit_artwork_path(@artwork), class: "tw-btn-secondary" %>
-      <%= button_to "Delete this artwork", @artwork, method: :delete, class: "tw-btn-danger", form: { data: { turbo_confirm: 'Are you sure?' } }, class: "tw-btn-danger mt-4" %>
-    </div>
+    </div> 
   </div>
 </div>
-<%= javascript_include_tag "lightbox-refresh" %>
