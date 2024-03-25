@@ -8,7 +8,7 @@ class Image < ApplicationRecord
   before_destroy :purge_file
 
   def is_video?
-    file.blob.content_type.include?("video")
+    file&.blob&.content_type&.include?("video")
   end
 
   private
