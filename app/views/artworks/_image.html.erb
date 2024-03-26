@@ -1,5 +1,5 @@
-<div class="col-4">
-  <%= image_tag large_url(i), alt: i.caption %>
+<div>
+  <%= image_tag large_url(i), alt: i.caption, class: "rounded" %>
   <i><%= i.caption %></i>
   <%= button_to asset_delete_text(i), [@artwork, i], method: :delete, class: "tw-btn-danger btn-sm mt-2 mb-4", form: { data: { turbo_confirm: 'Are you sure?' } } %>
 </div>

@@ -1,6 +1,17 @@
-<%= bootstrap_form_with(model: [artwork, image]) do |f| %>
-  <%= f.alert_message "Please fix the errors below." %>
-  <%= f.text_field :caption, label: "Caption", class: "form-control-sm", help: "required" %>
-  <%= f.file_field :file, class: "form-control-sm" %>
-  <%= f.submit "Save", class: "tw-btn-primary" %>
+<%= form_with(model: [artwork, image]) do |f| %>
+  <div class="flex mt-3 flex-col gap-3">
+    <div class="col-span-full">
+      <%= f.label :caption, 'Caption',  class: "block text-sm font-medium leading-6 text-gray-900" %>
+      <%= f.text_field :caption, class: "block w-full max-w-48 rounded-md border-0 py-1.5 text-gray-900
+                                        ring-1 ring-inset ring-gray-400 placeholder:text-gray-400 focus:ring-2 
+                                        focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6" %>
+    </div>
+    <div>
+      <%= f.label :file, 'File',  class: "block text-sm font-medium leading-6 text-gray-900" %>
+      <%= f.file_field :file, class: "block w-full p-2 max-w-64 rounded-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-400 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6" %>
+    </div>
+
+    <%= f.submit "Add", class: "tw-btn-primary" %>
+  </div>
+
 <% end %>
