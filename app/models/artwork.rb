@@ -19,8 +19,10 @@ class Artwork < ApplicationRecord
                         joins(:images).group("artworks.id").having("count(artwork_id) > 0")
                       }
 
+  MAX_ARTWORK_IMAGES = 3
+
   def more_images_allowed?
-    images.count < 3
+    images.count < MAX_ARTWORK_IMAGES
   end
 
   private
