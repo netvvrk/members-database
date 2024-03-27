@@ -10,13 +10,12 @@ class Artwork < ApplicationRecord
   belongs_to :user
   has_many :images, dependent: :destroy
 
-  # pg_search_scope :search, against: [:title, :medium]
-  pg_search_scope :search, against: [:title, :medium], associated_against: {user: [:first_name, :last_name]}
+  pg_search_scope :search, against: [:title, :medium, :description], associated_against: {user: [:first_name, :last_name]}
 
   scope :is_visible, -> { where("visible = true") }
 
   scope :with_images, -> {
-                        joins(:images).group("artworks.id").having("count(artwork_id) > 0")
+                        joins(:images)
                       }
 
   def more_images_allowed?
