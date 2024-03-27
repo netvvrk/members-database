@@ -1,6 +1,6 @@
 <div>
     <a class="text-black hover:no-underline" href="<%= curator_artwork_url(artwork) %>">
-      <img class="h-auto max-w-full" src="<%= large_url(artwork.images.first) if artwork.images.length %>" alt="<%= artwork.title %>">
+      <img class="h-auto rounded max-w-full" src="<%= large_url(artwork.images.first) if artwork.images.length %>" alt="<%= artwork.title %>">
       <section class="pt-2">
         <div class=""><%= artwork.user.name %></div>
         <div class="text-gray-500 italic"><%= artwork.title %></div>
