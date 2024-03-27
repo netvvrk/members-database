@@ -6,6 +6,8 @@ class Profile < ApplicationRecord
   validate :cv_size_and_format
   validate :avatar_size_and_format
 
+  has_and_belongs_to_many :tags
+
   private
 
   def cv_size_and_format

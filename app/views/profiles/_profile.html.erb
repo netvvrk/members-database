@@ -5,7 +5,15 @@
       <%= image_tag profile.avatar %>
   </div>
   <% end %>
-  <h3><%=profile.user.name %></h3>
+  <h3 class="text-xl text-slate-600"><%=profile.user.name %></h3>
+  <% if profile.tags.length %>
+    <h5 class="text-sm font-semibold">Disciplines:</h5>
+    <div class="flex flex-wrap">
+    <% profile.tags.each do | tag | %>
+      <span class="text-sm w-1/2"><%= tag.name %></span>
+    <% end %>
+    </div>
+  <% end %>
   <p class="my-3 ">
     <%= profile.bio.nil? ? 'No bio' : profile.bio  %>
   </p>
@@ -32,7 +40,7 @@
     <a href="<%= profile.cv.url %>" target="_blank" class="block tw-btn-secondary text-center w-32">CV</a>
   </div>
   <% end %>
-  <div class="mt-auto">
+  <div class="mt-6">
     <% if profile.user.id === current_user.id || current_user.admin? %>
       <%= link_to(
         "edit profile",
