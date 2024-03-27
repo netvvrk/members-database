@@ -4,15 +4,15 @@
   <%= link_to "Add new artwork", new_artwork_path, class: "tw-btn-secondary inline-block my-3" %>
 <% end %>
 <table class="table">
-  <thead>
+  <thead  class="text-sm">
     <tr>
-      <th scope="col">ID</th>
-      <th scope="col">Title</th>
-      <th scope="col">Medium</th>
-      <th scope="col">Description</th>
-      <th scope="col">Visible to curators?</th>
-      <th scope="col">&nbsp;</th>
-      <th scope="col">&nbsp;</th>
+      <th>ID</th>
+      <th>Title</th>
+      <th>Medium</th>
+      <th class="hidden sm:table-cell">Description</th>
+      <th>Visible to curators?</th>
+      <th>&nbsp;</th>
+      <th>&nbsp;</th>
     </tr>
   </thead>
   <tbody id="artworks">

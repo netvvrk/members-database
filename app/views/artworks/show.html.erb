@@ -30,7 +30,7 @@
       <% end %>
       <% if @artwork.more_images_allowed? %>
       <div>
-          <h5>Add a new image</h5>
+          <h5>Add up to <%= Artwork::MAX_ARTWORK_IMAGES %> images</h5>
           <%= render "images/form", artwork: @artwork, image: @artwork.images.new %>
       </div> 
       <% end %>

@@ -18,8 +18,10 @@ class Artwork < ApplicationRecord
                         joins(:images)
                       }
 
+  MAX_ARTWORK_IMAGES = 3
+
   def more_images_allowed?
-    images.count < 3
+    images.count < MAX_ARTWORK_IMAGES
   end
 
   private
