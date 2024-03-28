@@ -8,6 +8,8 @@ class Curator::ArtworksController < ApplicationController
     @search_term = params[:search]
     @min_price = params[:min_price]
     @max_price = params[:max_price]
+    @has_filters = @min_price.present? || @max_price.present?
+
     @artworks = Artwork.is_visible.with_images.all.page(@page)
     if @search_term.present?
       # with_pg_search_rank is to avoid sql error (see commit message)

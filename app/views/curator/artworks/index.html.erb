@@ -4,6 +4,14 @@
   items_per_column = (@artworks.length / 4.0).ceil # TODO: calculate reminder for more even columns
 %>
 <div class="flex justify-center">
+  <% if@artworks.length == 0 and @has_filters %>
+      <div class="flex flex-col items-center pt-4">
+        <div class="mb-4">No artworks matches your criteria.</div>
+        <%= link_to curator_artworks_path, class: "tw-btn-primary" do %>
+        Clear all filters
+        <% end %>
+      </div>
+  <% end %>
   <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 ">
       <% @artworks.each_with_index do |artwork, index| %>
         <% if index % items_per_column == 0 %>
