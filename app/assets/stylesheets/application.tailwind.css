@@ -23,6 +23,10 @@
     @apply px-2 py-1 border text-red-800 hover:text-red-600 border-red-800 
         hover:border-red-400 rounded-md text-nowrap no-underline w-min hover:no-underline;
   }
+
+  .small-field {
+    @apply block rounded-md border-0 text-gray-900 ring-1 ring-inset ring-gray-400 placeholder:text-gray-400 focus:ring-2 sm:text-sm
+  }
 }
 
 
