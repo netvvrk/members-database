@@ -8,7 +8,8 @@ class Curator::ArtworksController < ApplicationController
     @search_term = params[:search]
     @artworks = Artwork.is_visible.with_images.all.page(@page)
     if @search_term.present?
-      @artworks = @artworks.search(@search_term)
+      # with_pg_search_rank is to avoid sql error (see commit message)
+      @artworks = @artworks.search(@search_term).with_pg_search_rank
       Rails.logger.debug(@artworks.to_sql)
     end
   end
