@@ -4,6 +4,7 @@
       <section class="pt-2">
         <div class=""><%= artwork.user.name %></div>
         <div class="text-gray-500 italic"><%= artwork.title %></div>
+        <div class="text-black text-lg mb-1">Price: <%= artwork.price.present? ? artwork.price : "N/A" %></div>
         <div class=" text-sm text-gray-700"><%= artwork.description %></div>
       </section>
     </a>
