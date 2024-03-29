@@ -15,7 +15,7 @@ class Artwork < ApplicationRecord
   scope :is_visible, -> { where("visible = true") }
 
   scope :with_images, -> {
-                        joins(:images)
+                        joins(:images).distinct(:artwork_id)
                       }
 
   MAX_ARTWORK_IMAGES = 3
