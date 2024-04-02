@@ -8,7 +8,12 @@ class Curator::ArtworksController < ApplicationController
     @search_term = params[:search]
     @min_price = params[:min_price]
     @max_price = params[:max_price]
+    @location = params[:location]
     @has_filters = @min_price.present? || @max_price.present?
+
+    @location_options = Artwork.all.group(:location).order(count: :desc).count.map do  | item |
+      OpenStruct.new(:id => item.first, :name => "#{item.first} (#{item.last})")
+    end
 
     @artworks = Artwork.is_visible.with_images.all.page(@page)
     if @search_term.present?
@@ -21,6 +26,9 @@ class Curator::ArtworksController < ApplicationController
     end
     if @min_price.present?
       @artworks = @artworks.where("price > ? ", @min_price)
+    end
+    if @location.present?
+      @artworks = @artworks.where("location in (?) ", @location)
     end
   end
 
