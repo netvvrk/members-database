@@ -9,9 +9,9 @@ class Curator::ArtworksController < ApplicationController
     @min_price = params[:min_price]
     @max_price = params[:max_price]
     @location = params[:location]
-    @has_filters = @min_price.present? || @max_price.present?
+    @has_filters = @min_price.present? || @max_price.present? || @location.present?
 
-    @location_options = Artwork.all.group(:location).order(count: :desc).count.map do  | item |
+    @location_options = Artwork.is_visible.with_images.all.group(:location).order(count: :desc).count.map do  | item |
       OpenStruct.new(:id => item.first, :name => "#{item.first} (#{item.last})")
     end
 

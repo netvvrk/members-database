@@ -6,7 +6,19 @@
   <%= f.text_area :description %>
   <%= f.number_field :year, help: "required" %>
   <%= f.number_field :price %>
-  <%= f.text_field :location, help: "required" %>
+  <div class="flex flex-col">
+    <label>Location:</label>
+    <span class="text-sm text-slate-700 my-2">
+    Search locations and select from box
+    </span>
+    <input type="text" value="<%= artwork.location %>" id="location-search"/>
+    <%= f.hidden_field :location, id: "location-hidden" %>
+    <span class="text-sm text-slate-700 my-2">required</span>
+  
+    <ul id="suggestion-container" class="my-3 opacity-0 transition-opacity flex flex-col border-1 rounded border-slate-400 gap-2">
+      <li class="hidden p-2 cursor-pointer bg-slate-200">test</li>
+    </ul>
+  </div>
   <%= f.check_box :visible, label: "Visible to curators?" %>
   <fieldset class="border p-2 mb-4">
     <p class="text-secondary">Either duration or heigh and width are required</p>
@@ -18,3 +30,4 @@
   </fieldset>
   <%= f.submit "Save", class: "tw-btn-primary" %>
 <% end %>
+<%= javascript_include_tag "locationsearch" %>
