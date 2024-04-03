@@ -9,9 +9,15 @@ class Curator::ArtworksController < ApplicationController
     @min_price = params[:min_price]
     @max_price = params[:max_price]
     @location = params[:location]
-    @has_filters = @min_price.present? || @max_price.present? || @location.present?
+    @medium = params[:medium]
+    @has_filters = @min_price.present? || @max_price.present? ||
+                   @location.present? || @medium.present?
 
     @location_options = Artwork.is_visible.with_images.all.group(:location).order(count: :desc).count.map do  | item |
+      OpenStruct.new(:id => item.first, :name => "#{item.first} (#{item.last})")
+    end
+
+    @medium_options = Artwork.is_visible.with_images.all.group(:medium).order(count: :desc).count.map do  | item |
       OpenStruct.new(:id => item.first, :name => "#{item.first} (#{item.last})")
     end
 
@@ -29,6 +35,9 @@ class Curator::ArtworksController < ApplicationController
     end
     if @location.present?
       @artworks = @artworks.where("location in (?) ", @location)
+    end
+    if @medium.present?
+      @artworks = @artworks.where("medium in (?) ", @medium)
     end
   end
 

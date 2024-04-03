@@ -68,7 +68,22 @@
                                 </div>
                             <% end %>
                         </div>
-                    </div>                    
+                    </div> 
+                    <div>
+                        <%= f.label "medium", class: "block text-sm font-medium leading-6 text-gray-900" %>
+                        <div class="flex flex-col gap-1">
+                            <% @medium_options.each do | medium | %>
+                                <div class="w-full">
+                                    <label class="mr-2 text-sm leading-6 text-gray-900" for="<%= "medium_#{medium.id.parameterize(separator: '_')}" %>" >
+                                        <input class="mr-2" type="checkbox" name="medium[]" value="<%= medium.id %>"
+                                             id="<%= "medium_#{medium.id.parameterize(separator: '_')}" %>" 
+                                             <%= "checked" if @medium&.include?(medium.id) == true %> >
+                                        <%= medium.name %>
+                                    </label>
+                                </div>
+                            <% end %>
+                        </div>
+                    </div>                                        
                     <div>
                         <%= f.submit "Filter", class: "mt-4 tw-btn-secondary"  %>
                         <%= link_to curator_artworks_path, class: "ml-4 py-2 tw-btn-primary" do %>
