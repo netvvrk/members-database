@@ -30,7 +30,9 @@ jobs:
       IMAGEKIT_PRIVATE_KEY: private
       IMAGEKIT_PUBLIC_KEY: public
       IMAGEKIT_URL: http://example.com
-      SENDGRID_KEY: sendgrid
+      SMTP_HOST: smtp.example.com
+      SMTP_USER: sendgrid
+      SMTP_PASSWORD: password
       SUPPORT_ADDRESS: support@example.com
     steps:
       - name: Checkout code

@@ -48,11 +48,11 @@ module MembersDatabase
     # use sendgrid
     config.action_mailer.delivery_method = :smtp
     config.action_mailer.smtp_settings = {
-      address: "smtp.sendgrid.net",
+      address: ENV.fetch("SMTP_HOST"),
       port: 587,
       domain: ENV.fetch("DOMAIN"),
-      user_name: "apikey",
-      password: ENV.fetch("SENDGRID_KEY"),
+      user_name: ENV.fetch("SMTP_USER"),
+      password: ENV.fetch("SMTP_PASSWORD"),
       aauthentication: "plain",
       enable_starttls: true
     }
