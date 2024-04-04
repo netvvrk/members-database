@@ -38,7 +38,7 @@
         </svg>
       </a>
       <!-- filter menu -->
-      <div class="top-16 p-6 right-0 bg-white border-l-slate-200 border-1  fixed  z-20 h-full w-full translate-x-full overflow-y-auto overscroll-y-none transition duration-500 peer-checked/filter:translate-x-1 peer-checked/filter:sm:translate-x-1/3 peer-checked/filter:md:translate-x-1/2">
+      <div class="top-16 p-6 right-0 bg-white border-l-slate-400 border-1  fixed  z-20 h-5/6 w-full translate-x-full overflow-y-auto overscroll-y-none transition duration-500 peer-checked/filter:translate-x-1 peer-checked/filter:sm:translate-x-1/3 peer-checked/filter:md:translate-x-1/2">
             <div class="flex flex-col gap-6">
                 <h3>Filter artworks</h4>
                 <%= form_with method: :get do |f| %>
@@ -56,9 +56,11 @@
                     </div>
                     <div>
                         <%= f.label "location", class: "block text-sm font-medium leading-6 text-gray-900" %>
-                        <div class="flex flex-col gap-1">
+                        <div id="location-item-container" class="flex flex-col gap-1">
+                            <span class="text-slate-500 text-sm">Filter location options</span>
+                            <input type="text" class="w-48 small-field mb-2" id="location-serach" />
                             <% @location_options.each do | location | %>
-                                <div class="w-full">
+                                <div data-text="<%= location.id %>" class="location-item w-full <%= "hidden opacity-0" unless location.show_by_default %> transition-opacity duration-500 delay-75 ">
                                     <label class="mr-2 text-sm leading-6 text-gray-900" for="<%= "location_#{location.id.parameterize(separator: '_')}" %>" >
                                         <input class="mr-2" type="checkbox" name="location[]" value="<%= location.id %>"
                                              id="<%= "location_#{location.id.parameterize(separator: '_')}" %>" 
@@ -67,13 +69,18 @@
                                     </label>
                                 </div>
                             <% end %>
+                            <% if @location_options.length > 5 %>
+                              <label id="location-more" class="text-slate-500 my-2 w-content cursor-pointer text-sm">show all</label>
+                            <% end %>
                         </div>
                     </div> 
                     <div>
                         <%= f.label "medium", class: "block text-sm font-medium leading-6 text-gray-900" %>
-                        <div class="flex flex-col gap-1">
+                        <div id="medium-item-container" class="flex flex-col gap-1">
+                            <span class="text-slate-500 text-sm">Filter medium options</span>
+                            <input type="text" class="w-48 small-field mb-2" id="medium-serach" />
                             <% @medium_options.each do | medium | %>
-                                <div class="w-full">
+                                <div data-text="<%= medium.id %>" class="medium-item w-full <%= "hidden opacity-0" unless medium.show_by_default %> transition-opacity duration-500 delay-75 ">
                                     <label class="mr-2 text-sm leading-6 text-gray-900" for="<%= "medium_#{medium.id.parameterize(separator: '_')}" %>" >
                                         <input class="mr-2" type="checkbox" name="medium[]" value="<%= medium.id %>"
                                              id="<%= "medium_#{medium.id.parameterize(separator: '_')}" %>" 
@@ -82,8 +89,11 @@
                                     </label>
                                 </div>
                             <% end %>
+                            <% if @medium_options.length > 5 %>
+                              <label id="medium-more" class="text-slate-500 my-2 w-content cursor-pointer text-sm">show all</label>
+                            <% end %>
                         </div>
-                    </div>                                        
+                    </div>                                       
                     <div>
                         <%= f.submit "Filter", class: "mt-4 tw-btn-secondary"  %>
                         <%= link_to curator_artworks_path, class: "ml-4 py-2 tw-btn-primary" do %>
@@ -97,3 +107,5 @@
     </label>
   </div>
 </div>
+
+<%= javascript_include_tag "filter" %>
