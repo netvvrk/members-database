@@ -7,8 +7,12 @@
     per_page:      number of items to fetch per page
     remote:        data-remote
 -%>
+<% classes = page.current? ? "tw-page-current" : "tw-page-link" 
+   classes = classes + " rounded-s-lg" if current_page.first? && page == current_page
+   classes = classes + " rounded-e-lg" if current_page.last? && page == current_page
+%>
 <li>
-  <% attr = {remote: remote, rel: page.rel, class: page.current? ? "tw-page-current" : "tw-page-link"} %>
+  <% attr = {remote: remote, rel: page.rel, class: classes} %>
   <% attr[:tabindex] = -1 if page.current? %>
   <%= link_to page, url, attr %>
 </li>
