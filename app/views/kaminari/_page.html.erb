@@ -7,8 +7,8 @@
     per_page:      number of items to fetch per page
     remote:        data-remote
 -%>
-<li class="page-item <%= page.current? ? "disabled" : "" %>">
-  <% attr = {remote: remote, rel: page.rel, class: "page-link"} %>
+<li>
+  <% attr = {remote: remote, rel: page.rel, class: page.current? ? "tw-page-current" : "tw-page-link"} %>
   <% attr[:tabindex] = -1 if page.current? %>
   <%= link_to page, url, attr %>
 </li>

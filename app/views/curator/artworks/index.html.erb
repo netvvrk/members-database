@@ -1,7 +1,7 @@
 <%= render "header" %>
 
 <% 
-  items_per_column = (@artworks.length / 4.0).ceil # TODO: calculate reminder for more even columns
+  items_per_column = @artworks.length == 25 ? 6 : (@artworks.length / 4.0).ceil # TODO: calculate reminder for more even columns
 %>
 <div class="flex justify-center">
   <% if@artworks.length == 0 and @has_filters %>
@@ -23,11 +23,10 @@
         <% end %>
 
       <% end %>
-
   </div>
 </div>
+</div>
 
-
-
-
+<div class="flex w-full justify-center">
+  <%= paginate @artworks %>
 </div>
