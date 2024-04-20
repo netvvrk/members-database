@@ -1,7 +1,7 @@
-<div class="container col-md-3">
+<div class="container max-w-72">
   <%= bootstrap_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-    <%= f.email_field :email, label: "E-mail address" %>
-    <%= f.password_field :password %>
+    <%= f.email_field :email, label: "E-mail address", class: "small-field" %>
+    <%= f.password_field :password, class: "small-field" %>
     <%= f.check_box :remember_me %>
     <%= f.submit "Log In", class: "tw-btn-primary" %>
   <% end %>
