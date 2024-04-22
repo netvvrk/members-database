@@ -2,7 +2,7 @@ class Image < ApplicationRecord
   belongs_to :artwork
   has_one_attached :file
 
-  validates :caption, :file, presence: true
+  validates :file, presence: true
   validate :valid_image
 
   before_destroy :purge_file
