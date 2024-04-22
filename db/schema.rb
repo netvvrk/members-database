@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_26_132410) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_22_015352) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -64,7 +64,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_26_132410) do
   end
 
   create_table "images", force: :cascade do |t|
-    t.string "caption", default: ""
+    t.string "caption"
     t.bigint "artwork_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
