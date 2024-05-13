@@ -1,39 +1,48 @@
-<div class="flex flex-col lg:grid lg:grid-rows-3 lg:grid-cols-4 gap-6 h-auto">
+<div class="flex flex-col max-w-5xl mx-auto  gap-6 h-auto">
   <!-- info -->
-  <div class="lg:col-span-3">
+  <div class="">
     <% artwork = @artwork %>
-    <%= render "curator/artworks/info" %>
-  </div>
-  <!-- actions -->
-  <div class="lg:col-start-4 lg:row-start-1 flex content-center lg:flex-col gap-3">
-    <div class=" text-slate-700">
-      <svg width="20" height="20" class="<%= @artwork.visible ? "fill-slate-800" : "fill-slate-300" %>" viewBox="0 0 16 16">
-        <title class="w-full h-full"><%= @artwork.visible ? "" : "Not " %> visible to curators</title>
-        <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/>
-        <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7"/>
-      </svg>
-    </div>
-    
-      <%= link_to "Preview", preview_artwork_url(@artwork), class: "tw-btn-primary" %>
-    
-    <%= link_to "Edit this artwork", edit_artwork_path(@artwork), class: "tw-btn-secondary" %>
-    <%= button_to "Delete this artwork", @artwork, method: :delete, class: "tw-btn-danger", form: { data: { turbo_confirm: 'Are you sure?' } } %>
-
+    <%= render "info" %>
   </div>
   <!-- images -->
-  <div class="mt-4 lg:row-start-2 lg:row-span-2 lg:col-span-4 flex gap-4 lg:gap-6 flex-col lg:flex-row">
+  <h3 class="mt-4 text-xl">Images</h3>
+  <div class="border-slate-300 border-1 p-4 flex gap-4 lg:gap-6 flex-col sm:flex-row sm:flex-wrap">
     
       <% @artwork.images.each do | image |  %>
-      <div>
+      <div class="sm:w-[calc(50%-15px)] lg:w-[calc(33%-15px)]">
         <%= render "image", i: image %>
       </div>
       <% end %>
       <% if @artwork.more_images_allowed? %>
-      <div>
-          <h5>Add up to <%= Artwork::MAX_ARTWORK_IMAGES %> images</h5>
-          <%= render "images/form", artwork: @artwork, image: @artwork.images.new %>
+      <div class="bg-slate-100 sm:w-[calc(50%-15px)] lg:w-[calc(33%-15px)]">
+          <label class="z-10 relative flex justify-center  items-center cursor-pointer px-2 py-6" for="addimage">
+            <!-- filter hidden input. works for keeping the state -->
+            <input class="peer/addimage hidden" type="checkbox" id="addimage" />   
+            <a alt="add image" class="absolute block z-20 opacity-100 hover:no-underline transition-opacity peer-checked/addimage:opacity-0">
+              <div class="flex flex-col items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-8 h-8" viewBox="0 0 16 16">
+                  <path d="M8 6.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V11a.5.5 0 0 1-1 0V9.5H6a.5.5 0 0 1 0-1h1.5V7a.5.5 0 0 1 .5-.5"/>
+                  <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5z"/>
+                </svg>
+                <div class="mt-4 text-sm">Add artwork image (Up to <%= Artwork::MAX_ARTWORK_IMAGES %>)</div>
+              </div>
+            </a>            
+            <div class="opacity-0 peer-checked/addimage:opacity-100 transition-opacity">       
+              <h5>Upload artwork image:</h5>
+              <%= render "images/form", artwork: @artwork, image: @artwork.images.new %>
+            </div>
+          </label>
       </div> 
       <% end %>
     </div> 
+    <!-- actions -->
+    <div class="mt-4 flex content-center gap-3">
+      
+      <%= link_to "Edit this artwork", edit_artwork_path(@artwork), class: "tw-btn-secondary" %>
+      <%= button_to "Delete this artwork", @artwork, method: :delete, class: "tw-btn-danger", form: { data: { turbo_confirm: 'Are you sure?' } } %>
+
+    </div>
   </div>
+
+
 </div>

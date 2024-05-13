@@ -1,0 +1,39 @@
+<div class="">
+      <h1 class="text-2xl mb-0 font-normal">
+        <%= @artwork.user.name %>
+      </h1>
+      <h2 class="text-2xl font-normal italic text-black mb-3">
+        <%= @artwork.title %>, (<%= @artwork.year %>)
+      </h2>
+      <div class="text-slate-500">
+        <%= @artwork.medium %>
+      </div>
+      <% if @artwork.edition.present? %>
+        <div class="text-slate-500">
+          ed: <%= @artwork.edition %>
+        </div>
+      <% end %>
+      <%= render "artworks/dimensions" %>
+      <div class="text-slate-500">
+        Location: <%= @artwork.location %>
+      </div>
+      <% if @artwork.price.present? %>
+      <div class="text-xl py-2">
+        Price: <%= @artwork.price %>
+      </div>
+      <% end %>
+      <% if @artwork.description.present? %>
+        <div class="mt-2 text-slate-500">
+          <%= @artwork.description %>
+        </div>
+      <% end%>
+      <div class=" text-slate-700 flex gap-4 mt-4">
+        <svg width="20" height="20" class="<%= @artwork.visible ? "fill-slate-800" : "fill-slate-300" %>" viewBox="0 0 16 16">
+          <title class="w-full h-full"><%= @artwork.visible ? "" : "Not " %> visible to curators</title>
+          <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/>
+          <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7"/>
+        </svg>
+        <span class="text-md"><%= !@artwork.visible ? "Not" : "" %> Visible to curators</span>
+      </div>
+
+    </div>
