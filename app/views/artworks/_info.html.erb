@@ -17,9 +17,11 @@
       <div class="text-slate-500">
         Location: <%= @artwork.location %>
       </div>
+      <% if @artwork.price.present? %>
       <div class="text-xl py-2">
-        Price: <%= @artwork.price.present? ? @artwork.price : "N/A" %>
+        Price: <%= @artwork.price %>
       </div>
+      <% end %>
       <% if @artwork.description.present? %>
         <div class="mt-2 text-slate-500">
           <%= @artwork.description %>
