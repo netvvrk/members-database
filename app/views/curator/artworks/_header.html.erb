@@ -19,11 +19,12 @@
         <% end %>
         <% end %>  
     <% end %>  
-    <label class="z-10 w-10 relative flex items-center ml-4 cursor-pointer px-2 py-6" for="filter-menu">
+    <label class="z-10 w-16 relative flex items-center ml-4 cursor-pointer px-2 py-6" for="filter-menu">
       <!-- filter hidden input. works for keeping the state -->
       <input class="peer/filter hidden" type="checkbox" id="filter-menu" />
       <!-- open filter icon -->
-      <a alt="more filters" class="<%= @has_filters ? "tw-btn-primary" : "tw-btn-secondary" %> text-xs absolute text-nowrap right-0 z-20 opacity-100 transition-opacity peer-checked/filter:opacity-0">
+      <a alt="more filters" class="<%= @has_filters ? "tw-btn-primary" : "tw-btn-secondary" %> text-xs py-2 bg-white absolute flex flex-row text-nowrap right-0 z-20 opacity-100 transition-opacity peer-checked/filter:opacity-0">
+        <span class="px-2">filters</span>
         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 16 16">
           <title>more filters</title>
           <path d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5m-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5"/>
