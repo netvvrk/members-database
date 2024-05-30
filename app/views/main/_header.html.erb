@@ -1,0 +1,111 @@
+<div class="flex pb-6 items-center justify-between">
+  <div class="">
+    <h1 class="text-xl">Artworks</h1>
+  </div>
+  <div class="flex-1 flex justify-end gap-3 items-center ">
+    <% if @has_filters %>
+      <%= link_to "/", class: "tw-btn-primary text-sm" do %>
+        clear all filters
+      <% end %>
+    <% else %>
+      <%= form_with method: :get do |f| %>
+        <%= f.text_field :search, value: @search_term, placeholder: "search", label: '&nbsp;'.html_safe, class: "w-40 h-8 rounded focus:w-56 transition-[width] duration-300"   %>
+      <% end %>
+      <% if @search_term.present? %>
+        <%= link_to root_path do %>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="fill-slate-600" viewBox="0 0 16 16">
+            <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm3.354 4.646L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708"/>
+          </svg>
+        <% end %>
+      <% end %>
+    <% end %>
+    <label class="z-10 w-16 relative flex items-center ml-4 cursor-pointer px-2 py-6" for="filter-menu">
+      <!-- filter hidden input. works for keeping the state -->
+      <input class="peer/filter hidden" type="checkbox" id="filter-menu" />
+      <!-- open filter icon -->
+      <a alt="more filters" class="<%= @has_filters ? "tw-btn-primary" : "tw-btn-secondary" %> text-xs py-2 bg-white absolute flex flex-row text-nowrap right-0 z-20 opacity-100 transition-opacity peer-checked/filter:opacity-0">
+        <span class="px-2">filters</span>
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 16 16">
+          <title>more filters</title>
+          <path d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5m-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5"/>
+        </svg>
+      </a>
+      <!-- close filter icon -->
+      <a alt="close filters" class="<%= @has_filters ? "tw-btn-primary" : "tw-btn-secondary" %> text-xs absolute text-nowrap right-0 z-20 opacity-0 transition-opacity peer-checked/filter:opacity-100">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 " viewBox="0 0 16 16">
+          <title>close filters</title>
+          <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+        </svg>
+      </a>
+      <!-- filter menu -->
+      <div class="top-0  right-0 fixed z-10 h-full w-full translate-x-full overflow-y-auto overscroll-y-none transition duration-500 peer-checked/filter:translate-x-1 peer-checked/filter:sm:translate-x-1/3 peer-checked/filter:md:translate-x-1/2">
+        <div class="pt-16 bg-white"></div>
+        <div class="flex flex-col gap-6 p-6 bg-white border-l-slate-400 border-1">
+          <h3>Filter artworks</h4>
+          <%= form_with method: :get do |f| %>
+            <div class="flex flex-col gap-4">
+              <div class="">
+                <%= f.label "keyword", class: "block text-sm font-medium leading-6 text-gray-900" %>
+                <%= f.text_field :search, value: @search_term, placeholder: "", label: 'Search term', class: "w-48 small-field" %>
+              </div>
+              <div>
+                <%= f.label "price range", class: "block text-sm font-medium leading-6 text-gray-900" %>
+                <div class="flex gap-4">
+                  <%= f.text_field :min_price, value: @min_price, placeholder: "min", label: 'Min price', class: "w-16 small-field" %>
+                  <%= f.text_field :max_price, value: @max_price, placeholder: "max", label: 'Max price', class: "w-16 small-field" %>
+                </div>
+              </div>
+              <div>
+                <%= f.label "location", class: "block text-sm font-medium leading-6 text-gray-900" %>
+                <div id="location-item-container" class="flex flex-col gap-1">
+                  <span class="text-slate-500 text-sm">Filter location options</span>
+                  <input type="text" class="w-48 small-field mb-2" id="location-serach" />
+                  <% @location_options.each do | location | %>
+                    <div data-text="<%= location.id %>" class="location-item w-full <%= "hidden opacity-0" unless location.show_by_default %> transition-opacity duration-500 delay-75 ">
+                      <label class="mr-2 text-sm leading-6 text-gray-900" for="<%= "location_#{location.id.parameterize(separator: '_')}" %>" >
+                        <input class="mr-2" type="checkbox" name="location[]" value="<%= location.id %>"
+                                             id="<%= "location_#{location.id.parameterize(separator: '_')}" %>" 
+                                             <%= "checked" if @location&.include?(location.id) == true %> >
+                        <%= location.name %>
+                      </label>
+                    </div>
+                  <% end %>
+                  <% if @location_options.length > 5 %>
+                    <label id="location-more" class="text-slate-500 my-2 w-content cursor-pointer text-sm">show all</label>
+                  <% end %>
+                </div>
+              </div>
+              <div>
+                <%= f.label "medium", class: "block text-sm font-medium leading-6 text-gray-900" %>
+                <div id="medium-item-container" class="flex flex-col gap-1">
+                  <span class="text-slate-500 text-sm">Filter medium options</span>
+                  <input type="text" class="w-48 small-field mb-2" id="medium-serach" />
+                  <% @medium_options.each do | medium | %>
+                    <div data-text="<%= medium.id %>" class="medium-item w-full <%= "hidden opacity-0" unless medium.show_by_default %> transition-opacity duration-500 delay-75 ">
+                      <label class="mr-2 text-sm leading-6 text-gray-900" for="<%= "medium_#{medium.id.parameterize(separator: '_')}" %>" >
+                        <input class="mr-2" type="checkbox" name="medium[]" value="<%= medium.id %>"
+                                             id="<%= "medium_#{medium.id.parameterize(separator: '_')}" %>" 
+                                             <%= "checked" if @medium&.include?(medium.id) == true %> >
+                        <%= medium.name %>
+                      </label>
+                    </div>
+                  <% end %>
+                  <% if @medium_options.length > 5 %>
+                    <label id="medium-more" class="text-slate-500 my-2 w-content cursor-pointer text-sm">show all</label>
+                  <% end %>
+                </div>
+              </div>
+              <div>
+                <%= f.submit "Filter", class: "mt-4 tw-btn-secondary"  %>
+                <%= link_to root_path, class: "ml-4 py-2 tw-btn-primary" do %>
+                  Clear all filters
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </label>
+  </div>
+</div>
+<%= javascript_include_tag "filter" %>
