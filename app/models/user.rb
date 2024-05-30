@@ -26,10 +26,6 @@ class User < ApplicationRecord
     artist? || admin?
   end
 
-  def show_browse?
-    curator? || admin?
-  end
-
   def show_users?
     admin?
   end

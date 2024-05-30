@@ -1,8 +1,5 @@
-class Curator::ArtworksController < ApplicationController
-  before_action :authenticate_user!
-  before_action :confirm_curator
-
-  # GET /curator/artworks
+class MainController < ApplicationController
+  # GET /
   def index
     @page = params[:page]&.to_i || 0
     @search_term = params[:search]
@@ -11,28 +8,30 @@ class Curator::ArtworksController < ApplicationController
     @location = params[:location]
     @medium = params[:medium]
     @has_filters = @min_price.present? || @max_price.present? ||
-                   @location.present? || @medium.present?
+      @location.present? || @medium.present?
 
     location_options = Artwork.is_visible.with_images.all.group(:location).order(count: :desc).count
 
-    @location_options = location_options.each_with_index.reduce([]) do  | acc, (item, i) |
+    @location_options = location_options.each_with_index.reduce([]) do |acc, (item, i)|
       show_by_default = acc.size < 5
       acc.push(OpenStruct.new(
-        :id => item.first,
-        :name => "#{item.first} (#{item.last})",
-        :count => item.last,
-        :show_by_default => show_by_default))
+        id: item.first,
+        name: "#{item.first} (#{item.last})",
+        count: item.last,
+        show_by_default: show_by_default
+      ))
     end
 
     medium_options = Artwork.is_visible.with_images.all.group(:medium).order(count: :desc).count
 
-    @medium_options = medium_options.each_with_index.reduce([]) do  | acc, (item, i) |
+    @medium_options = medium_options.each_with_index.reduce([]) do |acc, (item, i)|
       show_by_default = acc.size < 5
       acc.push(OpenStruct.new(
-        :id => item.first,
-        :name => "#{item.first} (#{item.last})",
-        :count => item.last,
-        :show_by_default => show_by_default))
+        id: item.first,
+        name: "#{item.first} (#{item.last})",
+        count: item.last,
+        show_by_default: show_by_default
+      ))
     end
 
     @artworks = Artwork.is_visible.with_images.all.page(@page)
@@ -55,14 +54,8 @@ class Curator::ArtworksController < ApplicationController
     end
   end
 
-  # GET /curator/artworks/1
+  # GET artwork/1
   def show
     @artwork = Artwork.find(params[:id])
-  end
-
-  private
-
-  def confirm_curator
-    current_user.show_browse?
   end
 end

@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  root "pages#home"
+  root "main#index"
+  get "/artwork/:id", to: "main#show", as: "public_artwork"
 
   resources :artworks do
     member do
@@ -12,10 +13,6 @@ Rails.application.routes.draw do
 
   scope :admin do
     resources :users
-  end
-
-  namespace :curator do
-    resources :artworks, only: [:index, :show]
   end
 
   devise_for :users
