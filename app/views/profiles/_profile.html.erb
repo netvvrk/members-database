@@ -1,12 +1,12 @@
 <div id="<%= dom_id profile %>" class="lg:grid lg:auto-rows-min lg:grid-cols-12 lg:gap-x-8">
-  <div class="mt-8 p-1 flex flex-1 gap-y-4 flex-col lg:col-span-4 lg:col-start-1 lg:row-span-3 lg:row-start-1 lg:mt-0">
+  <div class="bg-slate-100 mt-8 p-6 lg:min-h-vh rounded-lg flex flex-1 gap-y-4 flex-col lg:col-span-4 lg:col-start-1 lg:row-span-3 lg:row-start-1 lg:mt-0">
   <% if profile.avatar.attached? %>
-  <div class="w-full my-2">
+  <div class="w-full sm:w-auto my-2">
       <%= image_tag profile.avatar %>
   </div>
   <% end %>
-  <h3 class="text-xl text-slate-600"><%=profile.user.name %></h3>
-  <% if profile.tags.length %>
+  <h3 class="text-xl text-slate-800"><%=profile.user.name %></h3>
+  <% if profile.tags.length > 0 %>
     <h5 class="text-sm font-semibold">Disciplines:</h5>
     <div class="flex flex-wrap">
     <% profile.tags.each do | tag | %>
@@ -14,9 +14,13 @@
     <% end %>
     </div>
   <% end %>
-  <p class="my-3 ">
-    <%= profile.bio.nil? ? 'No bio' : profile.bio  %>
-  </p>
+  <% if profile.bio %>
+    <div class="my-3 ">
+      <h5 class="text-sm font-semibold">Bio:</h5>
+      <%= profile.bio.nil? ? '' : profile.bio  %>
+    </div>
+
+  <% end %>
   <div class="flex gap-6">
   
     <a href="<%= profile.website %>" class="<%= profile.website.blank? ? "text-gray-400 cursor-default" : "text-black cursor-pointer"%>">
@@ -57,15 +61,15 @@
 
   </div>
   <div class="lg:col-span-8">
-    <ul role="list" class="pl-0 grid grid-cols-1 gap-1 md:grid-cols-2 lg:grid-cols-3">
-      <% profile.user.artworks.each do |artwork| %>
-        <a href="<%= artwork_path(artwork.id) %>">
+    <ul role="list" class="pl-0 mt-6 lg:mt-0 grid grid-cols-1 gap-4 md:grid-cols-2">
+      <% profile.user.artworks.is_visible.each do |artwork| %>
+        <a href="<%= public_artwork_path(artwork.id) %>">
           <li class="col-span-1 flex flex-col divide-y text-center">
-            <div class="flex flex-1 flex-col p-2">
-              <div class="mx-auto w-full flex-shrink-0 border-1 border-slate-400" >
-                <%= image_tag large_url(artwork.images.first), class: "w-full"  %>
+            <div class="flex flex-1 flex-col mb-4">
+              <div class="mx-auto w-full flex-shrink-0 bg-slate-100 p-4" >
+                <%= image_tag large_url_fix_h(artwork.images.first), class: "w-full"  %>
               </div>
-              <h4 class="mt-2 text-sm font-medium text-gray-900"><%= artwork.title %></h4>
+              <h4 class="mt-2 text-left text-md text-gray-900 focus:no-underline"><%= artwork.title %></h4>
 
             </div>
 
