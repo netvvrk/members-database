@@ -1,7 +1,7 @@
 <div>
   <a class="text-black hover:no-underline" href="<%= public_artwork_path(artwork.id) %>">
-    <div class="bg-slate-100 w-full py-8 px-4 lg:py-12 justify-center flex">
-      <img class="h-auto max-w-3/4 lg:max-w-fit xl:w-4/5" src="<%= large_url(artwork.images.first) if artwork.images.length %>" alt="<%= artwork.title %>">
+    <div class="bg-slate-100 w-full p-6 justify-center flex">
+        <img height="400" src="<%= large_url_fix_h(artwork.images.first) if artwork.images.length %>" alt="<%= artwork.title %>">
     </div>
     <section class="p-4">
       <div class=""><%= artwork.user.name %></div>
