@@ -57,5 +57,16 @@ class MainController < ApplicationController
   # GET artwork/1
   def show
     @artwork = Artwork.find(params[:id])
+    if !@artwork.visible || !belongs_to_user
+      redirect_to root_url
+    end
+
   end
+
+  private 
+
+  def belongs_to_user
+    current_user.id == @artwork.user.id
+  end 
+
 end
