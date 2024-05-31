@@ -15,6 +15,14 @@ module ApplicationHelper
     end
   end
 
+  # image with 400px height and extra gray padding to maintain ratio
+  def large_url_fix_h(image)
+    if image&.is_video?
+      "#{image.file.url}/ik-thumbnail.jpg?tr=h-400,c-maintain_ratio"
+    else
+      image&.file&.url(transformation: [{height: 400, width: 600, quality: 100, raw: "c-at_max,c-maintain_ratio,cm-pad_resize,bg-F3F3F3"}])
+    end
+  end  
   def asset_delete_text(i)
     if i.is_video?
       "Delete video"
