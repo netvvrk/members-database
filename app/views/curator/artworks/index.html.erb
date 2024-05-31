@@ -1,7 +1,7 @@
 <%= render "header" %>
 
 <% 
-  items_per_column = @artworks.length == 25 ? 6 : (@artworks.length / 4.0).ceil # TODO: calculate reminder for more even columns
+  items_per_column = @artworks.length / 2 #@artworks.length == 25 ? 6 : (@artworks.length / 4.0).ceil # TODO: calculate reminder for more even columns
 %>
 <div class="flex justify-center">
   <% if@artworks.length == 0 and @has_filters %>
@@ -14,13 +14,9 @@
   <% end %>
   <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 ">
       <% @artworks.each_with_index do |artwork, index| %>
-        <% if index % items_per_column == 0 %>
           <div class="grid gap-4 content-baseline">
-        <% end %>
             <%= render artwork %>
-        <% if index % items_per_column == items_per_column - 1 %>
           </div>
-        <% end %>
 
       <% end %>
   </div>
