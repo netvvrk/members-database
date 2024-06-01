@@ -66,7 +66,7 @@ class MainController < ApplicationController
   private 
 
   def belongs_to_user
-    current_user.id == @artwork.user.id
+    current_user&.id == @artwork.user.id
   end 
 
 end
