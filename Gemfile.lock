@@ -107,12 +107,8 @@ GEM
       responders
       warden (~> 1.2.3)
     domain_name (0.6.20240107)
-    down (5.4.1)
-      addressable (~> 2.8)
     drb (2.2.1)
     erubi (1.12.0)
-    faker (3.2.3)
-      i18n (>= 1.8.11, < 2)
     globalid (1.2.1)
       activesupport (>= 6.1)
     honeybadger (5.11.0)
@@ -333,8 +329,6 @@ DEPENDENCIES
   cssbundling-rails
   debug
   devise
-  down
-  faker
   honeybadger
   imagekitio
   jsbundling-rails

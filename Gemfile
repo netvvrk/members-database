@@ -29,8 +29,8 @@ group :development do
 end
 
 ##### comment out unless generating fake data
-gem "down"
-gem "faker"
+# gem "down"
+# gem "faker"
 #####
 
 gem "tailwindcss-rails", "~> 2.3"
