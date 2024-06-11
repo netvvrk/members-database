@@ -1,24 +1,25 @@
-# README
+# members-database
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Ruby on Rails app for a database of artists and their artworks
 
-Things you may want to cover:
+## HOW TO
 
-* Ruby version
+### Add a new user to the database
 
-* System dependencies
+Connect to the Rails console using Heroku:
 
-* Configuration
+`heroku run rails c -a <app-name>`
 
-* Database creation
+Create a user:
 
-* Database initialization
+Role can be admin. artist, or curator.
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+```ruby
+User.create!(
+  email: "jane@gmail.com",
+  first_name: "Jane",
+  last_name: "Smith",
+  role: "artist",
+  password: "a password",
+  password_confirmation: "a password"
+)
