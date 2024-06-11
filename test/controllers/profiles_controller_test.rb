@@ -19,7 +19,8 @@ class ProfilesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update profile when bio and avatar are in params" do
-    patch profile_url(@profile), params: { profile: { bio: @profile.bio, avatar: 'something', disciplines: @profile.disciplines, social_1: @profile.social_1, social_2: @profile.social_2, website: @profile.website } }
+    avatar = fixture_file_upload('sabzian.jpeg', 'image/jpeg')
+    patch profile_url(@profile), params: { profile: { bio: @profile.bio, avatar: avatar, disciplines: @profile.disciplines, social_1: @profile.social_1, social_2: @profile.social_2, website: @profile.website } }
     assert_redirected_to profile_url(@profile)
   end
 
@@ -30,7 +31,8 @@ class ProfilesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should fail when bio is missing in params" do
-    patch profile_url(@profile), params: { profile: { disciplines: @profile.disciplines, avatar: 'something', social_1: @profile.social_1, social_2: @profile.social_2, website: @profile.website } }
+    avatar = fixture_file_upload('sabzian.jpeg', 'image/jpeg')
+    patch profile_url(@profile), params: { profile: { disciplines: @profile.disciplines, avatar: avatar, social_1: @profile.social_1, social_2: @profile.social_2, website: @profile.website } }
     assert_response 422
   end  
 
