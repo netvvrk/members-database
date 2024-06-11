@@ -22,12 +22,18 @@ module ApplicationHelper
     else
       image&.file&.url(transformation: [{height: 400, width: 600, quality: 100, raw: "c-at_max,c-maintain_ratio,cm-pad_resize,bg-F3F3F3"}])
     end
-  end  
+  end
+
   def asset_delete_text(i)
     if i.is_video?
       "Delete video"
     else
       "Delete image"
     end
+  end
+
+  def is_production?
+    hostname = ENV.fetch("HOSTNAME", "")
+    hostname !~ /staging/
   end
 end
