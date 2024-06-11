@@ -4,6 +4,7 @@ ruby "3.2.2"
 
 gem "bootsnap", require: false
 gem "bootstrap_form"
+gem "chargebee"
 gem "cssbundling-rails"
 gem "devise"
 gem "honeybadger"
@@ -29,8 +30,8 @@ group :development do
 end
 
 ##### comment out unless generating fake data
-gem "down"
-gem "faker"
+# gem "down"
+# gem "faker"
 #####
 
 gem "tailwindcss-rails", "~> 2.3"

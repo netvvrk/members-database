@@ -56,6 +56,9 @@ module MembersDatabase
       aauthentication: "plain",
       enable_starttls: true
     }
+
+    # whether to send password reset email when a new user is created through sync or webhook
+    config.send_password_reset = ENV.fetch("SEND_PASSWORD_RESET", false)
   end
 
   private

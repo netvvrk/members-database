@@ -1,4 +1,4 @@
-require "faker"
+# require "faker"
 
 desc "Add fake users and artworks to the database"
 task fake_data: :environment do
