@@ -13,7 +13,7 @@
     <%= render "layouts/navbar" %>
     <div class="mx-auto max-w-7xl p-4  sm:px-6 lg:p-8">
       <% flash.each do |key, value| %>
-        <div class="<%= key == "notice" ? "text-lg text-slate-600" : "text-lg text-red-500" %>">
+        <div class="py-2 mb-4 text-md border-b w-fit <%= key == "notice" ? "border-slate-200 text-slate-600" : "text-red-500 border-red-200" %>">
           <%= value %>
         </div>
       <% end %>
