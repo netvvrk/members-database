@@ -23,3 +23,11 @@ User.create!(
   password: "a password",
   password_confirmation: "a password"
 )
+
+### Sync existing users into the users table
+
+`heroku run rake chargebee:sync -a <app-name>`
+
+This will not create duplicate users. It checks to see if the Chargebee ID is already in the database.
+
+

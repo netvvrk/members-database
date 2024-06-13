@@ -10,12 +10,11 @@ class ChargebeeSync
     loop do
       resp = ChargeBee::Subscription.list(search_condition)
       resp.each do |entry|
-        subscription = entry.subscription
         customer = entry.customer
         cb_id = customer.id
 
         next if User.exists?(cb_customer_id: cb_id)
-        puts "#{cb_id} - #{subscription.status}"
+        puts "ID: #{cb_id}"
 
         password = SecureRandom.alphanumeric(12)
         User.create!(
