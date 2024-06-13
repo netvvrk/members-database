@@ -47,4 +47,9 @@ class User < ApplicationRecord
       Artwork.where(user: self).update_all(visible: false)
     end
   end
+
+  def send_reset_password_instructions(initial = nil)
+    @initial = initial
+    super()
+  end
 end

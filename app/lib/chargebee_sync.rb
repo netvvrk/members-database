@@ -17,7 +17,7 @@ class ChargebeeSync
         puts "ID: #{cb_id}"
 
         password = SecureRandom.alphanumeric(12)
-        User.create!(
+        u = User.create!(
           cb_customer_id: cb_id,
           email: customer.email,
           first_name: customer.first_name,
@@ -26,6 +26,7 @@ class ChargebeeSync
           password_confirmation: password,
           role: "artist"
         )
+        u.send_reset_password_instructions(true)
       end
       if resp.next_offset
         search_condition[:offset] = resp.next_offset
