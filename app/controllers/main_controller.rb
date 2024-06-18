@@ -1,3 +1,5 @@
+require "ostruct"
+
 class MainController < ApplicationController
   # GET /
   def index
@@ -60,13 +62,11 @@ class MainController < ApplicationController
     if !@artwork.visible && !belongs_to_user
       redirect_to root_url
     end
-
   end
 
-  private 
+  private
 
   def belongs_to_user
     current_user&.id == @artwork.user.id
-  end 
-
+  end
 end
