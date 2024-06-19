@@ -1,7 +1,7 @@
 class ArtworksController < ApplicationController
   before_action :authenticate_user!
   before_action :confirm_not_curator
-  before_action :set_artwork, only: %i[show edit update destroy preview]
+  before_action :set_artwork, only: %i[show edit update destroy]
 
   # GET /artworks
   def index
@@ -10,10 +10,6 @@ class ArtworksController < ApplicationController
 
   # GET /artworks/1
   def show
-  end
-
-  # GET /artworks/1/preview
-  def preview
   end
 
   # GET /artworks/new

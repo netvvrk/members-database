@@ -1,33 +1,38 @@
   <%= bootstrap_form_with(model: artwork) do |f| %>
-  <%= f.alert_message "Please fix the errors below." %>
-  <%= f.text_field :title, help: "required" %>
-  <%= f.text_field :medium, help: "required" %>
-  <%= f.text_field :edition, help: "if applicable" %>
-  <%= f.text_area :description %>
-  <%= f.number_field :year, help: "required" %>
-  <%= f.number_field :price %>
-  <div class="flex flex-col">
-    <label>Location:</label>
-    <span class="text-sm text-slate-700 my-2">
-    Search locations and select from box
-    </span>
-    <input type="text" value="<%= artwork.location %>" id="location-search"/>
-    <%= f.hidden_field :location, id: "location-hidden" %>
-    <span class="text-sm text-slate-700 my-2">required</span>
-  
-    <ul id="suggestion-container" class="my-3 opacity-0 transition-opacity flex flex-col border-1 rounded border-slate-400 gap-2">
-      <li class="hidden p-2 cursor-pointer bg-slate-200">test</li>
-    </ul>
-  </div>
-  <%= f.check_box :visible, label: "Visible to curators?" %>
-  <fieldset class="border p-2 mb-4">
-    <p class="text-secondary">Either duration or heigh and width are required</p>
-    <%= f.number_field :duration, label: "Duration (minutes)" %>
-    <%= f.select :units, %w[in cm] %>
-    <%= f.number_field :height %>
-    <%= f.number_field :width %>
-    <%= f.number_field :depth %>
-  </fieldset>
-  <%= f.submit "Save", class: "tw-btn-primary" %>
-<% end %>
+  <div class="max-w-md">
+    <%= f.alert_message "Please fix the errors below." %>
+    <%= f.text_field :title, class: "small-field", help: "required" %>
+    <%= f.text_field :medium, class: "small-field", help: "required" %>
+    <%= f.text_field :edition, class: "small-field", help: "if applicable" %>
+    <%= f.text_area :description, rows: 6, class: "small-field" %>
+    <%= f.number_field :year, class: "small-field", help: "required" %>
+    <%= f.number_field :price, class: "small-field" %>
+    <div class="flex flex-col">
+      <label>Location:</label>
+      <span class="text-sm text-slate-700 my-2">
+      Search locations and select from box
+      </span>
+      <input type="text" class="small-field" value="<%= artwork.location %>" id="location-search"/>
+      <%= f.hidden_field :location, id: "location-hidden" %>
+      <span class="text-sm text-slate-700 my-2">required</span>
+    
+      <ul id="suggestion-container" class="my-3 opacity-0 transition-opacity flex flex-col border-1 rounded border-slate-400 gap-2">
+        <li class="hidden p-2 cursor-pointer bg-slate-200">test</li>
+      </ul>
+    </div>
+    <fieldset class="mb-6">
+      <p class="text-secondary mb-2">Artwork visibility:</p>
+      <%= f.check_box :visible, label: "Visible to curators" %>
+    </fieldset>
+    <fieldset class="border round-sm p-2 mb-4 max-w-80">
+      <p class="text-secondary">Either duration or heigh and width are required</p>
+      <%= f.number_field :duration, label: "Duration (minutes)", class: "small-field" %>
+      <%= f.select :units, %w[in cm], class: "small-field" %>
+      <%= f.number_field :height, class: "small-field" %>
+      <%= f.number_field :width, class: "small-field" %>
+      <%= f.number_field :depth, class: "small-field" %>
+    </fieldset>
+    <%= f.submit "Save", class: "tw-btn-primary" %>
+  <% end %>
+</div>
 <%= javascript_include_tag "locationsearch" %>
