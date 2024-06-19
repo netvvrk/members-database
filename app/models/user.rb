@@ -30,6 +30,10 @@ class User < ApplicationRecord
     admin?
   end
 
+  def has_profile?
+    artist?
+  end
+
   def active_for_authentication?
     super && active?
   end

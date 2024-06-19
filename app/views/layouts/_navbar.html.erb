@@ -18,7 +18,7 @@
             <div class="flex lg:flex-1 flex-col pt-12 lg:pt-0 lg:flex-row">
               <% if user_signed_in? %>
                 <% if current_user.show_artworks? %>
-                  <%= link_to "Manage Artworks", artworks_url, class: "text-black hover:no-underline hover:text-slate-600 hover:text-black rounded-md px-3 py-2 text-base font-medium" %>
+                  <%= link_to "My Artworks", artworks_url, class: "text-black hover:no-underline hover:text-slate-600 hover:text-black rounded-md px-3 py-2 text-base font-medium" %>
                 <% end %>
                 <% if current_user.show_users? %>
                   <%= link_to "Users", users_url, class: "text-black hover:no-underline hover:text-slate-600 hover:text-black rounded-md px-3 py-2 text-base font-medium" %>
@@ -27,7 +27,7 @@
             </div>
             <div class="inset-y-0 right-0 flex items-start gap-y-2 lg:gap-y-0 lg:items-center flex-col lg:flex-row  static inset-auto pr-0 ml-2 xmt-4 lg:mt-0">
               <% if user_signed_in? %>
-                <% if current_user.artist? %>
+                <% if current_user.has_profile? %>
                   <%= link_to(
                     "edit profile",
                     edit_profile_path(Profile.find_or_create_by(user_id: current_user.id)),
