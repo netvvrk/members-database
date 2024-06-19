@@ -26,7 +26,7 @@ class ChargebeeSync
           password_confirmation: password,
           role: "artist"
         )
-        u.send_reset_password_instructions(true)
+        u.send_reset_password_instructions
       end
       if resp.next_offset
         search_condition[:offset] = resp.next_offset
