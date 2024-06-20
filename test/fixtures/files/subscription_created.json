@@ -47,6 +47,7 @@
     "customer": {
       "id": "16CRpYTwv1YYb63b",
       "first_name": "test",
+      "last_name": "smith",
       "email": "penny@vvrkshop.art",
       "auto_collection": "on",
       "net_term_days": 0,
