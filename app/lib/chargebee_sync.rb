@@ -1,8 +1,7 @@
 class ChargebeeSync
   def initialize
-    api_key = ENV.fetch("CHARGEBEE_API_KEY")
-    site = ENV.fetch("CHARGEBEE_SITE")
-    @client = ChargeBee.configure({api_key: api_key, site: site})
+    config = Rails.application.config_for(:chargebee)
+    @client = ChargeBee.configure({api_key: config["api_key"], site: config["site"]})
   end
 
   def run
