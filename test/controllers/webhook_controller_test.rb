@@ -8,9 +8,13 @@ class ArtworksControllerTest < ActionDispatch::IntegrationTest
 
   test "subscription created post" do
     payload = File.read(Rails.root.join("test", "fixtures", "files", "subscription_created.json"))
-    post webhook_chargebee_url,
-      params: JSON.parse(payload),
-      headers: {Authorization: ActionController::HttpAuthentication::Basic.encode_credentials("test-user", "password")}
+    data = JSON.parse(payload)
+    assert_difference "User.count" do
+      post webhook_chargebee_url,
+        params: data, as: :json,
+        headers: {Authorization: ActionController::HttpAuthentication::Basic.encode_credentials("test-user", "password"),
+                  "Content-Type": "application/json"}
+    end
     assert_response :success
   end
 end
