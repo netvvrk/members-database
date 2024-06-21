@@ -1,7 +1,7 @@
 class ChargebeeSync
   def initialize
-    config = Rails.application.config_for(:chargebee)
-    @client = ChargeBee.configure({api_key: config["api_key"], site: config["site"]})
+    config = Rails.configuration.x.chargebee
+    @client = ChargeBee.configure({api_key: config.api_key, site: config.site})
   end
 
   def run

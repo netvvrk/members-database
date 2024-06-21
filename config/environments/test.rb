@@ -61,4 +61,10 @@ Rails.application.configure do
 
   # Raise error when a before_action's only/except options reference missing actions
   config.action_controller.raise_on_missing_callback_actions = true
+
+  # chargebee configuration
+  config.x.chargebee.api_key = "api-key"
+  config.x.chargebee.site = "test-site"
+  config.x.chargebee.webhook_user = "test-user"
+  config.x.chargebee.webhook_pass = "password"
 end

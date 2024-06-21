@@ -59,6 +59,12 @@ module MembersDatabase
 
     # whether to send password reset email when a new user is created through sync or webhook
     config.send_password_reset = ENV.fetch("SEND_PASSWORD_RESET", false)
+
+    # chargebee configuration
+    config.x.chargebee.api_key = ENV["CHARGEBEE_API_KEY"]
+    config.x.chargebee.site = ENV["CHARGEBEE_SITE"]
+    config.x.chargebee.webhook_user = ENV["CHARGEBEE_WEBHOOK_USER"]
+    config.x.chargebee.webhook_pass = ENV["CHARGEBEE_WEBHOOK_PASS"]
   end
 
   private
