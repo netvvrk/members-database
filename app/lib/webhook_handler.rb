@@ -6,6 +6,8 @@ class WebhookHandler
       case event.event_type
       when "subscription_cancelled"
         deactivate_user(event)
+      when "subscription_changed"
+        subscription_change(event)
       when "subscription_created"
         subscription_create(event)
       when "subscription_paused"
@@ -33,6 +35,14 @@ class WebhookHandler
       user = User.find_by(cb_customer_id: customer.id)
       user.active = false
       user.save
+    end
+
+    def subscription_change(event)
+      if Util.subscription_is_annual_or_founding(event.content.subscription)
+        activate_user(event)
+      else
+        deactivate_user(event)
+      end
     end
 
     def subscription_create(event)

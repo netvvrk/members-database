@@ -6,6 +6,7 @@ class WebhookController < ActionController::API
 
   def chargebee
     event = ChargeBee::Event.deserialize(request.body.read)
+    Rails.logger.debug(event)
     WebhookHandler.handle_payload(event)
     render plain: "OK"
   end
