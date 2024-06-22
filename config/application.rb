@@ -65,6 +65,7 @@ module MembersDatabase
     config.x.chargebee.site = ENV["CHARGEBEE_SITE"]
     config.x.chargebee.webhook_user = ENV["CHARGEBEE_WEBHOOK_USER"]
     config.x.chargebee.webhook_pass = ENV["CHARGEBEE_WEBHOOK_PASS"]
+    config.x.user_creation_send_email = ENV["USER_CREATION_SEND_EMAIL"]
   end
 
   private

@@ -36,6 +36,6 @@ class ChargebeeSync
       password_confirmation: password,
       role: "artist"
     )
-    u.send_reset_password_instructions
+    u.send_reset_password_instructions if Rails.configuration.x.user_creation_send_email
   end
 end
