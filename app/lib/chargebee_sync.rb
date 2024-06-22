@@ -9,7 +9,6 @@ class ChargebeeSync
     loop do
       resp = ChargeBee::Subscription.list(search_condition)
       resp.each do |entry|
-        print "."
         next unless Util.subscription_is_annual(entry.subscription)
         create_user(entry.customer)
       end
@@ -23,8 +22,9 @@ class ChargebeeSync
   end
 
   def create_user(customer)
+    puts customer.email
     cb_id = customer.id
-    return if User.exists?(cb_customer_id: cb_id)
+    return if User.exists?(cb_customer_id: cb_id).or(email: customer.email)
 
     password = SecureRandom.alphanumeric(12)
     u = User.create!(
