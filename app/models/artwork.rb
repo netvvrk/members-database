@@ -13,6 +13,7 @@ class Artwork < ApplicationRecord
   pg_search_scope :search, against: [:title, :medium, :description], associated_against: {user: [:first_name, :last_name]}
 
   scope :is_visible, -> { where("visible = true") }
+  scope :is_active, -> { where("active = true") }
 
   scope :with_images, -> {
                         joins(:images).distinct(:artwork_id)
