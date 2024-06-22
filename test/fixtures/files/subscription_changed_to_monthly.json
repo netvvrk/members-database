@@ -1,0 +1,215 @@
+{
+  "api_version": "v2",
+  "content": {
+    "customer": {
+      "allow_direct_debit": false,
+      "auto_collection": "off",
+      "billing_address": {
+        "country": "US",
+        "object": "billing_address",
+        "validation_status": "not_validated"
+      },
+      "card_status": "no_card",
+      "cf_Migrated": "YES",
+      "cf_Paypal": "YES",
+      "channel": "web",
+      "created_at": 1699042125,
+      "created_from_ip": "27.5.153.91",
+      "deleted": false,
+      "email": "cbuck66_AT_gmail.com@example.com",
+      "excess_payments": 0,
+      "first_name": "Charles",
+      "id": "abcdef",
+      "last_name": "Buckley",
+      "mrr": 0,
+      "net_term_days": 0,
+      "object": "customer",
+      "pii_cleared": "active",
+      "preferred_currency_code": "USD",
+      "promotional_credits": 0,
+      "refundable_credits": 0,
+      "resource_version": 1717430823069,
+      "taxability": "taxable",
+      "unbilled_charges": 0,
+      "updated_at": 1717430823
+    },
+    "invoice": {
+      "adjustment_credit_notes": [],
+      "amount_adjusted": 0,
+      "amount_due": 7900,
+      "amount_paid": 0,
+      "amount_to_collect": 7900,
+      "applied_credits": [],
+      "base_currency_code": "USD",
+      "billing_address": {
+        "country": "US",
+        "first_name": "Charles",
+        "last_name": "Buckley",
+        "object": "billing_address",
+        "validation_status": "not_validated"
+      },
+      "channel": "web",
+      "credits_applied": 0,
+      "currency_code": "USD",
+      "customer_id": "I-WDREV8A6D9EV",
+      "date": 1719093454,
+      "deleted": false,
+      "due_date": 1719093454,
+      "dunning_attempts": [],
+      "exchange_rate": 1.0,
+      "first_invoice": false,
+      "generated_at": 1719093454,
+      "has_advance_charges": false,
+      "id": "2233",
+      "is_gifted": false,
+      "issued_credit_notes": [],
+      "line_items": [
+        {
+          "amount": 7900,
+          "customer_id": "I-WDREV8A6D9EV",
+          "date_from": 1719093454,
+          "date_to": 1721685454,
+          "description": "Netvvrk Monthly",
+          "discount_amount": 0,
+          "entity_id": "Netvvrk-Monthly-USD-Monthly",
+          "entity_type": "plan_item_price",
+          "id": "li_169vqBUGSywV8n5w",
+          "is_taxed": false,
+          "item_level_discount_amount": 0,
+          "object": "line_item",
+          "pricing_model": "flat_fee",
+          "quantity": 1,
+          "subscription_id": "2857588",
+          "tax_amount": 0,
+          "tax_exempt_reason": "tax_not_configured",
+          "unit_amount": 7900
+        }
+      ],
+      "linked_orders": [],
+      "linked_payments": [],
+      "net_term_days": 0,
+      "object": "invoice",
+      "price_type": "tax_exclusive",
+      "recurring": true,
+      "resource_version": 1719093454860,
+      "round_off_amount": 0,
+      "shipping_address": {
+        "email": "cbuck66_AT_gmail.com@example.com",
+        "first_name": "Charles",
+        "last_name": "Buckley",
+        "object": "shipping_address",
+        "validation_status": "not_validated"
+      },
+      "site_details_at_creation": {
+        "organization_address": {
+          "city": "Astoria",
+          "country_code": "US",
+          "email": "paddy@vvrkshop.art",
+          "line1": "3811 Ditmars Blvd #1103",
+          "organization_name": "VVrkshop",
+          "phone": "(718) 753-3464",
+          "state": "New York",
+          "state_code": "NY",
+          "website": "http://vvrkshop.art/",
+          "zip": "11105"
+        },
+        "timezone": "America/New_York"
+      },
+      "status": "payment_due",
+      "sub_total": 7900,
+      "subscription_id": "2857588",
+      "tax": 0,
+      "tax_origin": {
+        "country": "US"
+      },
+      "term_finalized": true,
+      "total": 7900,
+      "updated_at": 1719093454,
+      "write_off_amount": 0
+    },
+    "subscription": {
+      "activated_at": 1680537899,
+      "base_currency_code": "USD",
+      "billing_period": 1,
+      "billing_period_unit": "month",
+      "cf_Paypal_Migrated": "YES",
+      "channel": "web",
+      "created_at": 1680537899,
+      "created_from_ip": "54.88.235.200",
+      "currency_code": "USD",
+      "current_term_end": 1721685454,
+      "current_term_start": 1719093454,
+      "customer_id": "I-WDREV8A6D9EV",
+      "deleted": false,
+      "due_invoices_count": 5,
+      "due_since": 1712160422,
+      "exchange_rate": 1.0,
+      "has_scheduled_advance_invoices": false,
+      "has_scheduled_changes": false,
+      "id": "2857588",
+      "mrr": 6583,
+      "next_billing_at": 1721685454,
+      "object": "subscription",
+      "resource_version": 1719093454875,
+      "shipping_address": {
+        "email": "cbuck66_AT_gmail.com@example.com",
+        "first_name": "Charles",
+        "last_name": "Buckley",
+        "object": "shipping_address",
+        "validation_status": "not_validated"
+      },
+      "started_at": 1680537899,
+      "status": "active",
+      "subscription_items": [
+        {
+          "amount": 7900,
+          "current_term_end": 1721685454,
+          "current_term_start": 1719093454,
+          "free_quantity": 0,
+          "item_price_id": "Netvvrk-Monthly-USD-Monthly",
+          "item_type": "plan",
+          "next_billing_at": 1721685454,
+          "object": "subscription_item",
+          "quantity": 1,
+          "unit_price": 7900
+        }
+      ],
+      "total_dues": 110600,
+      "updated_at": 1719093454
+    }
+  },
+  "event_type": "subscription_changed",
+  "id": "ev_169vqBUGSywXDn5z",
+  "object": "event",
+  "occurred_at": 1719093454,
+  "source": "admin_console",
+  "user": "barry@tristanmedia.com",
+  "webhook_status": "scheduled",
+  "webhooks": [
+    {
+      "id": "whv2_16BdjQTta98S3V6B",
+      "object": "webhook",
+      "webhook_status": "not_applicable"
+    },
+    {
+      "id": "whv2_AzqEwrUGSxGHuBF8x",
+      "object": "webhook",
+      "webhook_status": "scheduled"
+    },
+    {
+      "id": "whv2_169lseTrjW9lv3Dj8",
+      "object": "webhook",
+      "webhook_status": "scheduled"
+    },
+    {
+      "id": "whv2_AzylISTta6fjqU6v",
+      "object": "webhook",
+      "webhook_status": "not_applicable"
+    },
+    {
+      "id": "whv2_AzyhBKU6RPt8W1gF7",
+      "object": "webhook",
+      "webhook_status": "not_applicable"
+    }
+  ]
+}

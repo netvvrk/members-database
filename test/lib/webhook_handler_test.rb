@@ -71,4 +71,24 @@ class WebhookHandlerTest < ActiveSupport::TestCase
     assert(user.reload.active)
     assert(artwork.reload.active)
   end
+
+  test "subcription changed to annual" do
+    payload = File.read(Rails.root.join("test", "fixtures", "files", "subscription_changed_to_annual.json"))
+    event = ChargeBee::Event.deserialize(payload)
+
+    user = users(:artist)
+    user.active = false
+    user.save
+
+    assert WebhookHandler.handle_payload(event)
+    assert user.reload.active
+  end
+
+  test "subcription changed to monthly" do
+    payload = File.read(Rails.root.join("test", "fixtures", "files", "subscription_changed_to_monthly.json"))
+    event = ChargeBee::Event.deserialize(payload)
+    assert WebhookHandler.handle_payload(event)
+    user = users(:artist)
+    refute user.active
+  end
 end

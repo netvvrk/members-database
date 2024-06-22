@@ -40,7 +40,6 @@ class MainController < ApplicationController
     if @search_term.present?
       # with_pg_search_rank is to avoid sql error (see commit message)
       @artworks = @artworks.search(@search_term).with_pg_search_rank
-      Rails.logger.debug(@artworks.to_sql)
     end
     if @max_price.present?
       @artworks = @artworks.where("price < ? ", @max_price)
