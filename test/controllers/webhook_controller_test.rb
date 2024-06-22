@@ -7,7 +7,7 @@ class ArtworksControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "subscription created post" do
-    payload = File.read(Rails.root.join("test", "fixtures", "files", "subscription_created.json"))
+    payload = File.read(Rails.root.join("test", "fixtures", "files", "subscription_created_annual.json"))
     data = JSON.parse(payload)
     assert_difference "User.count" do
       post webhook_chargebee_url,

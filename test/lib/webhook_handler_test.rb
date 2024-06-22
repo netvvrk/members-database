@@ -1,8 +1,17 @@
 require "test_helper"
 
 class WebhookHandlerTest < ActiveSupport::TestCase
-  test "subscription created" do
-    payload = File.read(Rails.root.join("test", "fixtures", "files", "subscription_created.json"))
+  test "subscription created for a monthly subscriber -- no effect" do
+    payload = File.read(Rails.root.join("test", "fixtures", "files", "subscription_created_monthly.json"))
+    event = ChargeBee::Event.deserialize(payload)
+
+    assert_no_changes "User.count" do
+      assert WebhookHandler.handle_payload(event)
+    end
+  end
+
+  test "subscription created for an annual subscriber" do
+    payload = File.read(Rails.root.join("test", "fixtures", "files", "subscription_created_annual.json"))
     event = ChargeBee::Event.deserialize(payload)
 
     assert_difference "User.count" do
