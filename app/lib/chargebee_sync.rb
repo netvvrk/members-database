@@ -9,7 +9,7 @@ class ChargebeeSync
     loop do
       resp = ChargeBee::Subscription.list(search_condition)
       resp.each do |entry|
-        next unless Util.subscription_is_annual(entry.subscription)
+        next unless Util.subscription_is_annual_or_founding(entry.subscription)
         create_user(entry.customer)
       end
       if resp.next_offset

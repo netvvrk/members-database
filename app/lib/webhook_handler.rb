@@ -36,7 +36,7 @@ class WebhookHandler
     end
 
     def subscription_create(event)
-      return true unless Util.subscription_is_annual(event.content.subscription)
+      return true unless Util.subscription_is_annual_or_founding(event.content.subscription)
 
       customer = event.content.customer
       password = SecureRandom.hex
