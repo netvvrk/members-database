@@ -3,17 +3,18 @@ artist:
   first_name: Louise
   last_name: The Artist
   encrypted_password: <%= Devise::Encryptor.digest(User, "password1") %>
-  role: 0
+  role: artist
+  cb_customer_id: abcdef
 curator:
   email: lauren@gmail.com
   first_name: Lauren
   last_name: The Curator
   encrypted_password: <%= Devise::Encryptor.digest(User, "password1") %>
-  role: 1
+  role: curator
 admin:
   email: paddy@gmail.com
   first_name: Paddy
   last_name: The Admin
   encrypted_password: <%= Devise::Encryptor.digest(User, "password1") %>
-  role: 2
+  role: admin
 

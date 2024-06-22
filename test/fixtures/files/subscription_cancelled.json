@@ -1,0 +1,98 @@
+{
+  "id": "ev_16CRxgUFghpCa7Yct",
+  "occurred_at": 1718380111,
+  "source": "scheduled_job",
+  "object": "event",
+  "api_version": "v2",
+  "content": {
+    "subscription": {
+      "id": "16CRoNUClRRWE41b",
+      "billing_period": 1,
+      "billing_period_unit": "month",
+      "customer_id": "16CRpYTwv1YYb63b",
+      "status": "cancelled",
+      "current_term_start": 1715701689,
+      "current_term_end": 1718380089,
+      "created_at": 1715701689,
+      "started_at": 1715701689,
+      "activated_at": 1715701689,
+      "cancelled_at": 1718380110,
+      "created_from_ip": "47.230.84.174",
+      "updated_at": 1718380111,
+      "has_scheduled_changes": false,
+      "cancel_schedule_created_at": 1715701845,
+      "channel": "web",
+      "resource_version": 1718380111036,
+      "deleted": false,
+      "object": "subscription",
+      "cancel_reason_code": "I don't want another monthly payment",
+      "currency_code": "USD",
+      "subscription_items": [
+        {
+          "item_price_id": "Netvvrk-Monthly-USD-Monthly",
+          "item_type": "plan",
+          "quantity": 1,
+          "unit_price": 7900,
+          "amount": 7900,
+          "current_term_start": 1715701689,
+          "current_term_end": 1718380089,
+          "free_quantity": 0,
+          "object": "subscription_item"
+        }
+      ],
+      "due_invoices_count": 0,
+      "mrr": 0,
+      "has_scheduled_advance_invoices": false
+    },
+    "customer": {
+      "id": "abcdef",
+      "first_name": "test",
+      "last_name": "R",
+      "email": "penny@vvrkshop.art",
+      "auto_collection": "off",
+      "net_term_days": 0,
+      "allow_direct_debit": false,
+      "created_at": 1701185158,
+      "created_from_ip": "24.102.124.194",
+      "taxability": "taxable",
+      "updated_at": 1715701800,
+      "pii_cleared": "active",
+      "channel": "web",
+      "resource_version": 1715701800420,
+      "deleted": false,
+      "object": "customer",
+      "card_status": "no_card",
+      "promotional_credits": 0,
+      "refundable_credits": 0,
+      "excess_payments": 0,
+      "unbilled_charges": 0,
+      "preferred_currency_code": "USD",
+      "mrr": 6583
+    }
+  },
+  "event_type": "subscription_cancelled",
+  "webhook_status": "not_applicable",
+  "webhook_failure_reason": "",
+  "webhooks": [
+    {
+      "id": "whv2_AzylISTta6fjqU6v",
+      "webhook_status": "not_applicable",
+      "object": "webhook"
+    },
+    {
+      "id": "whv2_16BdjQTta98S3V6B",
+      "webhook_status": "not_applicable",
+      "object": "webhook"
+    },
+    {
+      "id": "whv2_169lseTrjW9lv3Dj8",
+      "webhook_status": "succeeded",
+      "object": "webhook"
+    },
+    {
+      "id": "whv2_AzyhBKU6RPt8W1gF7",
+      "webhook_status": "succeeded",
+      "object": "webhook"
+    }
+  ]
+}

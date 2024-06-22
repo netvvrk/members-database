@@ -43,8 +43,6 @@ class User < ApplicationRecord
   end
 
   def update_artworks
-    if !active
-      Artwork.where(user: self).update_all(active: false)
-    end
+    Artwork.where(user: self).update_all(active: active)
   end
 end
