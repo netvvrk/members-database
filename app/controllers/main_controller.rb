@@ -12,7 +12,7 @@ class MainController < ApplicationController
     @has_filters = @min_price.present? || @max_price.present? ||
       @location.present? || @medium.present?
 
-    location_options = Artwork.is_visible.with_images.all.group(:location).order(count: :desc).count
+    location_options = Artwork.is_active.is_visible.with_images.all.group(:location).order(count: :desc).count
 
     @location_options = location_options.each_with_index.reduce([]) do |acc, (item, i)|
       show_by_default = acc.size < 5
