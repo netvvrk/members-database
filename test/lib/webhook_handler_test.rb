@@ -13,20 +13,30 @@ class WebhookHandlerTest < ActiveSupport::TestCase
   test "subscripton paused" do
     payload = File.read(Rails.root.join("test", "fixtures", "files", "subscription_paused.json"))
     event = ChargeBee::Event.deserialize(payload)
-    customer = event.content.customer
 
-    user = User.create(
-      email: customer.email,
-      first_name: customer.first_name,
-      last_name: customer.last_name,
-      role: "artist",
-      password: "password",
-      password_confirmation: "password",
-      cb_customer_id: customer.id
-    )
+    user = users(:artist)
+    artwork = create_artwork(user)
 
-    assert(user.reload.active)
+    assert(user.active)
+    assert(artwork.active)
     assert WebhookHandler.handle_payload(event)
-    assert_equal(user.reload.active, false)
+    refute(user.reload.active)
+    refute(artwork.reload.active)
+  end
+
+  test "subscripton resumed" do
+    payload = File.read(Rails.root.join("test", "fixtures", "files", "subscription_resumed.json"))
+    event = ChargeBee::Event.deserialize(payload)
+
+    user = users(:artist)
+    artwork = create_artwork(user)
+    user.active = false
+    user.save
+
+    refute(artwork.reload.active)
+
+    assert WebhookHandler.handle_payload(event)
+    assert(user.reload.active)
+    assert(artwork.reload.active)
   end
 end

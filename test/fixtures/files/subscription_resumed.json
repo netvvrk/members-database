@@ -1,6 +1,6 @@
 {
-  "id": "ev_XpbG6hnQqGGBCj3c",
-  "occurred_at": 1365622909,
+  "id": "ev_XpbG6hnQqGGBdj3f",
+  "occurred_at": 1366832511,
   "source": "api",
   "user": "full_access_key_v1",
   "object": "event",
@@ -15,17 +15,18 @@
       "billing_period": 1,
       "billing_period_unit": "month",
       "plan_free_quantity": 0,
-      "status": "paused",
+      "status": "active",
       "trial_start": 1341690024,
       "trial_end": 1344368424,
       "current_term_start": 1364845254,
       "current_term_end": 1367437254,
+      "next_billing_at": 1367437254,
       "created_at": 1341085225,
       "started_at": 1341690024,
       "activated_at": 1362166854,
-      "updated_at": 1365622909,
+      "updated_at": 1366832511,
       "has_scheduled_changes": false,
-      "resource_version": 1365622909000,
+      "resource_version": 1366832511000,
       "deleted": false,
       "object": "subscription",
       "currency_code": "USD",
@@ -37,11 +38,10 @@
           "object": "addon"
         }
       ],
-      "due_invoices_count": 1,
-      "due_since": 1364845254,
-      "total_dues": 224,
-      "mrr": 0,
-      "pause_date": 1365622909
+      "due_invoices_count": 0,
+      "mrr": 1095,
+      "exchange_rate": 1.0,
+      "base_currency_code": "USD"
     },
     "customer": {
       "id": "abcdef",
@@ -53,16 +53,16 @@
       "allow_direct_debit": false,
       "created_at": 1341085225,
       "taxability": "taxable",
-      "updated_at": 1364845255,
-      "resource_version": 1364845255000,
+      "updated_at": 1366832511,
+      "resource_version": 1366832511000,
       "deleted": false,
       "object": "customer",
       "card_status": "valid",
-      "primary_payment_source_id": "pm_3Nl7oGgQqGG6Jr42",
+      "primary_payment_source_id": "pm_3Nl7oGgQqGGBWR5i",
       "payment_method": {
         "object": "payment_method",
         "type": "card",
-        "reference_id": "tok_3Nl7oGgQqGG6Jl41",
+        "reference_id": "tok_3Nl7oGgQqGGBWG5h",
         "gateway": "chargebee",
         "gateway_account_id": "gw_3Nl7oGgQqGFlba2",
         "status": "valid"
@@ -74,6 +74,6 @@
       "preferred_currency_code": "USD"
     }
   },
-  "event_type": "subscription_paused",
+  "event_type": "subscription_resumed",
   "webhook_status": "not_configured"
 }

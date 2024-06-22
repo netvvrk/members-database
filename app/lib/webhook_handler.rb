@@ -8,6 +8,8 @@ class WebhookHandler
         subscription_create(event)
       when "subscription_paused"
         subscription_pause(event)
+      when "subscription_resumed"
+        subscription_resume(event)
       else
         false
       end
@@ -15,7 +17,14 @@ class WebhookHandler
 
     private
 
-    def subscription_pause(event)
+    def activate_user(event)
+      customer = event.content.customer
+      user = User.find_by(cb_customer_id: customer.id)
+      user.active = true
+      user.save
+    end
+
+    def deactivate_user(event)
       customer = event.content.customer
       user = User.find_by(cb_customer_id: customer.id)
       user.active = false
@@ -41,6 +50,14 @@ class WebhookHandler
       else
         Rails.logger.error("User creation for #{customer["id"]} failed -- #{u.errors.messages}")
       end
+    end
+
+    def subscription_pause(event)
+      deactivate_user(event)
+    end
+
+    def subscription_resume(event)
+      activate_user(event)
     end
   end
 end
