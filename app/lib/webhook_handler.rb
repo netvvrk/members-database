@@ -4,12 +4,16 @@ class WebhookHandler
   class << self
     def handle_payload(event)
       case event.event_type
+      when "subscription_cancelled"
+        deactivate_user(event)
       when "subscription_created"
         subscription_create(event)
       when "subscription_paused"
-        subscription_pause(event)
+        deactivate_user(event)
+      when "subscription_reactivated"
+        activate_user(event)
       when "subscription_resumed"
-        subscription_resume(event)
+        activate_user(event)
       else
         false
       end
@@ -50,14 +54,6 @@ class WebhookHandler
       else
         Rails.logger.error("User creation for #{customer["id"]} failed -- #{u.errors.messages}")
       end
-    end
-
-    def subscription_pause(event)
-      deactivate_user(event)
-    end
-
-    def subscription_resume(event)
-      activate_user(event)
     end
   end
 end

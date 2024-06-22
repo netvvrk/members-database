@@ -10,6 +10,17 @@ class WebhookHandlerTest < ActiveSupport::TestCase
     end
   end
 
+  test "subscripton cancelled" do
+    payload = File.read(Rails.root.join("test", "fixtures", "files", "subscription_cancelled.json"))
+    event = ChargeBee::Event.deserialize(payload)
+
+    user = users(:artist)
+    assert(user.active)
+
+    assert WebhookHandler.handle_payload(event)
+    refute(user.reload.active)
+  end
+
   test "subscripton paused" do
     payload = File.read(Rails.root.join("test", "fixtures", "files", "subscription_paused.json"))
     event = ChargeBee::Event.deserialize(payload)
@@ -22,6 +33,18 @@ class WebhookHandlerTest < ActiveSupport::TestCase
     assert WebhookHandler.handle_payload(event)
     refute(user.reload.active)
     refute(artwork.reload.active)
+  end
+
+  test "subscripton reactivated" do
+    payload = File.read(Rails.root.join("test", "fixtures", "files", "subscription_reactivated.json"))
+    event = ChargeBee::Event.deserialize(payload)
+
+    user = users(:artist)
+    user.active = false
+    user.save
+
+    assert WebhookHandler.handle_payload(event)
+    assert(user.reload.active)
   end
 
   test "subscripton resumed" do
