@@ -24,7 +24,7 @@ class ChargebeeSync
   def create_user(customer)
     puts customer.email
     cb_id = customer.id
-    return if User.exists?(cb_customer_id: cb_id).or(email: customer.email)
+    return if User.exists?(["email = ? or cb_customer_id = ?", customer.email, cb_id])
 
     password = SecureRandom.alphanumeric(12)
     u = User.create!(
