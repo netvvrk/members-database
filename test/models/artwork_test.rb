@@ -1,12 +1,12 @@
 require "test_helper"
 
 class ArtworkTest < ActiveSupport::TestCase
-  test "mark artworks as not visbile if user is deactivated" do
+  test "mark artworks as not active if user is deactivated" do
     user = users(:artist)
-    create_artwork(user)
-    assert_equal 1, Artwork.is_visible.count
+    artwork = create_artwork(user)
+    assert artwork.active
     user.update!(active: false)
-    assert_equal 0, Artwork.is_visible.count
+    refute artwork.reload.active
   end
 
   test "search by artist name" do
