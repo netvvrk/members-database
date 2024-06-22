@@ -1,5 +1,6 @@
-class WebhookController < ApplicationController
-  protect_from_forgery unless: -> { request.format.json? }
+class WebhookController < ActionController::API
+  include ActionController::HttpAuthentication::Basic::ControllerMethods
+
   config = Rails.configuration.x.chargebee
   http_basic_authenticate_with name: config.webhook_user, password: config.webhook_pass
 
