@@ -1,13 +1,29 @@
-<h4>Users (admins/curators only)</h4>
+<h1 class="text-xl">Artworks</h1>
+<div class="flex-1 flex justify-end gap-3 items-center ">
+  <% if @has_filters %>
+    <%= link_to "/", class: "tw-btn-primary text-sm" do %>
+      clear all filters
+    <% end %>
+  <% else %>
+    <%= form_with method: :get do |f| %>
+      <%= f.text_field :search, value: @search_term, placeholder: "search", label: '&nbsp;'.html_safe, class: "w-40 h-8 rounded focus:w-56 transition-[width] duration-300"   %>
+    <% end %>
+    <% if @search_term.present? %>
+      <%= link_to users_path do %>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="fill-slate-600" viewBox="0 0 16 16">
+          <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm3.354 4.646L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708"/>
+        </svg>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
 <table id="users" class="table">
   <thead>
     <tr>
-      <th scope="col">ID</th>
       <th scope="col">Name</th>
       <th scope="col">E-mail</th>
       <th scope="col">Role</th>
       <th scope="col">Active</th>
-      <th scope="col">Last Signed In</th>
       <th scope="col">&nbsp;</th>
     </tr>
   </thead>
@@ -16,4 +32,7 @@
       <%= render user %>
     <% end %>
   </table>
+  <div class="flex w-full justify-center">
+    <%= paginate @users %>
+  </div>
 </div>
