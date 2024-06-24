@@ -8,8 +8,7 @@
     </td>
     <td><%= user.email %></td>
     <td><%= user.role %></td>
-    <td><%= user.active %></td>
-    <td><%= user.last_sign_in_at&.to_date&.to_fs(:long) %></td>
+    <td><%= yesno(user.active) %></td>
     <td>
       <% if user.artist? %>
         <%= link_to(

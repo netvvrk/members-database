@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  include PgSearch::Model
+
   devise :database_authenticatable, :lockable,
     :recoverable, :rememberable, :trackable, :validatable
 
@@ -15,6 +17,8 @@ class User < ApplicationRecord
   has_one :profile
 
   scope :is_active, -> { where(active: true) }
+
+  pg_search_scope :search, against: [:first_name, :last_name, :email]
 
   after_save :update_artworks
 

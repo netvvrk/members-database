@@ -6,7 +6,12 @@ class UsersController < ApplicationController
   # GET /users
   def index
     @page = params[:page]&.to_i || 0
+    @search_term = params[:search]
     @users = User.order(id: :desc).page(@page)
+
+    if @search_term
+      @users = @users.search(@search_term).with_pg_search_rank
+    end
   end
 
   # GET /users/1

@@ -36,4 +36,8 @@ module ApplicationHelper
     hostname = ENV.fetch("HOSTNAME", "")
     hostname !~ /staging/
   end
+
+  def yesno(b)
+    b ? "Yes" : "No"
+  end
 end
