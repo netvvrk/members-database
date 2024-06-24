@@ -1,8 +1,10 @@
-<h4>Users (admins/curators only)</h4>
+<h1 class="text-xl">Artworks</h1>
+<div class="flex w-full justify-center pb-5">
+  <%= paginate @users %>
+</div>
 <table id="users" class="table">
   <thead>
     <tr>
-      <th scope="col">ID</th>
       <th scope="col">Name</th>
       <th scope="col">E-mail</th>
       <th scope="col">Role</th>

@@ -5,7 +5,8 @@ class UsersController < ApplicationController
 
   # GET /users
   def index
-    @users = User.order(id: :desc).limit(50)
+    @page = params[:page]&.to_i || 0
+    @users = User.order(id: :desc).page(@page)
   end
 
   # GET /users/1
