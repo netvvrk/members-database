@@ -1,6 +1,14 @@
 require "test_helper"
 
 class WebhookHandlerTest < ActiveSupport::TestCase
+  test "monthly user activated after subscribing for 2 years" do
+    payload = File.read(Rails.root.join("test", "fixtures", "files", "payment_succeeded.json"))
+    event = ChargeBee::Event.deserialize(payload)
+    assert_no_changes "User.count" do
+      assert WebhookHandler.handle_payload(event)
+    end
+  end
+
   test "subscription created for a monthly subscriber -- no effect" do
     payload = File.read(Rails.root.join("test", "fixtures", "files", "subscription_created_monthly.json"))
     event = ChargeBee::Event.deserialize(payload)

@@ -4,6 +4,8 @@ class WebhookHandler
   class << self
     def handle_payload(event)
       case event.event_type
+      when "payment_succeeded"
+        payment_succeeded(event)
       when "subscription_cancelled"
         deactivate_user(event)
       when "subscription_changed"
@@ -35,6 +37,16 @@ class WebhookHandler
       user = User.find_by(cb_customer_id: customer.id)
       user.active = false
       user.save
+    end
+
+    # monthly subscribers with at least 2 years of payments get activated
+    def payment_succeeded(event)
+      subscription = event.content.subscription
+      return if Util.subscription_is_annual_or_founding(subscription)
+
+      if 2.years.ago.to_i > subscription.started_at
+        activate_user(event)
+      end
     end
 
     def subscription_change(event)
