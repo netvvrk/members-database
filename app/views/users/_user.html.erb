@@ -6,7 +6,6 @@
       profile_path(Profile.find_or_create_by(user_id: user.id))
       ) %>
     </td>
-    <td><%= link_to(user.cb_customer_id, "https://#{Rails.configuration.x.chargebee.site}.chargebee.com/d/customers/#{user.cb_customer_id}", target: :_blank) %></td>
     <td><%= user.email %></td>
     <td><%= user.role %></td>
     <td><%= yesno(user.active) %></td>
