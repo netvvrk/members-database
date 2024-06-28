@@ -4,6 +4,8 @@ class WebhookHandler
   class << self
     def handle_payload(event)
       case event.event_type
+      when "payment_succeeded"
+        upgrade_monthly_user(event)
       when "subscription_cancelled"
         deactivate_user(event)
       when "subscription_changed"
@@ -65,6 +67,14 @@ class WebhookHandler
         true
       else
         Rails.logger.error("User creation for #{customer["id"]} failed -- #{u.errors.messages}")
+      end
+    end
+
+    def upgrade_monthly_user(event)
+      return true if Util.subscription_is_annual_or_founding(event.content.subscription)
+      started_at = event.content.subscription.started_at
+      if 2.years.ago.to_i > started_at
+        activate_user(event)
       end
     end
   end

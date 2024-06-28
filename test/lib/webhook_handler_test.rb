@@ -91,4 +91,16 @@ class WebhookHandlerTest < ActiveSupport::TestCase
     user = users(:artist)
     refute user.active
   end
+
+  test "monthly user is activated after 2 years" do
+    payload = File.read(Rails.root.join("test", "fixtures", "files", "payment_succeeded.json"))
+    event = ChargeBee::Event.deserialize(payload)
+
+    user = users(:artist)
+    user.active = false
+    user.save
+
+    assert WebhookHandler.handle_payload(event)
+    assert user.reload.active
+  end
 end
