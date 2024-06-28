@@ -1,0 +1,221 @@
+{
+  "id": "ev_16CRoNUClRRwI41g",
+  "occurred_at": 1715701691,
+  "source": "admin_console",
+  "user": "admin@vvrkshop.art",
+  "object": "event",
+  "api_version": "v2",
+  "content": {
+    "transaction": {
+      "id": "txn_16CRoNUClRRYs41e",
+      "customer_id": "16CRpYTwv1YYb63b",
+      "subscription_id": "16CRoNUClRRWE41b",
+      "gateway_account_id": "gw_16CIiITngP9Gm4ru",
+      "payment_source_id": "pm_AzqCEDU5VgyMVliy",
+      "payment_method": "card",
+      "gateway": "stripe",
+      "type": "payment",
+      "date": 1715701690,
+      "exchange_rate": 1.0,
+      "amount": 7900,
+      "id_at_gateway": "ch_3PGNaIDu91Ct3QYd05XfXC91",
+      "status": "success",
+      "updated_at": 1715701691,
+      "fraud_reason": "Payment complete.",
+      "resource_version": 1715701691441,
+      "deleted": false,
+      "object": "transaction",
+      "masked_card_number": "************4242",
+      "currency_code": "USD",
+      "base_currency_code": "USD",
+      "amount_unused": 0,
+      "linked_invoices": [
+        {
+          "invoice_id": "2136",
+          "applied_amount": 7900,
+          "applied_at": 1715701691,
+          "invoice_date": 1715701689,
+          "invoice_total": 7900,
+          "invoice_status": "paid"
+        }
+      ],
+      "linked_refunds": [],
+      "initiator_type": "merchant",
+      "three_d_secure": false,
+      "payment_method_details": "{\"card\":{\"first_name\":\"R\",\"last_name\":\"L\",\"iin\":\"******\",\"last4\":\"4242\",\"funding_type\":\"credit\",\"expiry_month\":12,\"expiry_year\":2029,\"billing_addr1\":\"1 Apple Park Way\",\"billing_city\":\"Cupertino\",\"billing_state\":\"California\",\"billing_country\":\"US\",\"billing_zip\":\"95014\",\"masked_number\":\"************4242\",\"object\":\"card\",\"brand\":\"visa\"}}"
+    },
+    "invoice": {
+      "id": "2136",
+      "customer_id": "16CRpYTwv1YYb63b",
+      "subscription_id": "16CRoNUClRRWE41b",
+      "recurring": true,
+      "status": "paid",
+      "price_type": "tax_exclusive",
+      "date": 1715701689,
+      "due_date": 1715701689,
+      "net_term_days": 0,
+      "exchange_rate": 1.0,
+      "total": 7900,
+      "amount_paid": 7900,
+      "amount_adjusted": 0,
+      "write_off_amount": 0,
+      "credits_applied": 0,
+      "amount_due": 0,
+      "paid_at": 1715701690,
+      "updated_at": 1715701691,
+      "resource_version": 1715701691455,
+      "deleted": false,
+      "object": "invoice",
+      "first_invoice": true,
+      "amount_to_collect": 0,
+      "round_off_amount": 0,
+      "new_sales_amount": 7900,
+      "has_advance_charges": false,
+      "currency_code": "USD",
+      "base_currency_code": "USD",
+      "generated_at": 1715701689,
+      "is_gifted": false,
+      "term_finalized": true,
+      "channel": "web",
+      "tax": 0,
+      "line_items": [
+        {
+          "id": "li_16CRoNUClRRXQ41d",
+          "date_from": 1715701689,
+          "date_to": 1718380089,
+          "unit_amount": 7900,
+          "quantity": 1,
+          "amount": 7900,
+          "pricing_model": "flat_fee",
+          "is_taxed": false,
+          "tax_amount": 0,
+          "object": "line_item",
+          "subscription_id": "16CRoNUClRRWE41b",
+          "customer_id": "16CRpYTwv1YYb63b",
+          "description": "Netvvrk Monthly",
+          "entity_type": "plan_item_price",
+          "entity_id": "Netvvrk-Monthly-USD-Monthly",
+          "tax_exempt_reason": "tax_not_configured",
+          "discount_amount": 0,
+          "item_level_discount_amount": 0
+        }
+      ],
+      "sub_total": 7900,
+      "linked_payments": [
+        {
+          "txn_id": "txn_16CRoNUClRRYs41e",
+          "applied_amount": 7900,
+          "applied_at": 1715701691,
+          "txn_status": "success",
+          "txn_date": 1715701690,
+          "txn_amount": 7900
+        }
+      ],
+      "applied_credits": [],
+      "adjustment_credit_notes": [],
+      "issued_credit_notes": [],
+      "linked_orders": [],
+      "dunning_attempts": [],
+      "billing_address": {
+        "first_name": "test",
+        "last_name": "R",
+        "validation_status": "not_validated",
+        "object": "billing_address"
+      }
+    },
+    "customer": {
+      "id": "abcdef",
+      "first_name": "test",
+      "last_name": "R",
+      "email": "penny@vvrkshop.art",
+      "auto_collection": "on",
+      "net_term_days": 0,
+      "allow_direct_debit": false,
+      "created_at": 1701185158,
+      "created_from_ip": "24.102.124.194",
+      "taxability": "taxable",
+      "updated_at": 1712085764,
+      "pii_cleared": "active",
+      "channel": "web",
+      "resource_version": 1712085764862,
+      "deleted": false,
+      "object": "customer",
+      "card_status": "valid",
+      "promotional_credits": 0,
+      "refundable_credits": 0,
+      "excess_payments": 0,
+      "unbilled_charges": 0,
+      "preferred_currency_code": "USD",
+      "mrr": 6583,
+      "primary_payment_source_id": "pm_AzqCEDU5VgyMVliy",
+      "payment_method": {
+        "object": "payment_method",
+        "type": "card",
+        "reference_id": "cus_PdmINIV3j9xrGi/pm_1OoUkDDu91Ct3QYd1vJEhCAC",
+        "gateway": "stripe",
+        "gateway_account_id": "gw_16CIiITngP9Gm4ru",
+        "status": "valid"
+      }
+    },
+    "subscription": {
+      "id": "16CRoNUClRRWE41b",
+      "billing_period": 1,
+      "billing_period_unit": "month",
+      "customer_id": "16CRpYTwv1YYb63b",
+      "status": "active",
+      "current_term_start": 1715701689,
+      "current_term_end": 1718380089,
+      "next_billing_at": 1718380089,
+      "created_at": 1651112022,
+      "started_at": 1651112022,
+      "activated_at": 1651112022,
+      "created_from_ip": "47.230.84.174",
+      "updated_at": 1715701691,
+      "has_scheduled_changes": false,
+      "channel": "web",
+      "resource_version": 1715701691469,
+      "deleted": false,
+      "object": "subscription",
+      "currency_code": "USD",
+      "subscription_items": [
+        {
+          "item_price_id": "Netvvrk-Monthly-USD-Monthly",
+          "item_type": "plan",
+          "quantity": 1,
+          "unit_price": 7900,
+          "amount": 7900,
+          "free_quantity": 0,
+          "object": "subscription_item"
+        }
+      ],
+      "due_invoices_count": 0,
+      "mrr": 0,
+      "has_scheduled_advance_invoices": false
+    }
+  },
+  "event_type": "payment_succeeded",
+  "webhook_status": "not_applicable",
+  "webhook_failure_reason": "",
+  "webhooks": [
+    {
+      "id": "whv2_16BdjQTta98S3V6B",
+      "webhook_status": "not_applicable",
+      "object": "webhook"
+    },
+    {
+      "id": "whv2_AzyhBKU6RPt8W1gF7",
+      "webhook_status": "not_applicable",
+      "object": "webhook"
+    },
+    {
+      "id": "whv2_AzylISTta6fjqU6v",
+      "webhook_status": "not_applicable",
+      "object": "webhook"
+    },
+    {
+      "id": "whv2_169lseTrjW9lv3Dj8",
+      "webhook_status": "succeeded",
+      "object": "webhook"
+    }
+  ]
+}
