@@ -35,3 +35,6 @@ end
 #####
 
 gem "tailwindcss-rails", "~> 2.3"
+
+# Needed until Ruby 3.3.4 is released https://github.com/ruby/ruby/pull/11006
+gem "net-pop", github: "ruby/net-pop"
