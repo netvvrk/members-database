@@ -4,6 +4,9 @@ class Artwork < ApplicationRecord
   validates :title, :medium, :location, :year, presence: true
   validates :units, inclusion: {in: %w[in cm],
                                 message: "%{value} is not a valid unit"}
+  validates :duration, numericality: {greater_than_or_equal_to: 0, allow_blank: true}
+  validates :price, numericality: {greater_than_or_equal_to: 0, allow_blank: true}
+  validates :year, numericality: {greater_than_or_equal_to: 1900}
 
   belongs_to :user
   has_many :images, dependent: :destroy
