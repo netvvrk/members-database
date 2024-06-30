@@ -5,8 +5,6 @@ class Artwork < ApplicationRecord
   validates :units, inclusion: {in: %w[in cm],
                                 message: "%{value} is not a valid unit"}
 
-  validate :dimensions
-
   belongs_to :user
   has_many :images, dependent: :destroy
 
@@ -26,12 +24,6 @@ class Artwork < ApplicationRecord
   end
 
   private
-
-  def dimensions
-    if duration.blank? && (height.blank? || width.blank?)
-      errors.add(:either, "Height and Width or Duration is required")
-    end
-  end
 
   def artist_name
     user.name

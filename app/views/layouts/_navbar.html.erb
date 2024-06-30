@@ -29,7 +29,7 @@
               <% if user_signed_in? %>
                 <% if current_user.has_profile? %>
                   <%= link_to(
-                    "edit profile",
+                    "Edit Profile",
                     edit_profile_path(Profile.find_or_create_by(user_id: current_user.id)),
                     class: "tw-btn-secondary lg:mr-2"
                   ) %>

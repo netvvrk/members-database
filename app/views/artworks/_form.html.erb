@@ -25,7 +25,6 @@
       <%= f.check_box :visible, label: "Visible to curators" %>
     </fieldset>
     <fieldset class="border round-sm p-2 mb-4 max-w-80">
-      <p class="text-secondary">Either duration or heigh and width are required</p>
       <%= f.number_field :duration, label: "Duration (minutes)", class: "small-field" %>
       <%= f.select :units, %w[in cm], class: "small-field" %>
       <%= f.number_field :height, class: "small-field" %>
