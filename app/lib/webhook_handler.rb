@@ -28,6 +28,8 @@ class WebhookHandler
     def activate_user(event)
       customer = event.content.customer
       user = User.find_by(cb_customer_id: customer.id)
+      return true unless user
+
       user.active = true
       user.save
     end
@@ -35,6 +37,8 @@ class WebhookHandler
     def deactivate_user(event)
       customer = event.content.customer
       user = User.find_by(cb_customer_id: customer.id)
+      return true unless user
+
       user.active = false
       user.save
     end
