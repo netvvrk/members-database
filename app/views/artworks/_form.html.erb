@@ -38,7 +38,7 @@
       <%= f.number_field :price, class: "small-field" %>
     </div>
     <div class="flex flex-col">
-      <label>Location</label>
+      <label class="form-label">Location</label>
       <span class="text-sm text-slate-700 my-2">
       Search locations (City, state, and country), then select from box
       </span>
@@ -55,15 +55,14 @@
       <%= f.check_box :visible, label: "Visible to curators" %>
       <%= f.label(:visible, "Visible to curators") %>
     </fieldset>
-    <fieldset class="border round-sm p-3 grid gap-y-3 mb-4 max-w-96">
-      <p class="form-desc">Either duration or heigh and width are required</p>
+    <fieldset class="border round-sm p-3 grid gap-y-2 mb-4 max-w-96">
       <div>
-        <%= f.label(:duration, :class => "form-label") %>
-        <%= f.number_field :duration, label: "Duration (minutes)", class: "small-field" %>
+        <%= f.label(:duration, "Duration (minutes)", :class => "form-label") %>
+        <%= f.number_field :duration, class: "small-field" %>
       </div>
       <div>
         <%= f.label(:units, :class => "form-label") %>
-        <%= f.select :units, %w[in cm], class: "small-field" %>
+        <%= f.select :units, %w[in cm], {}, { class: "small-field" } %>
       </div>
       <div>
         <%= f.label(:height, :class => "form-label") %>
