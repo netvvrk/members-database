@@ -28,15 +28,16 @@ async function fetchSuggestions(e) {
      `<li data-place-name="${suggestion.name}" class="p-2 cursor-pointer ${i % 2 ? "bg-slate-200" : ""}">${suggestion.name}, ${suggestion.place_formatted}</li>`).join("") 
      : ""
     suggestionEl.innerHTML = lineItems
-    suggestionEl.classList.remove('opacity-0', )
-    suggestionEl.classList.remove('h-0')
+    suggestionEl.classList.remove('opacity-0')
+    suggestionEl.classList.remove('hidden')
     suggestionEl.querySelectorAll('li').forEach(item => item.addEventListener('click', e => {
         const value = e.target.getAttribute('data-place-name')
         autofillEl.value = value
         locationHiddenEl.value = value
-        suggestionEl.classList.add('opacity-0', )
-        suggestionEl.classList.add('h-0')
-        }))
+        suggestionEl.classList.add('opacity-0')
+        setTimeout(() =>  suggestionEl.classList.add('hidden'), 200)
+       
+    }))
 }
 
 const debouncedFetch = debounce(fetchSuggestions, 500)
