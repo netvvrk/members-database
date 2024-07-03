@@ -8,9 +8,9 @@
     <%= f.number_field :year, class: "small-field", help: "required" %>
     <%= f.number_field :price, class: "small-field" %>
     <div class="flex flex-col">
-      <label>Location:</label>
+      <label>Location</label>
       <span class="text-sm text-slate-700 my-2">
-      Search locations and select from box
+      Search locations (City, state, and country), then select from box
       </span>
       <input type="text" class="small-field" value="<%= artwork.location %>" id="location-search"/>
       <%= f.hidden_field :location, id: "location-hidden" %>
@@ -21,7 +21,7 @@
       </ul>
     </div>
     <fieldset class="mb-6">
-      <p class="text-secondary mb-2">Artwork visibility:</p>
+      <p class="text-secondary mb-2">Artwork visibility</p>
       <%= f.check_box :visible, label: "Visible to curators" %>
     </fieldset>
     <fieldset class="border round-sm p-2 mb-4 max-w-80">
