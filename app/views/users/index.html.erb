@@ -1,12 +1,9 @@
-<h1 class="text-xl">Artworks</h1>
-<div class="flex-1 flex justify-end gap-3 items-center ">
-  <% if @has_filters %>
-    <%= link_to "/", class: "tw-btn-primary text-sm" do %>
-      clear all filters
-    <% end %>
-  <% else %>
+<div class="flex justify-between items-center my-6">
+  <h1 class="text-xl">Users</h1>
+  <div class="flex-1 flex justify-end gap-3 items-center" >
     <%= form_with method: :get do |f| %>
-      <%= f.text_field :search, value: @search_term, placeholder: "search", label: '&nbsp;'.html_safe, class: "w-40 h-8 rounded focus:w-56 transition-[width] duration-300"   %>
+      <%= f.text_field :search, value: @search_term, placeholder: "search users", label: '&nbsp;'.html_safe, 
+          class: "w-40 h-8 rounded focus:w-56 transition-[width] duration-300"   %>
     <% end %>
     <% if @search_term.present? %>
       <%= link_to users_path do %>
@@ -15,14 +12,15 @@
         </svg>
       <% end %>
     <% end %>
-  <% end %>
+  </div>
+
 </div>
-<table id="users" class="table">
+<table id="users" class="table w-full mt-6">
   <thead>
     <tr>
       <th scope="col">Name</th>
-      <th scope="col">ID</th>
-      <th scope="col">E-mail</th>
+      <th scope="col" class="max-w-40 sm:max-w-fit text-ellipsis overflow-hidden">ID</th>
+      <th scope="col" class="max-w-40 sm:max-w-fit text-ellipsis overflow-hidden">E-mail</th>
       <th scope="col">Role</th>
       <th scope="col">Active</th>
       <th scope="col">&nbsp;</th>

@@ -6,8 +6,10 @@
       profile_path(Profile.find_or_create_by(user_id: user.id))
       ) %>
     </td>
-    <td><%= link_to user.cb_customer_id, "https://#{Rails.configuration.x.chargebee.site}.chargebee.com/d/customers/#{user.cb_customer_id}" %></td>
-    <td><%= user.email %></td>
+    <td class="max-w-24 sm:max-w-40 md:max-w-fit text-ellipsis overflow-hidden">
+      <%= link_to user.cb_customer_id, "https://#{Rails.configuration.x.chargebee.site}.chargebee.com/d/customers/#{user.cb_customer_id}" %>
+    </td>
+    <td class="max-w-24 sm:max-w-40 md:max-w-fit text-ellipsis overflow-hidden"><%= user.email %></td>
     <td><%= user.role %></td>
     <td><%= yesno(user.active) %></td>
     <td>
