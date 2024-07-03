@@ -1,12 +1,42 @@
-  <%= bootstrap_form_with(model: artwork) do |f| %>
-  <div class="max-w-md">
-    <%= f.alert_message "Please fix the errors below." %>
-    <%= f.text_field :title, class: "small-field", help: "required" %>
-    <%= f.text_field :medium, class: "small-field", help: "required" %>
-    <%= f.text_field :edition, class: "small-field", help: "if applicable" %>
-    <%= f.text_area :description, rows: 6, class: "small-field" %>
-    <%= f.number_field :year, class: "small-field", help: "required" %>
-    <%= f.number_field :price, class: "small-field" %>
+  <%= form_with(model: artwork) do |f| %>
+  <div class="max-w-md grid grid-cols-1 gap-y-6 ">
+    <% if artwork.errors.any? %>
+      <div class="text-red-500 my-4 w-full border-red-200 py-2 border-b">
+        <ul>
+          <% artwork.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>  
+    <div>
+      <%= f.label :title, class: "form-label" %>
+      <%= f.text_field :title, class: "small-field w-full" %>
+      <span class="form-desc">required</span>
+    </div>
+    <div>
+      <%= f.label :medium, class: "form-label" %>
+      <%= f.text_field :medium, class: "small-field w-full" %>
+      <span class="form-desc">required</span>
+    </div>
+    <div>
+      <%= f.label :edition, class: "form-label" %>
+      <%= f.text_field :edition, class: "small-field w-full" %>
+      <span class="form-desc">if applicable</span>
+    </div>
+    <div>
+      <%= f.label :description, class: "form-label" %>
+      <%= f.text_area :description, rows: 6, class: "small-field w-full" %>
+    </div>
+    <div>
+      <%= f.label :year, class: "form-label" %>
+      <%= f.number_field :year, class: "small-field w-full" %>
+      <span class="form-desc">required</span>
+    </div>
+    <div>
+      <%= f.label :price, class: "form-label" %>
+      <%= f.number_field :price, class: "small-field" %>
+    </div>
     <div class="flex flex-col">
       <label>Location</label>
       <span class="text-sm text-slate-700 my-2">
@@ -14,22 +44,39 @@
       </span>
       <input type="text" class="small-field" value="<%= artwork.location %>" id="location-search"/>
       <%= f.hidden_field :location, id: "location-hidden" %>
-      <span class="text-sm text-slate-700 my-2">required</span>
+      <span class="form-desc my-2">required</span>
     
-      <ul id="suggestion-container" class="my-3 opacity-0 transition-opacity flex flex-col border-1 rounded border-slate-400 gap-2">
+      <ul id="suggestion-container" class="opacity-0 transition-opacity flex flex-col border rounded border-slate-400 gap-2">
         <li class="hidden p-2 cursor-pointer bg-slate-200">test</li>
       </ul>
     </div>
-    <fieldset class="mb-6">
-      <p class="text-secondary mb-2">Artwork visibility</p>
+    <fieldset class="">
+      <label class="form-label">Artwork visibility</label>
       <%= f.check_box :visible, label: "Visible to curators" %>
+      <%= f.label(:visible, "Visible to curators") %>
     </fieldset>
-    <fieldset class="border round-sm p-2 mb-4 max-w-80">
-      <%= f.number_field :duration, label: "Duration (minutes)", class: "small-field" %>
-      <%= f.select :units, %w[in cm], class: "small-field" %>
-      <%= f.number_field :height, class: "small-field" %>
-      <%= f.number_field :width, class: "small-field" %>
-      <%= f.number_field :depth, class: "small-field" %>
+    <fieldset class="border round-sm p-3 grid gap-y-3 mb-4 max-w-96">
+      <p class="form-desc">Either duration or heigh and width are required</p>
+      <div>
+        <%= f.label(:duration, :class => "form-label") %>
+        <%= f.number_field :duration, label: "Duration (minutes)", class: "small-field" %>
+      </div>
+      <div>
+        <%= f.label(:units, :class => "form-label") %>
+        <%= f.select :units, %w[in cm], class: "small-field" %>
+      </div>
+      <div>
+        <%= f.label(:height, :class => "form-label") %>
+        <%= f.number_field :height, class: "small-field" %>
+      </div>
+      <div>
+        <%= f.label(:width, :class => "form-label") %>
+        <%= f.number_field :width, class: "small-field" %>
+      </div>
+      <div>
+        <%= f.label(:depth, :class => "form-label") %>
+        <%= f.number_field :depth, class: "small-field" %>
+      </div>
     </fieldset>
     <%= f.submit "Save", class: "tw-btn-primary" %>
   <% end %>
