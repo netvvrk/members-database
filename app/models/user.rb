@@ -10,7 +10,8 @@ class User < ApplicationRecord
   CURATOR = 1
   ADMIN = 2
 
-  validates :email, :last_name, :role, presence: true
+  validates :email, :role, presence: true
+  validates :last_name, presence: true, on: :update
 
   has_many :artworks, dependent: :destroy
 
