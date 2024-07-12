@@ -29,6 +29,6 @@ class Artwork < ApplicationRecord
   private
 
   def artist_name
-    user.name
+    user.profile.name
   end
 end

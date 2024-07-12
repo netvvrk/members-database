@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   resources :profiles, only: [:edit, :show, :update]
 
   scope :admin do
-    resources :users
+    resources :users, except: [:new, :create, :destroy]
   end
 
   devise_for :users

@@ -1,10 +1,10 @@
 <div>
   <a class="text-black hover:no-underline" href="<%= public_artwork_path(artwork.id) %>">
     <div class="bg-slate-100 w-full p-6 justify-center flex">
-        <img height="400" src="<%= large_url_fix_h(artwork.images.first) if artwork.images.length %>" alt="<%= artwork.title %>">
+      <img height="400" src="<%= large_url_fix_h(artwork.images.first) if artwork.images.length %>" alt="<%= artwork.title %>">
     </div>
     <section class="p-4">
-      <div class=""><%= artwork.user.name %></div>
+      <div class=""><%= artwork.artist_name %></div>
       <div class="text-gray-500 italic"><%= artwork.title %></div>
       <div class="text-black text-lg mb-1">Price: <%= artwork.price.present? ? artwork.price : "N/A" %></div>
       <div class=" text-sm text-gray-700"><%= artwork.description %></div>
