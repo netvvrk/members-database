@@ -21,6 +21,7 @@ class User < ApplicationRecord
 
   pg_search_scope :search, against: [:first_name, :last_name, :email]
 
+  after_create -> { Profile.create!(user_id: id) }
   after_save :update_artworks
 
   def name
