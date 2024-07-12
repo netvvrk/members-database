@@ -1,9 +1,7 @@
 <div id="<%= dom_id user %>">
   <tr>
     <td>
-      <% if user.artist? %>
-        <%= link_to user.profile.name, profile_path(user.profile)%>
-      <% end %>
+      <%= link_to_if user.artist?, user.profile.name, profile_path(user.profile)%>
     </td>
     <td class="max-w-24 sm:max-w-40 md:max-w-fit text-ellipsis overflow-hidden">
       <%= link_to_if user.cb_customer_id, user.cb_customer_id, "https://#{Rails.configuration.x.chargebee.site}.chargebee.com/d/customers/#{user.cb_customer_id}" %>
