@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     resources :images
   end
 
-  resources :profiles
+  resources :profiles, only: [:edit, :show, :update]
 
   scope :admin do
     resources :users
