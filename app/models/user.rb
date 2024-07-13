@@ -19,8 +19,9 @@ class User < ApplicationRecord
 
   scope :is_active, -> { where(active: true) }
 
-  pg_search_scope :search, against: [:first_name, :last_name, :email]
+  pg_search_scope :search, against: [:email], associated_against: {profile: :name}
 
+  after_create -> { Profile.create!(user_id: id) }
   after_save :update_artworks
 
   def name

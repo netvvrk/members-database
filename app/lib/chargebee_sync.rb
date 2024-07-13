@@ -26,16 +26,18 @@ class ChargebeeSync
     cb_id = customer.id
     return if User.exists?(["email = ? or cb_customer_id = ?", customer.email, cb_id])
 
+    name = [customer.first_name, customer.last_name].compact.join(" ")
     password = SecureRandom.alphanumeric(12)
     u = User.create!(
       cb_customer_id: cb_id,
       email: customer.email,
-      first_name: customer.first_name,
-      last_name: customer.last_name,
       password: password,
       password_confirmation: password,
       role: "artist"
     )
+    u.profile.name = name
+    u.profile.save!
+
     u.send_reset_password_instructions if Rails.configuration.x.user_creation_send_email
   end
 end

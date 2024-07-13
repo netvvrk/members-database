@@ -1,13 +1,13 @@
 <div id="<%= dom_id user %>">
   <tr>
-    <td><%= link_to_if(
-      user.artist?,
-      user.name,
-      profile_path(Profile.find_or_create_by(user_id: user.id))
-      ) %>
+    <td>
+      <% Rails.logger.info user %>
+      <% if user.has_profile? %>
+        <%= link_to user.profile&.name, profile_path(user.profile)%>
+      <% end %>
     </td>
     <td class="max-w-24 sm:max-w-40 md:max-w-fit text-ellipsis overflow-hidden">
-      <%= link_to user.cb_customer_id, "https://#{Rails.configuration.x.chargebee.site}.chargebee.com/d/customers/#{user.cb_customer_id}" %>
+      <%= link_to_if user.cb_customer_id, user.cb_customer_id, "https://#{Rails.configuration.x.chargebee.site}.chargebee.com/d/customers/#{user.cb_customer_id}" %>
     </td>
     <td class="max-w-24 sm:max-w-40 md:max-w-fit text-ellipsis overflow-hidden"><%= user.email %></td>
     <td><%= user.role %></td>
@@ -16,7 +16,7 @@
       <% if user.artist? %>
         <%= link_to(
           "edit profile",
-          edit_profile_path(Profile.find_or_create_by(user_id: user.id)),
+          edit_profile_path(user.profile),
           class: "tw-btn-secondary lg:mr-2"
         ) %>
       <% end %>

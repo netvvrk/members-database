@@ -56,11 +56,10 @@ class WebhookHandler
 
       customer = event.content.customer
       password = SecureRandom.hex
+      name = [customer.first_name, customer.last_name].compact.join(" ")
 
       u = User.create(
         email: customer.email,
-        first_name: customer.first_name,
-        last_name: customer.last_name,
         role: "artist",
         password: password,
         password_confirmation: password,
@@ -68,9 +67,11 @@ class WebhookHandler
       )
       if u.valid?
         u.send_reset_password_instructions
+        u.profile.name = name
+        u.save
         true
       else
-        Rails.logger.error("User creation for #{customer["id"]} failed -- #{u.errors.messages}")
+        Rails.logger.error("User creation for #{customer.id} failed -- #{u.errors.messages}")
       end
     end
 
