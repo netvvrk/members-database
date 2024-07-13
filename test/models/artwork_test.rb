@@ -20,4 +20,10 @@ class ArtworkTest < ActiveSupport::TestCase
     artwork = create_artwork(user)
     assert_equal [artwork], Artwork.search(artwork.title)
   end
+
+  test "get artist_name" do
+    user = users(:artist)
+    artwork = create_artwork(user)
+    assert_equal "Louise the Artist", artwork.artist_name
+  end
 end

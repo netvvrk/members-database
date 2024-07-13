@@ -22,13 +22,11 @@ class Artwork < ApplicationRecord
 
   MAX_ARTWORK_IMAGES = 3
 
-  def more_images_allowed?
-    images.count < MAX_ARTWORK_IMAGES
-  end
-
-  private
-
   def artist_name
     user.profile.name
+  end
+
+  def more_images_allowed?
+    images.count < MAX_ARTWORK_IMAGES
   end
 end
