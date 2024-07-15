@@ -14,7 +14,7 @@
         <% @artwork.images.each_with_index do | image, i | %>
         <a data-fslightbox href="<%= image.file.url %>">
           <div
-            class="relative float-left -mr-[100%] w-full transition-opacity duration-[600ms] ease-in-out motion-reduce:transition-none opacity-0 <%= "!opacity-100" if i == 0 %>"
+            class="relative float-left -mr-[100%] w-full transition-opacity duration-[600ms] ease-in-out motion-reduce:transition-none opacity-0 pointer-events-none <%= "!opacity-100 pointer-events-auto" if i == 0 %>"
             data-carousel-item
             style="backface-visibility: hidden">
             <%= image_tag image.file.url, alt: image.caption, class: "block w-full" %>

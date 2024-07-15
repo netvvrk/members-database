@@ -2,7 +2,7 @@
 
 const BUTTON_ACTIVE_CLASS = "!opacity-100";
 const INACTIVE_CLASSES = [];
-const ACTIVE_CLASSES = ["!opacity-100"];
+const ACTIVE_CLASSES = ["!opacity-100", "pointer-events-auto"];
 
 const containers = document.querySelectorAll("[data-carousel]");
 
@@ -25,13 +25,13 @@ containers.forEach((container) => {
   const activateIndex = (index) => {
     if (prevIndex !== -1) {
       // items[prevIndex].classList.add(INACTIVE_CLASSES);
-      items[prevIndex].classList.remove(ACTIVE_CLASSES);
+      items[prevIndex].classList.remove(...ACTIVE_CLASSES);
       
       buttons[prevIndex].classList.remove(BUTTON_ACTIVE_CLASS);
     }
     if (index < itemsCount) {
       // items[index].classList.remove(INACTIVE_CLASSES);
-      items[index].classList.add(ACTIVE_CLASSES);
+      items[index].classList.add(...ACTIVE_CLASSES);
       
       buttons[index].classList.add(BUTTON_ACTIVE_CLASS);
     }
