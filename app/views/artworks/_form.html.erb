@@ -10,14 +10,12 @@
       </div>
     <% end %>  
     <div>
-      <%= f.label :title, class: "form-label" %>
+      <%= f.label :title, class: "form-label required" %>
       <%= f.text_field :title, class: "small-field w-full" %>
-      <span class="form-desc">required</span>
     </div>
     <div>
-      <%= f.label :medium, class: "form-label" %>
+      <%= f.label :medium, class: "form-label required" %>
       <%= f.text_field :medium, class: "small-field w-full" %>
-      <span class="form-desc">required</span>
     </div>
     <div>
       <%= f.label :edition, class: "form-label" %>
@@ -29,31 +27,29 @@
       <%= f.text_area :description, rows: 6, class: "small-field w-full" %>
     </div>
     <div>
-      <%= f.label :year, class: "form-label" %>
+      <%= f.label :year, class: "form-label required" %>
       <%= f.number_field :year, class: "small-field w-full" %>
-      <span class="form-desc">required</span>
     </div>
     <div>
       <%= f.label :price, class: "form-label" %>
       <%= f.number_field :price, class: "small-field" %>
     </div>
     <div class="flex flex-col">
-      <label class="form-label">Location</label>
+      <label class="form-label required">Location</label>
       <span class="text-sm text-slate-700 my-2">
       Search locations (City, state, and country), then select from box
       </span>
       <input type="text" class="small-field" value="<%= artwork.location %>" id="location-search"/>
       <%= f.hidden_field :location, id: "location-hidden" %>
-      <span class="form-desc my-2">required</span>
     
       <ul id="suggestion-container" class="opacity-0 transition-opacity flex flex-col border rounded border-slate-400 gap-2">
         <li class="hidden p-2 cursor-pointer bg-slate-200">test</li>
       </ul>
     </div>
     <fieldset class="">
-      <label class="form-label">Artwork visibility</label>
-      <%= f.check_box :visible, label: "Visible to curators" %>
-      <%= f.label(:visible, "Visible to curators") %>
+      <label class="form-label mb-1">Artwork visibility</label>
+      <%= f.check_box :visible %>
+      <%= f.label :visible, "Visible to curators", :class => "form-desc ml-2" %>
     </fieldset>
     <fieldset class="border round-sm p-3 grid gap-y-2 mb-4 max-w-96">
       <div>
@@ -78,6 +74,7 @@
       </div>
     </fieldset>
     <%= f.submit "Save", class: "tw-btn-primary" %>
+    <span class="form-desc">Artwork images can be uploaded after saving.</span>
   <% end %>
 </div>
 <%= javascript_include_tag "locationsearch" %>
