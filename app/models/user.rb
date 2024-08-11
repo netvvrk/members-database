@@ -4,14 +4,13 @@ class User < ApplicationRecord
   devise :database_authenticatable, :lockable,
     :recoverable, :rememberable, :trackable, :validatable
 
-  enum :role, [:artist, :curator, :admin]
+  enum :role, [:artist, :curator, :admin] # curator is deprecated
 
   ARTIST = 0
-  CURATOR = 1
+  CURATOR = 1 # DEPRECATED
   ADMIN = 2
 
   validates :email, :role, presence: true
-  validates :last_name, presence: true, on: :update
 
   has_many :artworks, dependent: :destroy
 
@@ -23,10 +22,6 @@ class User < ApplicationRecord
 
   after_create -> { Profile.create!(user_id: id) }
   after_save :update_artworks
-
-  def name
-    [first_name, last_name].compact.join(" ")
-  end
 
   def show_artworks?
     artist? || admin?

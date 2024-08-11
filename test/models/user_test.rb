@@ -13,13 +13,6 @@ class UserTest < ActiveSupport::TestCase
     assert_equal "artist", @user.role
   end
 
-  test "requires a last name upon update" do
-    @user.update(email: "a@b.com")
-    refute @user.valid?
-    @user.update(last_name: "last-name")
-    assert @user.valid?
-  end
-
   test "user searching by name" do
     user = users(:artist)
     assert_equal [user], User.search("Louise")

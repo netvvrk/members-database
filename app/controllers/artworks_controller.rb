@@ -1,6 +1,5 @@
 class ArtworksController < ApplicationController
   before_action :authenticate_user!
-  before_action :confirm_not_curator
   before_action :set_artwork, only: %i[show edit update destroy]
 
   # GET /artworks
@@ -60,11 +59,5 @@ class ArtworksController < ApplicationController
   # Only allow a list of trusted parameters through.
   def artwork_params
     params.require(:artwork).permit(:title, :medium, :description, :price, :visible, :duration, :units, :height, :width, :depth, :location, :user_id, :year, :edition)
-  end
-
-  def confirm_not_curator
-    if current_user.curator?
-      redirect_to root_url, notice: "You do not have access to that page"
-    end
   end
 end
