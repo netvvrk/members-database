@@ -17,10 +17,4 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     get users_url
     assert_redirected_to root_url
   end
-
-  test "curators should redirect to home page" do
-    sign_in users(:curator)
-    get users_url
-    assert_redirected_to root_url
-  end
 end

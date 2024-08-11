@@ -9,9 +9,10 @@ class Artwork < ApplicationRecord
   validates :year, numericality: {greater_than_or_equal_to: 1900}
 
   belongs_to :user
+  has_one :profile, through: :user
   has_many :images, dependent: :destroy
 
-  pg_search_scope :search, against: [:title, :medium, :description], associated_against: {user: [:first_name, :last_name]}
+  pg_search_scope :search, against: [:title, :medium, :description], associated_against: {profile: :name}
 
   scope :is_visible, -> { where("visible = true") }
   scope :is_active, -> { where("active = true") }

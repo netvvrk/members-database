@@ -12,13 +12,11 @@ Connect to the Rails console using Heroku:
 
 Create a user:
 
-Role can be admin. artist, or curator.
+Role can be admin or artist.
 
 ```ruby
 User.create!(
   email: "jane@gmail.com",
-  first_name: "Jane",
-  last_name: "Smith",
   role: "artist",
   password: "a password",
   password_confirmation: "a password"
@@ -31,3 +29,4 @@ User.create!(
 This will not create duplicate users. It checks to see if the Chargebee ID is already in the database.
 
 
+```
