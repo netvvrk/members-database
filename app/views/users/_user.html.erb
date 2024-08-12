@@ -15,8 +15,8 @@
     <td>
       <% if user.artist? %>
         <%= link_to(
-          "edit profile",
-          edit_profile_path(user.profile),
+          "login as user",
+          login_as_user_path(user),
           class: "tw-btn-secondary lg:mr-2"
         ) %>
       <% end %>

@@ -12,7 +12,11 @@ Rails.application.routes.draw do
   resources :profiles, only: [:edit, :show, :update]
 
   scope :admin do
-    resources :users, except: [:new, :create, :destroy]
+    resources :users, except: [:new, :create, :destroy] do
+      member do
+        get :login_as
+      end
+    end
   end
 
   devise_for :users

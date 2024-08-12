@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :confirm_admin
-  before_action :set_user, only: %i[show edit update]
+  before_action :set_user, only: %i[show edit update login_as]
 
   # GET /users
   def index
@@ -46,6 +46,11 @@ class UsersController < ApplicationController
   def destroy
     @user.destroy!
     redirect_to users_url, notice: "User was successfully destroyed.", status: :see_other
+  end
+
+  def login_as
+    bypass_sign_in(@user)
+    redirect_to root_path, notice: "Now logged in as #{@user.profile.name}"
   end
 
   private
