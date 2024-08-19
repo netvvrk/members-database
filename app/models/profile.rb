@@ -3,6 +3,8 @@ class Profile < ApplicationRecord
   has_one_attached :avatar
   has_one_attached :cv
 
+  validates :bio, :avatar, presence: true
+
   validate :cv_size_and_format
   validate :avatar_size_and_format
   validate :name, on: :update
