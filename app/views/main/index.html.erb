@@ -1,8 +1,8 @@
 <%= render "header" %>
 <div class="flex justify-center">
-  <% if@artworks.length == 0 and @has_filters %>
+  <% if @artworks.length == 0 and (@has_filters or @search_term.present?) %>
     <div class="flex flex-col items-center pt-4">
-      <div class="mb-4">No artworks matches your criteria.</div>
+      <div class="mb-4">No artwork matches your criteria.</div>
       <%= link_to root_path, class: "tw-btn-primary" do %>
         Clear all filters
       <% end %>
