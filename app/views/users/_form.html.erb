@@ -1,32 +1,23 @@
-<%= form_with(model: user) do |form| %>
-  <% if user.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
-
-      <ul>
-        <% user.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+  <%= form_with(model: user) do |f| %>
+  <div class="max-w-md grid grid-cols-1 gap-y-6 ">
+    <% if user.errors.any? %>
+      <div class="text-red-500 my-4 w-full border-red-200 py-2 border-b">
+        <ul>
+          <% user.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div>
+      <%= f.label :password, class: "form-label required" %>
+      <%= f.text_field :password, class: "small-field w-full" %>
     </div>
+    <div>
+      <%= f.label :password_confirmation, class: "form-label required" %>
+      <%= f.text_field :password_confirmation, class: "small-field w-full" %>
+    </div>
+    <%= f.submit "Save", class: "tw-btn-primary" %>
   <% end %>
-
-  <div>
-    <%= form.label :email, style: "display: block" %>
-    <%= form.text_field :email %>
-  </div>
-
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
-  </div>
-
-  <div>
-    <%= form.label :role, style: "display: block" %>
-    <%= form.number_field :role %>
-  </div>
-
-  <div>
-    <%= form.submit, class: "tw-btn-primary" %>
-  </div>
-<% end %>
+</div>
+<%= javascript_include_tag "locationsearch" %>

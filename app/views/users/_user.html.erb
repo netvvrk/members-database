@@ -19,6 +19,11 @@
           login_as_user_path(user),
           class: "tw-btn-secondary lg:mr-2"
         ) %>
+        <%= link_to(
+          "change password",
+          edit_user_path(user),
+          class: "tw-btn-secondary lg:mr-2"
+        ) %>
       <% end %>
     </td>
   </tr>
