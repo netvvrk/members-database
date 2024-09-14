@@ -24,9 +24,10 @@ async function fetchSuggestions(e) {
 
     const response = await fetch(`${API_URL}&access_token=${ACCESS_TOKEN}&session_token=${sessionToken}&q=${value}`)
     const json = await response.json()
-    const lineItems = json?.suggestions ?  json.suggestions.map((suggestion, i) =>
-     `<li data-place-name="${suggestion.name}" class="p-2 cursor-pointer ${i % 2 ? "bg-slate-200" : ""}">${suggestion.name}, ${suggestion.place_formatted}</li>`).join("") 
-     : ""
+    const lineItems = json?.suggestions ? json.suggestions.map((suggestion, i) => {
+        const suggestionName = `${suggestion.name}, ${suggestion.place_formatted}`
+        return `<li data-place-name="${suggestionName}" data-mapbox-id="${suggestion.mapbox_id}" class="p-2 cursor-pointer ${i % 2 ? "bg-slate-200" : ""}">${suggestionName}</li>`
+    }).join("") : "";
     suggestionEl.innerHTML = lineItems
     suggestionEl.classList.remove('opacity-0')
     suggestionEl.classList.remove('hidden')
