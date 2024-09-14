@@ -26,7 +26,7 @@ function addSearch(inputEl, items) {
 }
 
 function addExpand(btn, items) {
-    btn.addEventListener('click', () => {
+    btn && btn.addEventListener('click', () => {
         const isOpen = btn.getAttribute('data-open')
         items.forEach((item, i) => {
             if( isOpen == null ) {
