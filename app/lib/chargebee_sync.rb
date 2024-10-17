@@ -25,8 +25,8 @@ class ChargebeeSync
     emails = ENV.fetch("TEST_EMAILS").split(",")
     emails.each do |email|
       list = ChargeBee::Customer.list({"email[is]" => email})
-      if (customer = list.first)
-        create_user(customer)
+      if (resp = list.first)
+        create_user(resp.customer)
       end
     end
   end
@@ -46,7 +46,7 @@ class ChargebeeSync
       role: "artist"
     )
     u.profile.name = name
-    u.profile.save!
+    u.profile.save(validate: false)
 
     u.send_reset_password_instructions if Rails.configuration.x.user_creation_send_email
   end
