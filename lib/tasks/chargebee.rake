@@ -6,7 +6,7 @@ namespace :chargebee do
   end
 
   desc "sync a list of chargebee users"
-  task sync: :environment do
+  task sync_list: :environment do
     client = ChargebeeSync.new
     client.sync_list
   end
