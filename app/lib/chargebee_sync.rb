@@ -1,7 +1,7 @@
 class ChargebeeSync
   def initialize
     config = Rails.configuration.x.chargebee
-    @client = ChargeBee.configure({api_key: config.api_key, site: config.site})
+    ChargeBee.configure({api_key: config.api_key, site: config.site})
   end
 
   def run
@@ -19,6 +19,16 @@ class ChargebeeSync
       end
     end
     puts "end"
+  end
+
+  def sync_list
+    emails = ENV.fetch("TEST_EMAILS").split(",")
+    emails.each do |email|
+      list = ChargeBee::Customer.list({"email[is]" => email})
+      if (customer = list.first)
+        create_user(customer)
+      end
+    end
   end
 
   def create_user(customer)
