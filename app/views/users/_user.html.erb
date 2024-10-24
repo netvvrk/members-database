@@ -1,7 +1,6 @@
 <div id="<%= dom_id user %>">
   <tr>
     <td>
-      <% Rails.logger.info user %>
       <% if user.has_profile? %>
         <%= link_to user.profile&.name, profile_path(user.profile)%>
       <% end %>
