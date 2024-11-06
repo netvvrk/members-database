@@ -11,6 +11,9 @@ class Profile < ApplicationRecord
 
   has_and_belongs_to_many :tags
 
+  MAX_AVATAR_SIZE = 25
+  MAX_CV_SIZE = 25
+
   private
 
   def cv_size_and_format
@@ -18,8 +21,8 @@ class Profile < ApplicationRecord
       if cv.content_type != "application/pdf"
         errors.add(:cv, "Must be a PDF")
       end
-      if cv.byte_size > 25.megabytes
-        errors.add(:cv, "Must be under 25MB")
+      if cv.byte_size > MAX_CV_SIZE.megabytes
+        errors.add(:cv, "Must be under #{MAX_CV_SIZE}MB")
       end
     end
   end
@@ -29,8 +32,8 @@ class Profile < ApplicationRecord
       if !avatar.content_type.match?(/^image\//)
         errors.add(:avatar, "Must be an image")
       end
-      if avatar.byte_size > 25.megabytes
-        errors.add(:avatar, "Must be under 25MB")
+      if avatar.byte_size > MAX_AVATAR_SIZE.megabytes
+        errors.add(:avatar, "Must be under #{MAX_AVATAR_SIZE}MB")
       end
     end
   end

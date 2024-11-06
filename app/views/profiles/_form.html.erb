@@ -44,15 +44,27 @@
         <%= form.label :avatar, "Profile picture", class: "block text-sm font-medium leading-6 text-gray-900 mb-2" %>
         <div class="block w-full max-w-96 lg:w-1/2">
           <% if profile.avatar.attached? %>
+            <div class="text-sm my-2">
+              Current picture:
+            </div>
             <%= image_tag profile.avatar, class: "h-32" %>
+            <div class="text-sm mt-3">
+              Choose a new picture:
+            </div>
           <% end %>
-          <%= form.file_field :avatar, class: "py-1.5 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6" %>
+          <%= form.file_field :avatar, class: "py-1.5 text-gray-900 placeholder:text-gray-400 text-sm leading-6" %>
+          <span class="text-sm">
+          (Max <%= Profile::MAX_AVATAR_SIZE %>MB)
+          </span>          
         </div>
       </div>
       <div class="col-span-full">
-        <%= form.label :cv, "CV", class: "block text-sm font-medium leading-6 text-gray-900 mb-2" %>
+        <%= form.label :cv, "CV (in PDF format)", class: "block text-sm font-medium leading-6 text-gray-900 mb-2" %>
         <div class="block w-full max-w-96 lg:w-1/2">
-          <%= form.file_field :cv, class: "py-1.5 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6" %>
+          <%= form.file_field :cv, id: 'cv-file', class: "py-1.5 text-gray-900 placeholder:text-gray-400 text-sm leading-6" %>
+          <span class="text-sm">
+          (Max <%= Profile::MAX_CV_SIZE %>MB)
+          </span>
         </div>
       </div>
       <div class="col-span-full">
