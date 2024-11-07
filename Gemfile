@@ -13,6 +13,7 @@ gem "jsbundling-rails"
 gem "kaminari"
 gem "pg"
 gem "pg_search"
+gem 'positioning'
 gem "propshaft"
 gem "puma"
 gem "rails"

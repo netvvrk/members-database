@@ -196,6 +196,9 @@ GEM
     pg_search (2.3.7)
       activerecord (>= 6.1)
       activesupport (>= 6.1)
+    positioning (0.4.1)
+      activerecord (>= 6.1)
+      activesupport (>= 6.1)
     propshaft (1.1.0)
       actionpack (>= 7.0.0)
       activesupport (>= 7.0.0)
@@ -343,6 +346,7 @@ DEPENDENCIES
   net-pop!
   pg
   pg_search
+  positioning
   propshaft
   puma
   rails
