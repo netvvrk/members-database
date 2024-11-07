@@ -1,10 +1,8 @@
 import Sortable from 'sortablejs'
-console.log('sortable', Sortable)
 
-var el = document.getElementById('image-list');
+const el = document.getElementById('image-list');
 const artworkId = el.getAttribute('data-artwork-id')
-console.log(el)
-var sortable = Sortable.create(el, {
+const sortable = Sortable.create(el, {
     handle: '.sort-handle',
     animation: 100,
     filter: '.ignore-drag',
@@ -24,3 +22,16 @@ var sortable = Sortable.create(el, {
         return e.related.className.indexOf('ignore-drag') === -1
     }
 });
+
+const editButtons = document.querySelectorAll('.edit-caption-icon')
+
+editButtons.forEach(btn => {
+    btn.addEventListener('click', e => {
+        const imageId = e.target.getAttribute('data-image-id')
+        const formId = `caption-form${imageId}`
+        const captionId = `caption${imageId}`
+        document.getElementById(formId).style.opacity = 1
+        document.getElementById(captionId).style.opacity = 0
+        
+    })
+})

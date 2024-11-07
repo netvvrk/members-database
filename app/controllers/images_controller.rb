@@ -36,7 +36,7 @@ class ImagesController < ApplicationController
   # PATCH/PUT /images/1
   def update
     if @image.update(image_params)
-      redirect_to artwork_images_url(@artwork), notice: "Image was successfully updated.", status: :see_other
+      redirect_to @artwork
     else
       render :edit, status: :unprocessable_entity
     end
