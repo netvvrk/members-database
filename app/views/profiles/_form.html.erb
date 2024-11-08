@@ -43,7 +43,7 @@
       <div class="col-span-full">
         <%= form.label :avatar, "Profile picture", class: "block text-sm font-medium leading-6 text-gray-900 mb-2" %>
         <div class="block w-full max-w-96 lg:w-1/2">
-          <% if profile.avatar.attached? %>
+          <% if profile.avatar.attached? && profile.avatar.persisted? %>
             <div class="text-sm my-2">
               Current picture:
             </div>
