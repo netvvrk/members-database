@@ -6,15 +6,14 @@
   </div>
   <!-- images -->
   <h3 class="mt-4 text-xl">Images</h3>
-  <div class="border-slate-300 border p-4 flex gap-4 lg:gap-6 flex-col sm:flex-row sm:flex-wrap">
-    
-      <% @artwork.images.each do | image |  %>
-      <div class="sm:w-[calc(50%-15px)] lg:w-[calc(33%-15px)]">
-        <%= render "image", i: image %>
-      </div>
-      <% end %>
+  <div id="image-list" data-artwork-id="<%=@artwork.id %>" class="border-slate-300 border p-4 flex gap-4 lg:gap-6 flex-col sm:flex-row sm:flex-wrap">
+        <% @artwork.images.each do | image |  %>
+        <div class="sm:w-[calc(50%-15px)] lg:w-[calc(33%-15px)]" data-image-id="<%=image.id %>">
+          <%= render "image", i: image %>
+        </div>
+        <% end %>
       <% if @artwork.more_images_allowed? %>
-      <div class="bg-slate-100 sm:w-[calc(50%-15px)] lg:w-[calc(33%-15px)]">
+      <div class="ignore-drag bg-slate-100 sm:w-[calc(50%-15px)] lg:w-[calc(33%-15px)]">
           <label class="z-10 relative flex justify-center  items-center cursor-pointer px-2 py-6" for="addimage">
             <!-- filter hidden input. works for keeping the state -->
             <input class="peer/addimage hidden" type="checkbox" id="addimage" />   
@@ -46,3 +45,5 @@
 
 
 </div>
+
+<%= javascript_include_tag "imagesort" %>

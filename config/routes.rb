@@ -6,7 +6,11 @@ Rails.application.routes.draw do
     member do
       get :preview
     end
-    resources :images
+    resources :images do
+      member do
+        patch :move_image
+      end 
+    end
   end
 
   resources :profiles, only: [:edit, :show, :update]

@@ -1,7 +1,8 @@
 class ImagesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_artwork
-  before_action :set_image, only: %i[show edit update destroy]
+  before_action :set_image, only: %i[show edit update destroy move_image]
+  skip_before_action :verify_authenticity_token, only: %i[move_image]
 
   # GET /images
   def index
@@ -35,10 +36,17 @@ class ImagesController < ApplicationController
   # PATCH/PUT /images/1
   def update
     if @image.update(image_params)
-      redirect_to artwork_images_url(@artwork), notice: "Image was successfully updated.", status: :see_other
+      redirect_to @artwork
     else
       render :edit, status: :unprocessable_entity
     end
+  end
+
+  # PATCH /images/1/move_image
+  def move_image
+    new_position = params[:to_index].to_i + 1
+    @image.update position: new_position
+    render json: {}, status: 200
   end
 
   # DELETE /images/1

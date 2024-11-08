@@ -356,6 +356,7 @@ __metadata:
     postcss: "npm:^8.4.31"
     postcss-cli: "npm:^10.1.0"
     sass: "npm:^1.69.5"
+    sortablejs: "npm:^1.15.3"
   languageName: unknown
   linkType: soft
 
@@ -1662,6 +1663,13 @@ __metadata:
     ip: "npm:^2.0.0"
     smart-buffer: "npm:^4.2.0"
   checksum: 5074f7d6a13b3155fa655191df1c7e7a48ce3234b8ccf99afa2ccb56591c195e75e8bb78486f8e9ea8168e95a29573cbaad55b2b5e195160ae4d2ea6811ba833
+  languageName: node
+  linkType: hard
+
+"sortablejs@npm:^1.15.3":
+  version: 1.15.3
+  resolution: "sortablejs@npm:1.15.3"
+  checksum: 85d39a172ef47adedf273afa65daa8aefcbaafd43a5b5c480d8637add93033f5784da697d0d3545d9bb6e11fd71f1847f307ee26be452942f3785a683fd44bb5
   languageName: node
   linkType: hard
 
