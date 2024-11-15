@@ -278,7 +278,10 @@ GEM
       rubocop (>= 1.48.1, < 2.0)
       rubocop-ast (>= 1.31.1, < 2.0)
     ruby-progressbar (1.13.0)
+    ruby_http_client (3.5.5)
     securerandom (0.3.1)
+    sendgrid-ruby (6.7.0)
+      ruby_http_client (~> 3.4)
     standard (1.41.0)
       language_server-protocol (~> 3.17.0.2)
       lint_roller (~> 1.0)
@@ -350,6 +353,7 @@ DEPENDENCIES
   propshaft
   puma
   rails
+  sendgrid-ruby
   standard
   stimulus-rails
   tailwindcss-rails (~> 2.3)
