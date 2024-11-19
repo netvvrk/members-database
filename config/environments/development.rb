@@ -75,4 +75,8 @@ Rails.application.configure do
   config.x.chargebee.site = ENV["CHARGEBEE_SITE"]
   config.x.chargebee.webhook_user = "test-user"
   config.x.chargebee.webhook_pass = "password"
+
+  config.action_mailer.default_url_options = {host: "localhost:3000"}
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.perform_deliveries = true
 end
