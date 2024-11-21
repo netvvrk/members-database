@@ -48,6 +48,6 @@ class ChargebeeSync
     u.profile.name = name
     u.profile.save(validate: false)
 
-    u.send_reset_password_instructions if Rails.configuration.x.user_creation_send_email
+    u.send_welcome_email if Rails.configuration.x.user_creation_send_email
   end
 end
