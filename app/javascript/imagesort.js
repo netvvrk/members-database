@@ -1,11 +1,13 @@
+
 import Sortable from 'sortablejs'
 
 const el = document.getElementById('image-list');
 const artworkId = el.getAttribute('data-artwork-id')
+
 const sortable = Sortable.create(el, {
     handle: '.sort-handle',
     animation: 100,
-    filter: '.ignore-drag',
+   // filter: '.ignore-drag',
     onEnd: async e => {
         const imageId = e.item.getAttribute('data-image-id')
         const url = `/artworks/${artworkId}/images/${imageId}/move_image?from_index=${e.oldIndex}&to_index=${e.newIndex}`
@@ -35,3 +37,4 @@ editButtons.forEach(btn => {
         
     })
 })
+    

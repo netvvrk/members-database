@@ -17,7 +17,7 @@
           <label class="z-10 relative flex justify-center  items-center cursor-pointer px-2 py-6" for="addimage">
             <!-- filter hidden input. works for keeping the state -->
             <input class="peer/addimage hidden" type="checkbox" id="addimage" />   
-            <a alt="add image" class="absolute block z-20 opacity-100 hover:no-underline transition-opacity peer-checked/addimage:opacity-0">
+            <a alt="add image" class="absolute block z-20 opacity-100 hover:no-underline transition-opacity peer-checked/addimage:hidden">
               <div class="flex flex-col items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-8 h-8" viewBox="0 0 16 16">
                   <path d="M8 6.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V11a.5.5 0 0 1-1 0V9.5H6a.5.5 0 0 1 0-1h1.5V7a.5.5 0 0 1 .5-.5"/>
@@ -26,7 +26,7 @@
                 <div class="mt-4 text-sm">Add artwork image (Up to <%= Artwork::MAX_ARTWORK_IMAGES %>)</div>
               </div>
             </a>            
-            <div class="opacity-0 peer-checked/addimage:opacity-100 transition-opacity">       
+            <div class=" opacity-0 z-30 peer-checked/addimage:opacity-100 peer-checked/addimage:translate-y-0 transition-opacity">       
               <h5>Upload artwork image:</h5>
               <%= render "images/form", artwork: @artwork, image: @artwork.images.new %>
             </div>
