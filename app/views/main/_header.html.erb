@@ -64,7 +64,7 @@
                   <div id="location-item-container" class="flex flex-col gap-1">
                     <span class="text-slate-500 text-sm">Filter location options</span>
                     <input type="text" class="w-48 small-field mb-2" id="location-serach" />
-                    <% @location_options.take(5).each do | location | %>
+                    <% @location_options.each do | location | %>
                       <div data-text="<%= location.id %>" class="location-item w-full <%= "hidden opacity-0" unless location.show_by_default %> transition-opacity duration-500 delay-75 ">
                         <label class="mr-2 text-sm leading-6 text-gray-900" for="<%= "location_#{location.id.parameterize(separator: '_')}" %>" >
                           <input class="mr-2" type="checkbox" name="location[]" value="<%= location.id %>"
@@ -74,7 +74,9 @@
                         </label>
                       </div>
                     <% end %>
-                    <% if @location_options.length > 5 %>
+                    <% if @location_options.length > 5 and @location_options.length < 20  %>
+                      <label id="location-more" class="text-slate-500 my-2 w-content cursor-pointer text-sm">show all</label>
+                    <% elsif @location_options.length > 20 %>
                       <label id="location-too-many" class="text-slate-500 my-2 w-1/2 text-sm">
                         There are too many locations (Showing only top 5). Use search to find the location.
                       </label>
@@ -86,7 +88,7 @@
                   <div id="medium-item-container" class="flex flex-col gap-1">
                     <span class="text-slate-500 text-sm">Filter medium options</span>
                     <input type="text" class="w-48 small-field mb-2" id="medium-serach" />
-                    <% @medium_options.take(5).each do | medium | %>
+                    <% @medium_options.each do | medium | %>
                       <div data-text="<%= medium.id %>" class="medium-item w-full <%= "hidden opacity-0" unless medium.show_by_default %> transition-opacity duration-500 delay-75 ">
                         <label class="mr-2 text-sm leading-6 text-gray-900" for="<%= "medium_#{medium.id.parameterize(separator: '_')}" %>" >
                           <input class="mr-2" type="checkbox" name="medium[]" value="<%= medium.id %>"
@@ -97,9 +99,7 @@
                       </div>
                     <% end %>
                     <% if @medium_options.length > 5 %>
-                      <label id="medium-more" class="text-slate-500 my-2 w-content cursor-pointer text-sm">
-                        There are too many mediums (Showing only top 5). Use search to find the location.
-                      </label>
+                      <label id="medium-more" class="text-slate-500 my-2 w-content cursor-pointer text-sm">show all</label>
                     <% end %>
                   </div>
                 </div>
