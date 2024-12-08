@@ -1,6 +1,6 @@
 <div class="h-full flex flex-col justify-between">
   <%= image_tag large_url(i), alt: i.caption, class: "rounded lg:w-full", draggable: false %>
-  <div class="flex justify-between">
+  <div class="flex justify-between pt-2">
     <div  class="grow relative">
       <i id="caption<%= i.id %>" class="absolute"><%= i.caption %></i>
       <div id="caption-form<%= i.id %>" class="absolute opacity-0 ">
