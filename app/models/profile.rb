@@ -4,6 +4,7 @@ class Profile < ApplicationRecord
   has_one_attached :cv
 
   validates :bio, :avatar, presence: true, on: :update
+  validates :bio, length: {maximum: 2500}, on: :update
 
   validate :cv_size_and_format
   validate :avatar_size_and_format
