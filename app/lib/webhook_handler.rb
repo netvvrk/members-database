@@ -66,7 +66,7 @@ class WebhookHandler
         cb_customer_id: customer.id
       )
       if u.valid?
-        u.send_reset_password_instructions
+        u.send_welcome_email if Rails.configuration.x.user_creation_send_email
         u.profile.name = name
         u.save
         true
