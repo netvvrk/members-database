@@ -3,10 +3,6 @@ require "securerandom"
 class WebhookHandler
   class << self
     def handle_payload(event)
-      if Rails.configuration.x.chargebee.log_webhook_events
-        Rails.logger.info(event)
-      end
-
       case event.event_type
       # when "payment_succeeded"
       #   upgrade_monthly_user(event)
