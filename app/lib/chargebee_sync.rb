@@ -4,6 +4,22 @@ class ChargebeeSync
     ChargeBee.configure({api_key: config.api_key, site: config.site})
   end
 
+  def dry_run
+    search_condition = {:limit => 100, "status[not_in]" => "[cancelled,non_renewing]"}
+    loop do
+      resp = ChargeBee::Subscription.list(search_condition)
+      resp.each do |entry|
+        create_user(entry, true)
+      end
+      if resp.next_offset
+        search_condition[:offset] = resp.next_offset
+      else
+        break
+      end
+    end
+    puts "end"
+  end
+
   def run
     search_condition = {:limit => 100, "status[not_in]" => "[cancelled,non_renewing]"}
     loop do
@@ -31,7 +47,7 @@ class ChargebeeSync
   end
 
   # TODO: refactor this to be used by WebhookHandler also
-  def create_user(entry)
+  def create_user(entry, dry_run = false)
     customer = entry.customer
     puts customer.email
     cb_id = customer.id
@@ -40,17 +56,22 @@ class ChargebeeSync
     name = [customer.first_name, customer.last_name].compact.join(" ")
     password = SecureRandom.alphanumeric(12)
     active = Util.subscription_is_annual_or_founding(entry.subscription)
-    u = User.create!(
-      cb_customer_id: cb_id,
-      email: customer.email,
-      password: password,
-      password_confirmation: password,
-      role: "artist",
-      active: active
-    )
-    u.profile.name = name
-    u.profile.save(validate: false)
 
-    u.send_welcome_email if active && Rails.configuration.x.user_creation_send_email
+    if dry_run
+      puts "creating user #{customer.email} - active: #{active}"
+    else
+      u = User.create!(
+        cb_customer_id: cb_id,
+        email: customer.email,
+        password: password,
+        password_confirmation: password,
+        role: "artist",
+        active: active
+      )
+      u.profile.name = name
+      u.profile.save(validate: false)
+
+      u.send_welcome_email if active && Rails.configuration.x.user_creation_send_email
+    end
   end
 end
