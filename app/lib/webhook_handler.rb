@@ -4,12 +4,12 @@ class WebhookHandler
   class << self
     def handle_payload(event)
       if Rails.configuration.x.chargebee.log_webhook_events
-        Rails.logger.info(event.inspect)
+        Rails.logger.info(event)
       end
 
       case event.event_type
-      when "payment_succeeded"
-        upgrade_monthly_user(event)
+      # when "payment_succeeded"
+      #   upgrade_monthly_user(event)
       when "subscription_cancelled"
         deactivate_user(event)
       when "subscription_changed"
@@ -32,7 +32,14 @@ class WebhookHandler
     def activate_user(event)
       customer = event.content.customer
       user = User.find_by(cb_customer_id: customer.id)
-      return true unless user
+      unless user
+        Rails.logger.error("User not found for #{customer.id}")
+        return
+      end
+
+      active = Util.subscription_is_annual_or_founding(event.content.subscription)
+
+      user.send_welcome_email if active && Rails.configuration.x.user_creation_send_email
 
       user.active = true
       user.save
