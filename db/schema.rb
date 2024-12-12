@@ -10,8 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_07_011000) do
+ActiveRecord::Schema[7.2].define(version: 2024_12_12_012008) do
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
 
   create_table "active_storage_attachments", force: :cascade do |t|
@@ -132,6 +133,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_07_011000) do
     t.datetime "locked_at"
     t.boolean "active", default: true, null: false
     t.string "cb_customer_id"
+    t.datetime "welcome_email_sent_at"
     t.index ["active"], name: "index_users_on_active"
     t.index ["cb_customer_id"], name: "index_users_on_cb_customer_id"
     t.index ["email"], name: "index_users_on_email", unique: true
