@@ -9,8 +9,7 @@ class ChargebeeSync
     loop do
       resp = ChargeBee::Subscription.list(search_condition)
       resp.each do |entry|
-        next unless Util.subscription_is_annual_or_founding(entry.subscription)
-        create_user(entry.customer)
+        create_user(entry)
       end
       if resp.next_offset
         search_condition[:offset] = resp.next_offset
@@ -31,23 +30,27 @@ class ChargebeeSync
     end
   end
 
-  def create_user(customer)
+  # TODO: refactor this to be used by WebhookHandler also
+  def create_user(entry)
+    customer = entry.customer
     puts customer.email
     cb_id = customer.id
     return if User.exists?(["email = ? or cb_customer_id = ?", customer.email, cb_id])
 
     name = [customer.first_name, customer.last_name].compact.join(" ")
     password = SecureRandom.alphanumeric(12)
+    active = Util.subscription_is_annual_or_founding(entry.subscription)
     u = User.create!(
       cb_customer_id: cb_id,
       email: customer.email,
       password: password,
       password_confirmation: password,
-      role: "artist"
+      role: "artist",
+      active: active
     )
     u.profile.name = name
     u.profile.save(validate: false)
 
-    u.send_welcome_email if Rails.configuration.x.user_creation_send_email
+    u.send_welcome_email if active && Rails.configuration.x.user_creation_send_email
   end
 end
