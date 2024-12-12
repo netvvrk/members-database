@@ -18,10 +18,10 @@ class WebhookHandler
         subscription_create(event)
       when "subscription_paused"
         deactivate_user(event)
-      when "subscription_reactivated"
-        activate_user(event)
-      when "subscription_resumed"
-        activate_user(event)
+      # when "subscription_reactivated"
+      #   activate_user(event)
+      # when "subscription_resumed"
+      #   activate_user(event)
       else
         false
       end
@@ -63,7 +63,7 @@ class WebhookHandler
     end
 
     def subscription_create(event)
-      return true unless Util.subscription_is_annual_or_founding(event.content.subscription)
+      active = Util.subscription_is_annual_or_founding(event.content.subscription)
 
       customer = event.content.customer
       password = SecureRandom.hex
@@ -74,10 +74,11 @@ class WebhookHandler
         role: "artist",
         password: password,
         password_confirmation: password,
-        cb_customer_id: customer.id
+        cb_customer_id: customer.id,
+        active: active
       )
       if u.valid?
-        u.send_welcome_email if Rails.configuration.x.user_creation_send_email
+        u.send_welcome_email if active && Rails.configuration.x.user_creation_send_email
         u.profile.name = name
         u.save
         true
