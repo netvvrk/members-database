@@ -5,13 +5,13 @@ class ChargebeeSync
   end
 
   def run
-    search_condition = {:limit => 100, "status[not_in]" => "[cancelled,non_renewing]"}
+    search_condition = {:limit => 20, "status[not_in]" => "[cancelled,non_renewing]"}
     loop do
       resp = ChargeBee::Subscription.list(search_condition)
       resp.each do |entry|
         create_user(entry)
       end
-      if resp.next_offset
+      if false && resp.next_offset
         search_condition[:offset] = resp.next_offset
       else
         break
