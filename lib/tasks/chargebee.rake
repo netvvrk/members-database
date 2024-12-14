@@ -16,4 +16,9 @@ namespace :chargebee do
     client = ChargebeeSync.new
     client.sync_list
   end
+
+  desc "check subscription for a user"
+  task check_sub: :environment do
+    Util.check_subscription
+  end
 end
