@@ -1,13 +1,13 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :confirm_admin
-  before_action :set_user, only: %i[show edit update login_as]
+  before_action :set_user, only: %i[show edit update login_as send_welcome_email]
 
   # GET /users
   def index
     @page = params[:page]&.to_i || 0
     @search_term = params[:search]
-    @users = User.order(id: :desc).page(@page)
+    @users = User.includes(:profile).order(id: :desc).page(@page)
 
     if @search_term
       @users = @users.search(@search_term).with_pg_search_rank
@@ -51,6 +51,11 @@ class UsersController < ApplicationController
   def login_as
     bypass_sign_in(@user)
     redirect_to root_path, notice: "Now logged in as #{@user.profile.name}"
+  end
+
+  def send_welcome_email
+    @user.send_welcome_email
+    redirect_to users_path, notice: "Welcome email sent to #{@user.email}"
   end
 
   private
