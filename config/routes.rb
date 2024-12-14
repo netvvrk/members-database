@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     resources :images do
       member do
         patch :move_image
-      end 
+      end
     end
   end
 
@@ -19,6 +19,7 @@ Rails.application.routes.draw do
     resources :users, except: [:new, :create, :destroy] do
       member do
         get :login_as
+        get :send_welcome_email
       end
     end
   end
