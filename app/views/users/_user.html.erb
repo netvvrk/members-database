@@ -23,11 +23,13 @@
           edit_user_path(user),
           class: "tw-btn-secondary lg:mr-2"
         ) %>
-        <%= link_to(
-          "send welcome email",
-          send_welcome_email_user_path(user),
-          class: "tw-btn-secondary lg:mr-2"
-        ) %>
+        <% if user.active %>
+          <%= link_to(
+            "send welcome email",
+            send_welcome_email_user_path(user),
+            class: "tw-btn-secondary lg:mr-2"
+          ) %>
+        <% end %>
       <% end %>
     </td>
   </tr>
