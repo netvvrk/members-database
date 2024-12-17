@@ -12,7 +12,7 @@ class Util
 
       File.readlines(File.join(ENV.fetch("HOME"), "check-emails.txt")).each do |email|
         email.chomp!
-        last if email.blank?
+        break if email.blank?
 
         print email, " -- "
         resp = ChargeBee::Customer.list("email[is]" => email)
