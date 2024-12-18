@@ -22,6 +22,9 @@ module ApplicationHelper
     else
       image&.file&.url(transformation: [{height: 400, width: 600, quality: 100, raw: "c-at_max,c-maintain_ratio,cm-pad_resize,bg-F3F3F3"}])
     end
+  rescue => e
+    Rails.logger.error("large_url_fix_h failed for Image ID #{image.id}: #{e}")
+    ""
   end
 
   def asset_delete_text(i)
