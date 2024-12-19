@@ -1,0 +1,35 @@
+<h1 class="font-bold pb-3">Create user</h1>
+
+<%= form_with(model: @user) do |f| %>
+  <div class="max-w-md grid grid-cols-1 gap-y-6 ">
+    <% if @user.errors.any? %>
+      <div class="text-red-500 my-4 w-full border-red-200 py-2 border-b">
+        <ul>
+          <% @user.errors.each do |error| %>
+            <li>
+              <%= error.full_message %>
+            </li>
+            <% end %>
+        </ul>
+      </div>
+      <% end %>
+      <div>
+        <%= f.label :name, class: "form-label required" %>
+        <%= f.text_field :name, class: "small-field w-full", value: session[:user_name] %>
+      </div>
+      <div>
+        <%= f.label :email, class: "form-label required" %>
+        <%= f.email_field :email, class: "small-field w-full" %>
+      </div>
+       <div>
+        <%= f.label :password, class: "form-label required" %>
+          <%= f.text_field :password, class: "small-field w-full" %>
+      </div>
+      <div>
+        <%= f.label :password_confirmation, class: "form-label required" %>
+          <%= f.text_field :password_confirmation, class: "small-field w-full" %>
+      </div>
+      <%= f.submit "Save" , class: "tw-btn-primary" %>
+    <% end %>
+  </div>
+  <%= javascript_include_tag "locationsearch" %>

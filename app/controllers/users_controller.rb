@@ -22,16 +22,27 @@ class UsersController < ApplicationController
   def edit
   end
 
-  # POST /users
-  # def create
-  #   @user = User.new(user_params)
+  # GET /users/new
+  def new
+    @user = User.new
+  end
 
-  #   if @user.save
-  #     redirect_to @user, notice: "User was successfully created."
-  #   else
-  #     render :new, status: :unprocessable_entity
-  #   end
-  # end
+  # POST /users
+  def create
+
+    name = user_params[:name]
+    params = user_params.except(:name)
+    @user = User.new(params)
+
+    if @user.save
+      @user.profile.update!(name: name)
+      redirect_to @user, notice: "User was successfully created."
+    else
+      Rails.logger.info(@artwork.errors.messages)
+      session[:user_name] = name
+      render :new, status: :unprocessable_entity
+    end
+  end
 
   # PATCH/PUT /users/1
   def update
@@ -67,7 +78,7 @@ class UsersController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def user_params
-    params.require(:user).permit(:password, :password_confirmation)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation)
   end
 
   def confirm_admin

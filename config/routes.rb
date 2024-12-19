@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   resources :profiles, only: [:edit, :show, :update]
 
   scope :admin do
-    resources :users, except: [:new, :create, :destroy] do
+    resources :users do
       member do
         get :login_as
         get :send_welcome_email
