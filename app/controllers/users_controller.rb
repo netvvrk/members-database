@@ -54,6 +54,7 @@ class UsersController < ApplicationController
   end
 
   def send_welcome_email
+    @user.update!(active: true) unless @user.active
     @user.send_welcome_email
     redirect_to users_path, notice: "Welcome email sent to #{@user.email}"
   end
