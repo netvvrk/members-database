@@ -29,16 +29,14 @@ class UsersController < ApplicationController
 
   # POST /users
   def create
-
     name = user_params[:name]
     params = user_params.except(:name)
     @user = User.new(params)
 
     if @user.save
-      @user.profile.update!(name: name)
-      redirect_to @user, notice: "User was successfully created."
+      @user.profile.update_attribute(:name, name)
+      redirect_to users_path, notice: "User was successfully created."
     else
-      Rails.logger.info(@artwork.errors.messages)
       session[:user_name] = name
       render :new, status: :unprocessable_entity
     end
@@ -78,7 +76,7 @@ class UsersController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :role)
   end
 
   def confirm_admin

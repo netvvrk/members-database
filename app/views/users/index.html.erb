@@ -1,6 +1,7 @@
 <div class="flex justify-between items-center my-6">
   <h1 class="text-xl">Users</h1>
-  <div class="flex-1 flex justify-end gap-3 items-center" >
+  <div class="flex-1 flex justify-end gap-3 items-center">
+    <div><%= link_to "Create user", new_user_path, class: "tw-btn-secondary lg:mr-2" %></div>
     <%= form_with method: :get do |f| %>
       <%= f.text_field :search, value: @search_term, placeholder: "search users", label: '&nbsp;'.html_safe, 
           class: "w-40 h-8 rounded focus:w-56 transition-[width] duration-300"   %>

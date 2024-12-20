@@ -21,6 +21,10 @@
         <%= f.label :email, class: "form-label required" %>
         <%= f.email_field :email, class: "small-field w-full" %>
       </div>
+      <div>
+        <%= f.label :role, class: "form-label required" %>
+        <%= f.select :role, ["artist", "admin"] %>
+      </div>
        <div>
         <%= f.label :password, class: "form-label required" %>
           <%= f.text_field :password, class: "small-field w-full" %>
