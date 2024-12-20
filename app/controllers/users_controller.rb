@@ -44,7 +44,14 @@ class UsersController < ApplicationController
 
   # PATCH/PUT /users/1
   def update
-    if @user.update(user_params)
+    name = user_params[:name]
+    params = user_params.except(:name)
+    if params[:password].empty?
+      params = params.except(:password, :password_confirmation)
+    end
+
+    if @user.update(params)
+      @user.profile.update_attribute(:name, name)
       redirect_to users_path, notice: "User was successfully updated.", status: :see_other
     else
       render :edit, status: :unprocessable_entity
@@ -77,7 +84,7 @@ class UsersController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation, :role)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :role, :active)
   end
 
   def confirm_admin
