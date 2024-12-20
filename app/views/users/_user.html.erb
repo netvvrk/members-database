@@ -1,7 +1,7 @@
 <div id="<%= dom_id user %>">
   <tr>
     <td>
-      <% if user.has_profile? %>
+      <% if user.profile.present? %>
         <%= link_to user.profile&.name, profile_path(user.profile)%>
       <% end %>
     </td>
@@ -19,16 +19,16 @@
           class: "tw-btn-secondary lg:mr-2"
         ) %>
         <%= link_to(
-          "change password",
-          edit_user_path(user),
-          class: "tw-btn-secondary lg:mr-2"
-        ) %>
-        <%= link_to(
           "send welcome email",
           send_welcome_email_user_path(user),
           class: "tw-btn-secondary lg:mr-2"
         ) %>
       <% end %>
+      <%= link_to(
+        "edit",
+        edit_user_path(user),
+        class: "tw-btn-secondary lg:mr-2"
+      ) %>
     </td>
   </tr>
 </div>
