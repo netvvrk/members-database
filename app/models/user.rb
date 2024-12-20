@@ -52,7 +52,6 @@ class User < ApplicationRecord
   # https://members-staging.vvrkshop.art/users/password/edit?reset_password_token=ysyb3fR86CZsR4-ECmmC
 
   def send_welcome_email
-    return if welcome_email_sent_at.present?
     token = set_reset_password_token
     # I don't know why I have to pass in the host: parameter. It should just get it from the environment.
     url = edit_user_password_url(self, reset_password_token: token, host: Rails.configuration.action_mailer.default_url_options[:host])
