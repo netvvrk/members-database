@@ -17,7 +17,7 @@
     <% if profile.bio %>
       <div class="my-3 ">
         <h5 class="text-sm font-semibold">Bio:</h5>
-        <%= profile.bio.nil? ? '' : profile.bio  %>
+        <%= profile.bio.nil? ? '' : simple_format(profile.bio)  %>
       </div>
     <% end %>
     <div class="flex gap-6">
