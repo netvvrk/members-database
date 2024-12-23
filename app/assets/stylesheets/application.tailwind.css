@@ -9,6 +9,10 @@
     @apply text-slate-600 hover:underline hover:text-slate-500 no-underline
   }
 
+  p {
+    @apply my-2 text-sm
+  }
+
   .tw-btn-primary {
     @apply px-2 py-1 border text-slate-700 bg-slate-200 hover:text-black hover:border-black 
        border-slate-700 rounded-md text-nowrap no-underline w-min hover:no-underline;

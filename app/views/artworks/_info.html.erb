@@ -24,7 +24,7 @@
   <% end %>
   <% if @artwork.description.present? %>
     <div class="mt-2 text-slate-500">
-      <%= @artwork.description %>
+      <%= simple_format(@artwork.description) %>
     </div>
   <% end%>
   <div class=" text-slate-700 flex gap-4 mt-4">
