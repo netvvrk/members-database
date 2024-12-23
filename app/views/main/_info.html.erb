@@ -22,7 +22,7 @@
   </div>
   <% if @artwork.description.present? %>
     <div class="mt-2 text-slate-500">
-      <%= @artwork.description %>
+      <%= simple_format(@artwork.description) %>
     </div>
   <% end%>
 </div>

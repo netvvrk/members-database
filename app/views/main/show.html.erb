@@ -104,7 +104,7 @@
       <div class="pb-2">
       About artist:
       </div>
-      <%= @artwork.user.profile&.bio %>
+      <%= simple_format(@artwork.user.profile&.bio) %>
   </section>  
 </div>
 
