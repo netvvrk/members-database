@@ -34,7 +34,7 @@ class User < ApplicationRecord
   end
 
   def has_profile?
-    artist?
+    artist? || admin?
   end
 
   def active_for_authentication?
