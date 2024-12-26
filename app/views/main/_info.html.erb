@@ -18,7 +18,7 @@
     Location: <%= @artwork.location %>
   </div>
   <div class="text-2xl py-2">
-    Price: <%= @artwork.price.present? ? @artwork.price : "N/A" %>
+    Price: <%= @artwork.price.present? ? number_with_delimiter(@artwork.price) : "N/A" %>
   </div>
   <% if @artwork.description.present? %>
     <div class="mt-2 text-slate-500">
