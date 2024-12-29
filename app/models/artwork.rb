@@ -10,7 +10,7 @@ class Artwork < ApplicationRecord
 
   belongs_to :user
   has_one :profile, through: :user
-  has_many :images,  -> { order('position') }, dependent: :destroy
+  has_many :images, -> { order("position") }, dependent: :destroy
 
   pg_search_scope :search, against: [:title, :medium, :description], associated_against: {profile: :name}
 
