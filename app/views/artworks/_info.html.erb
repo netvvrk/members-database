@@ -19,7 +19,7 @@
   </div>
   <% if @artwork.price.present? %>
     <div class="text-xl py-2">
-      Price: <%= @artwork.price %>
+      Price: <%= number_with_delimiter(@artwork.price) %>
     </div>
   <% end %>
   <% if @artwork.description.present? %>

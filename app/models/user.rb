@@ -34,6 +34,8 @@ class User < ApplicationRecord
   end
 
   def has_profile?
+    return false unless profile
+
     artist? || admin?
   end
 
