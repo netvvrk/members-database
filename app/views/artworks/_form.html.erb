@@ -62,15 +62,15 @@
       </div>
       <div>
         <%= f.label(:height, :class => "form-label") %>
-        <%= f.number_field :height, class: "small-field" %>
+        <%= f.number_field :height, step: 0.005, class: "small-field" %>
       </div>
       <div>
         <%= f.label(:width, :class => "form-label") %>
-        <%= f.number_field :width, class: "small-field" %>
+        <%= f.number_field :width, step: 0.005, class: "small-field" %>
       </div>
       <div>
         <%= f.label(:depth, :class => "form-label") %>
-        <%= f.number_field :depth, class: "small-field" %>
+        <%= f.number_field :depth, step: 0.005, class: "small-field" %>
       </div>
     </fieldset>
     <%= f.submit "Save", class: "tw-btn-primary" %>
