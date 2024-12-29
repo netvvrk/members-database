@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_12_12_012008) do
+ActiveRecord::Schema[7.2].define(version: 2024_12_29_010154) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
@@ -51,9 +51,9 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_012008) do
     t.boolean "visible"
     t.integer "duration"
     t.string "units", default: "in", null: false
-    t.float "height"
-    t.float "width"
-    t.float "depth"
+    t.decimal "height"
+    t.decimal "width"
+    t.decimal "depth"
     t.string "location", null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
