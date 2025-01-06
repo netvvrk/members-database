@@ -3,9 +3,6 @@ Rails.application.routes.draw do
   get "/artwork/:id", to: "main#show", as: "public_artwork"
 
   resources :artworks do
-    member do
-      get :preview
-    end
     resources :images do
       member do
         patch :move_image
