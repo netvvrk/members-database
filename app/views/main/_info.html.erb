@@ -1,6 +1,6 @@
 <div class="">
   <h1 class="text-2xl mb-0 font-normal">
-    <%= link_to(@artwork.artist_name, profile_url(@artwork.user.profile)) %>
+    <%= link_to(@artwork.artist_name, artist_url(@artwork.user)) %>
   </h1>
   <h2 class="text-2xl font-normal italic text-slate-500">
     <%= @artwork.title %> (<%= @artwork.year %>)

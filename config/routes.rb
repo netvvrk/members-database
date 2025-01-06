@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   end
 
   resources :profiles, only: [:edit, :show, :update]
+  resources :artists, only: :show
 
   scope :admin do
     resources :users do
