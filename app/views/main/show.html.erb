@@ -20,8 +20,8 @@
             style="backface-visibility: hidden">
             <%= image_tag image.file.url, alt: image.caption, class: "block w-full" %>
             <div
-              class="absolute inset-x-[15%] -bottom-16 <%= "-bottom-20" if @artwork.images.length > 1 %> py-5 text-center block">
-              <h5 class="text-black"><%= image.caption %></h5>
+              class="absolute inset-x-1 md:inset-x-[15%] -bottom-14 py-5 text-center block">
+              <h5 class="text-black leading-4"><%= image.caption %></h5>
 
             </div>
           </div>    
@@ -31,7 +31,7 @@
       <% if @artwork.images.length > 1 %>
       <!--Carousel indicators-->
       <div
-        class="absolute -bottom-12 left-0 right-0 z-[2] mx-[15%] mb-4 flex list-none justify-center p-0"
+        class="absolute -bottom-20 left-0 right-0 z-[2] mx-[15%] mb-4 flex list-none justify-center p-0"
         data-twe-carousel-indicators>
         <% @artwork.images.each_with_index do |artwork, i| %>
           <button
@@ -106,7 +106,7 @@
         
   </div>
 
-  <div class="lg:row-start-1 lg:col-start-4 lg:row-span-2 mt-8 <%= "mt-12" if @artwork.images.length > 1 %>">
+  <div class="lg:row-start-1 lg:col-start-4 lg:row-span-2 mt-8 <%= "mt-14" if @artwork.images.length > 1 %>">
     <%= render "info" %>
   </div>
   <% if @artwork.user.profile&.bio&.present? %>
