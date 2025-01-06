@@ -23,6 +23,8 @@ module ApplicationHelper
 
   # image with 400px height and extra gray padding to maintain ratio
   def large_url_fix_h(image)
+    return "1x1.png" if image.blank?
+
     if image&.is_video?
       "#{image.file.url}/ik-thumbnail.jpg?tr=h-400,c-maintain_ratio"
     else
