@@ -34,7 +34,7 @@
         </svg>
       </a>
       <!-- close filter icon -->
-      <a alt="close filters" class="<%= @has_filters ? "tw-btn-primary" : "tw-btn-secondary" %> text-xs absolute text-nowrap right-0 z-20 opacity-0 transition-opacity peer-checked/filter:opacity-100">
+      <a alt="close filters" class="<%= @has_filters ? "tw-btn-primary" : "tw-btn-secondary" %> text-xs absolute text-nowrap right-0 top-0 <%= '-top-[210px]' if @page < 2 %> z-20 opacity-0 transition-opacity peer-checked/filter:opacity-100">
         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 " viewBox="0 0 16 16">
           <title>close filters</title>
           <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
