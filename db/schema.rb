@@ -10,9 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_12_29_010154) do
+ActiveRecord::Schema[7.2].define(version: 2025_01_12_091237) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
 
   create_table "active_storage_attachments", force: :cascade do |t|
@@ -61,7 +60,9 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_29_010154) do
     t.integer "year", null: false
     t.string "edition", default: "", null: false
     t.boolean "active", default: true, null: false
+    t.integer "position", null: false
     t.index ["active"], name: "index_artworks_on_active"
+    t.index ["user_id", "position"], name: "index_artworks_on_user_id_and_position", unique: true
     t.index ["user_id"], name: "index_artworks_on_user_id"
     t.index ["year"], name: "index_artworks_on_year"
   end

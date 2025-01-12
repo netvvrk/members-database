@@ -14,7 +14,7 @@ class User < ApplicationRecord
 
   validates :email, :role, presence: true
 
-  has_many :artworks, dependent: :destroy
+  has_many :artworks, -> { order('position') }, dependent: :destroy
 
   has_one :profile
 

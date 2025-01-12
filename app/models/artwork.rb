@@ -9,6 +9,8 @@ class Artwork < ApplicationRecord
   validates :year, numericality: {greater_than_or_equal_to: 1900}
 
   belongs_to :user
+  positioned on: :user
+
   has_one :profile, through: :user
   has_many :images, -> { order("position") }, dependent: :destroy
 
