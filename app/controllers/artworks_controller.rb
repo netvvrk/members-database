@@ -1,6 +1,7 @@
 class ArtworksController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_artwork, only: %i[show edit update destroy]
+  before_action :set_artwork, only: %i[show edit update destroy move_artwork]
+  skip_before_action :verify_authenticity_token, only: %i[move_artwork]  
 
   # GET /artworks
   def index
@@ -48,6 +49,13 @@ class ArtworksController < ApplicationController
     @artwork.destroy!
     redirect_to artworks_url, notice: "Artwork was successfully destroyed.", status: :see_other
   end
+
+  # PATCH /artworks/1/move_artwork
+  def move_artwork
+    new_position = params[:to_index].to_i + 1
+    @artwork.update position: new_position
+    render json: {}, status: 200
+  end  
 
   private
 
