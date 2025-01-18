@@ -8,7 +8,7 @@
           <% end %>
         </ul>
       </div>
-    <% end %>  
+    <% end %>
     <div>
       <%= f.label :title, class: "form-label required" %>
       <%= f.text_field :title, class: "small-field w-full" %>
@@ -41,7 +41,7 @@
       </span>
       <input type="text" class="small-field" value="<%= artwork.location %>" id="location-search"/>
       <%= f.hidden_field :location, id: "location-hidden" %>
-    
+
       <ul id="suggestion-container" class="opacity-0 transition-opacity flex flex-col border rounded border-slate-400 gap-2">
         <li class="hidden p-2 cursor-pointer bg-slate-200">test</li>
       </ul>
@@ -49,7 +49,7 @@
     <fieldset class="">
       <label class="form-label mb-1">Artwork visibility</label>
       <%= f.check_box :visible %>
-      <%= f.label :visible, "Visible to curators", :class => "form-desc ml-2" %>
+      <%= f.label :visible, "Visible in search", :class => "form-desc ml-2" %>
     </fieldset>
     <fieldset class="border round-sm p-3 grid gap-y-2 mb-4 max-w-96">
       <div>
