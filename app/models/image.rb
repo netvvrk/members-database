@@ -2,12 +2,12 @@ class Image < ApplicationRecord
   belongs_to :artwork
   positioned on: :artwork
   has_one_attached :file
-  
+
   validates :file, presence: true
   validate :valid_image
-  
+
   before_destroy :purge_file
-  
+
   def is_video?
     file&.blob&.content_type&.include?("video")
   end
@@ -16,7 +16,7 @@ class Image < ApplicationRecord
 
   def valid_image
     return unless file.attached?
-    unless file.blob.byte_size <= 10.megabyte
+    unless file.blob.byte_size <= 20.megabyte
       errors.add(:file, "is too large")
     end
 
