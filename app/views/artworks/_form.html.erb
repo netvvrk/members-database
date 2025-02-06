@@ -16,7 +16,7 @@
     <div>
       <%= f.label :medium, class: "form-label required" %>
         <div class="flex flex-wrap my-3">
-          <%= f.collection_radio_buttons :medium, ["Painting", "Work on Paper", "Film/Video", "Digital Art",  "Photography",  "Sculpture", "Installation"].map { | m | [m, m]}, :first, :last  do | mm | %>
+          <%= f.collection_radio_buttons :medium, Artwork::MEDIUM_LIST.map { | m | [m, m]}, :first, :last  do | mm | %>
             <span class="w-1/2">
               <%= mm.label(class: "mr-2 text-sm font-medium leading-6 text-gray-900") { mm.radio_button(class: "mr-2") + mm.text } %>
             </span>
