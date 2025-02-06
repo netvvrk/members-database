@@ -25,6 +25,11 @@ class Artwork < ApplicationRecord
 
   MAX_ARTWORK_IMAGES = 3
 
+  MEDIUM_LIST = [ "Painting", "Photography", "Sculpture", "Prints", "Work on Paper", "NFT",
+   "Design", "Drawing", "Installation", "Film/Video", "Jewelry", "Performance Art",
+   "Reproduction", "Ephemera or Merchandise", "Digital Art"
+  ]
+
   def artist_name
     user.profile.name
   end

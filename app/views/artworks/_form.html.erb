@@ -15,7 +15,17 @@
     </div>
     <div>
       <%= f.label :medium, class: "form-label required" %>
-      <%= f.text_field :medium, class: "small-field w-full" %>
+        <div class="flex flex-wrap my-3">
+          <%= f.collection_radio_buttons :medium, Artwork::MEDIUM_LIST.map { | m | [m, m]}, :first, :last  do | mm | %>
+            <span class="w-1/2">
+              <%= mm.label(class: "mr-2 text-sm font-medium leading-6 text-gray-900") { mm.radio_button(class: "mr-2") + mm.text } %>
+            </span>
+          <% end %>
+        </div>      
+    </div>    
+    <div>
+      <%= f.label :material, class: "form-label required" %>
+      <%= f.text_field :material, class: "small-field w-full" %>
     </div>
     <div>
       <%= f.label :edition, class: "form-label" %>
