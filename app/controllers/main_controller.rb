@@ -5,8 +5,8 @@ class MainController < ApplicationController
   def index
     @page = params[:page]&.to_i || 0
     @search_term = params[:search]
-    @min_price = params[:min_price]
-    @max_price = params[:max_price]
+    @min_price = params[:min_price] if params[:min_price].to_i.to_s == params[:min_price]
+    @max_price = params[:max_price] if params[:max_price].to_i.to_s == params[:max_price]
     @location = params[:location]
     @medium = params[:medium]
     @has_filters = @min_price.present? || @max_price.present? ||
