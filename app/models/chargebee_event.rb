@@ -1,0 +1,2 @@
+class ChargebeeEvent < ApplicationRecord
+end
