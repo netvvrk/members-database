@@ -86,9 +86,9 @@
                   <div id="medium-item-container" class="flex flex-col gap-1">
                     <% @medium_options.each do | medium | %>
                       <div data-text="<%= medium.id %>" class="medium-item w-full transition-opacity duration-500 delay-75 ">
-                        <label class="mr-2 text-sm leading-6 text-gray-900" for="<%= "medium_#{medium.id.parameterize(separator: '_')}" %>" >
+                        <label class="mr-2 text-sm leading-6 text-gray-900" for="<%= "medium_#{medium&.id&.parameterize(separator: '_')}" %>" >
                           <input class="mr-2" type="checkbox" name="medium[]" value="<%= medium.id %>"
-                                              id="<%= "medium_#{medium.id.parameterize(separator: '_')}" %>" 
+                                              id="<%= "medium_#{medium&.id&.parameterize(separator: '_')}" %>" 
                                               <%= "checked" if @medium&.include?(medium.id) == true %> >
                           <%= medium.name %>
                         </label>
