@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :artworks do
     member do
       patch :move_artwork
-    end    
+    end
     resources :images do
       member do
         patch :move_image

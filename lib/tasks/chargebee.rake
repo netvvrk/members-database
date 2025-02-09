@@ -21,4 +21,9 @@ namespace :chargebee do
   task check_sub: :environment do
     Util.check_subscription
   end
+
+  desc "delete old webhook events"
+  task deleted_old_webhook_events: :environment do
+    Util.deleted_old_webhook_events
+  end
 end

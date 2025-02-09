@@ -1,0 +1,113 @@
+{
+  "id": "ev_AzqaRuUU8ubk53HJU",
+  "occurred_at": 1731622754,
+  "source": "admin_console",
+  "user": "admin@vvrkshop.art",
+  "object": "event",
+  "api_version": "v2",
+  "content": {
+    "subscription": {
+      "id": "2509882",
+      "billing_period": 1,
+      "billing_period_unit": "year",
+      "customer_id": "I-G3SKKUXLBL1B",
+      "status": "active",
+      "current_term_start": 1701208389,
+      "current_term_end": 1732830789,
+      "next_billing_at": 1740718800,
+      "created_at": 1669672389,
+      "started_at": 1669672389,
+      "activated_at": 1669672389,
+      "created_from_ip": "54.88.235.200",
+      "updated_at": 1731622754,
+      "has_scheduled_changes": false,
+      "channel": "web",
+      "resource_version": 1731622754615,
+      "deleted": false,
+      "object": "subscription",
+      "currency_code": "USD",
+      "subscription_items": [
+        {
+          "item_price_id": "Netvvrk-Annual-USD-Yearly",
+          "item_type": "plan",
+          "quantity": 1,
+          "unit_price": 79000,
+          "amount": 79000,
+          "free_quantity": 0,
+          "object": "subscription_item"
+        }
+      ],
+      "shipping_address": {
+        "first_name": "Jane",
+        "last_name": "Bauman",
+        "email": "janebauman_AT_verizon.net@example.com",
+        "validation_status": "not_validated",
+        "object": "shipping_address"
+      },
+      "due_invoices_count": 0,
+      "mrr": 6583,
+      "exchange_rate": 1.0,
+      "base_currency_code": "USD",
+      "cf_Paypal_Migrated": "YES",
+      "pause_date": 1732830789,
+      "resume_date": 1740718800,
+      "has_scheduled_advance_invoices": false
+    },
+    "customer": {
+      "id": "I-G3SKKUXLBL1B",
+      "first_name": "Jane",
+      "last_name": "Bauman",
+      "email": "janebauman_AT_verizon.net@example.com",
+      "auto_collection": "off",
+      "net_term_days": 0,
+      "allow_direct_debit": false,
+      "created_at": 1699042118,
+      "created_from_ip": "27.5.153.91",
+      "taxability": "taxable",
+      "updated_at": 1712338306,
+      "pii_cleared": "active",
+      "channel": "web",
+      "resource_version": 1712338306433,
+      "deleted": false,
+      "object": "customer",
+      "billing_address": {
+        "country": "US",
+        "validation_status": "not_validated",
+        "object": "billing_address"
+      },
+      "card_status": "no_card",
+      "promotional_credits": 0,
+      "refundable_credits": 0,
+      "excess_payments": 0,
+      "unbilled_charges": 0,
+      "preferred_currency_code": "USD",
+      "mrr": 0,
+      "cf_Migrated": "YES",
+      "cf_Paypal": "YES"
+    }
+  },
+  "event_type": "subscription_pause_scheduled",
+  "webhook_status": "not_applicable",
+  "webhooks": [
+    {
+      "id": "whv2_16BdjQTta98S3V6B",
+      "webhook_status": "not_applicable",
+      "object": "webhook"
+    },
+    {
+      "id": "whv2_169lseTrjW9lv3Dj8",
+      "webhook_status": "succeeded",
+      "object": "webhook"
+    },
+    {
+      "id": "whv2_AzylISTta6fjqU6v",
+      "webhook_status": "not_applicable",
+      "object": "webhook"
+    },
+    {
+      "id": "whv2_AzyhBKU6RPt8W1gF7",
+      "webhook_status": "not_applicable",
+      "object": "webhook"
+    }
+  ]
+}

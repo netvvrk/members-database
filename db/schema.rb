@@ -10,8 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_02_06_080856) do
+ActiveRecord::Schema[7.2].define(version: 2025_02_09_185340) do
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
 
   create_table "active_storage_attachments", force: :cascade do |t|
@@ -66,6 +67,19 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_06_080856) do
     t.index ["user_id", "position"], name: "index_artworks_on_user_id_and_position", unique: true
     t.index ["user_id"], name: "index_artworks_on_user_id"
     t.index ["year"], name: "index_artworks_on_year"
+  end
+
+  create_table "chargebee_events", id: false, force: :cascade do |t|
+    t.string "event_id", null: false
+    t.datetime "created_at", null: false
+    t.string "event_type", null: false
+    t.string "user_email", null: false
+    t.jsonb "content"
+    t.index ["content"], name: "chargebee_events_idx", using: :gin
+    t.index ["created_at"], name: "index_chargebee_events_on_created_at"
+    t.index ["event_id"], name: "index_chargebee_events_on_event_id", unique: true
+    t.index ["event_type"], name: "index_chargebee_events_on_event_type"
+    t.index ["user_email"], name: "index_chargebee_events_on_user_email"
   end
 
   create_table "images", force: :cascade do |t|
