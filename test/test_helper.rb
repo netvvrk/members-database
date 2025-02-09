@@ -15,7 +15,8 @@ module ActiveSupport
 
     def create_artwork(user)
       r = Random.new
-      user.artworks.create!(title: "Title#{r.rand(100)}", medium: "medium#{r.rand(100)}", material: "material#{r.rand(100)}", visible: true, height: 2, width: 3, location: "Brooklyn", year: 2025)
+      user.artworks.create!(title: "Title#{r.rand(100)}", medium: Artwork::MEDIUM_LIST[r.rand(Artwork::MEDIUM_LIST.size)],
+          material: "material#{r.rand(100)}", visible: true, height: 2, width: 3, location: "Brooklyn", year: 2025)
     end
   end
 end
