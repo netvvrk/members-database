@@ -5,8 +5,8 @@ class MainController < ApplicationController
   def index
     @page = params[:page]&.to_i || 0
     @search_term = params[:search]
-    @min_price = params[:min_price]
-    @max_price = params[:max_price]
+    @min_price = params[:min_price] if params[:min_price].to_i.to_s == params[:min_price]
+    @max_price = params[:max_price] if params[:max_price].to_i.to_s == params[:max_price]
     @location = params[:location]
     @medium = params[:medium]
     @has_filters = @min_price.present? || @max_price.present? ||
@@ -27,12 +27,10 @@ class MainController < ApplicationController
     medium_options = Artwork.is_visible.with_images.all.group(:medium).order(count: :desc).count
 
     @medium_options = medium_options.each_with_index.reduce([]) do |acc, (item, i)|
-      show_by_default = acc.size < 5
       acc.push(OpenStruct.new(
         id: item.first,
         name: "#{item.first} (#{item.last})",
         count: item.last,
-        show_by_default: show_by_default
       ))
     end
 

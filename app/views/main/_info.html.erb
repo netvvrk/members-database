@@ -8,6 +8,11 @@
   <div class="text-slate-500">
     <%= @artwork.medium %>
   </div>
+  <% if @artwork.material.present? %>
+    <div class="text-slate-500 italic text-sm">
+      <%= @artwork.material %>
+    </div>
+  <% end %>  
   <% if @artwork.edition.present? %>
     <div class="text-slate-500">
       ed: <%= @artwork.edition %>

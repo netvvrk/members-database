@@ -34,7 +34,7 @@
         </svg>
       </a>
       <!-- close filter icon -->
-      <a alt="close filters" class="<%= @has_filters ? "tw-btn-primary" : "tw-btn-secondary" %> text-xs absolute text-nowrap right-0 top-0 <%= '-top-[210px]' if @page < 2 %> z-20 opacity-0 transition-opacity peer-checked/filter:opacity-100">
+      <a alt="close filters" class="<%= @has_filters ? "tw-btn-primary" : "tw-btn-secondary" %> text-xs absolute text-nowrap right-0 <%= '!-top-[210px]' if @page < 2 %> top-0 z-20 opacity-0 transition-opacity peer-checked/filter:opacity-100">
         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 " viewBox="0 0 16 16">
           <title>close filters</title>
           <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
@@ -82,12 +82,10 @@
                   </div>
                 </div>
                 <div>
-                  <%= f.label "medium", class: "block text-sm font-medium leading-6 text-gray-900" %>
+                  <%= f.label "medium", class: "block text-sm font-medium leading-6 text-gray-900 mb-1" %>
                   <div id="medium-item-container" class="flex flex-col gap-1">
-                    <span class="text-slate-500 text-sm">Filter medium options</span>
-                    <input type="text" class="w-48 small-field mb-2" id="medium-serach" />
                     <% @medium_options.each do | medium | %>
-                      <div data-text="<%= medium.id %>" class="medium-item w-full <%= "hidden opacity-0" unless medium.show_by_default %> transition-opacity duration-500 delay-75 ">
+                      <div data-text="<%= medium.id %>" class="medium-item w-full transition-opacity duration-500 delay-75 ">
                         <label class="mr-2 text-sm leading-6 text-gray-900" for="<%= "medium_#{medium.id.parameterize(separator: '_')}" %>" >
                           <input class="mr-2" type="checkbox" name="medium[]" value="<%= medium.id %>"
                                               id="<%= "medium_#{medium.id.parameterize(separator: '_')}" %>" 
@@ -95,11 +93,6 @@
                           <%= medium.name %>
                         </label>
                       </div>
-                    <% end %>
-                    <% if @medium_options.length > 5 %>
-                      <label id="location-too-many" class="text-slate-500 my-2 w-1/2 text-sm">
-                        There are too many mediums (Showing only top 5). Use search to find the location.
-                      </label>
                     <% end %>
                   </div>
                 </div>

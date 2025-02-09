@@ -1,12 +1,20 @@
 class Artwork < ApplicationRecord
   include PgSearch::Model
 
+  MAX_ARTWORK_IMAGES = 3
+
+  MEDIUM_LIST = [ "Painting", "Photography", "Sculpture", "Prints", "Work on Paper", "NFT",
+   "Design", "Drawing", "Installation", "Film/Video", "Jewelry", "Performance Art",
+   "Reproduction", "Ephemera or Merchandise", "Digital Art"
+  ]  
+
   validates :title, :medium, :location, :year, presence: true
   validates :units, inclusion: {in: %w[in cm],
                                 message: "%{value} is not a valid unit"}
   validates :duration, numericality: {greater_than_or_equal_to: 0, allow_blank: true}
   validates :price, numericality: {greater_than_or_equal_to: 0, allow_blank: true}
   validates :year, numericality: {greater_than_or_equal_to: 1900}
+  validates :medium, inclusion: { in: MEDIUM_LIST}
 
   belongs_to :user
   positioned on: :user
@@ -22,8 +30,6 @@ class Artwork < ApplicationRecord
   scope :with_images, -> {
                         joins(:images).distinct(:artwork_id)
                       }
-
-  MAX_ARTWORK_IMAGES = 3
 
   def artist_name
     user.profile.name
