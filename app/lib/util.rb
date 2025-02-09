@@ -37,5 +37,9 @@ class Util
         puts ""
       end
     end
+
+    def deleted_old_webhook_events
+      ChargebeeEvent.where("created_at < ?", 3.months.ago).delete_all
+    end
   end
 end
