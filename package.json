@@ -7,7 +7,7 @@
     "autoprefixer": "^10.4.16",
     "bootstrap": "^5.3.2",
     "bootstrap-icons": "^1.11.1",
-    "esbuild": "^0.19.5",
+    "esbuild": "^0.25.0",
     "fslightbox": "^3.4.1",
     "nodemon": "^3.0.1",
     "postcss": "^8.4.31",
