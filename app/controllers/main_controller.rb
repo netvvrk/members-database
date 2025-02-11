@@ -30,14 +30,16 @@ class MainController < ApplicationController
       acc.push(OpenStruct.new(
         id: item.first,
         name: "#{item.first} (#{item.last})",
-        count: item.last,
+        count: item.last
       ))
     end
 
     @artworks = Artwork.is_visible.with_images.all.page(@page)
-    if @search_term.present?
+    @artworks = if @search_term.present?
       # with_pg_search_rank is to avoid sql error (see commit message)
-      @artworks = @artworks.search(@search_term).with_pg_search_rank
+      @artworks.search(@search_term).with_pg_search_rank
+    else
+      @artworks.order(:non_search_rank)
     end
     if @max_price.present?
       @artworks = @artworks.where("price < ? ", @max_price)
