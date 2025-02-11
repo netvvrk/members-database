@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_02_09_185340) do
+ActiveRecord::Schema[7.2].define(version: 2025_02_10_022618) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
@@ -63,6 +63,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_09_185340) do
     t.boolean "active", default: true, null: false
     t.integer "position", null: false
     t.string "medium"
+    t.decimal "non_search_rank"
     t.index ["active"], name: "index_artworks_on_active"
     t.index ["user_id", "position"], name: "index_artworks_on_user_id_and_position", unique: true
     t.index ["user_id"], name: "index_artworks_on_user_id"
