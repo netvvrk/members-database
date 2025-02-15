@@ -7,7 +7,7 @@ class WebhookHandler
         event_id: event.id,
         created_at: event.occurred_at,
         event_type: event.event_type,
-        user_email: event.content.customer.email,
+        user_email: event.content.customer&.email,
         content: event.content
       )
       unless cb_event.save
