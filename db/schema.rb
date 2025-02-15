@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_02_10_022618) do
+ActiveRecord::Schema[7.2].define(version: 2025_02_15_031025) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
@@ -74,7 +74,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_10_022618) do
     t.string "event_id", null: false
     t.datetime "created_at", null: false
     t.string "event_type", null: false
-    t.string "user_email", null: false
+    t.string "user_email"
     t.jsonb "content"
     t.index ["content"], name: "chargebee_events_idx", using: :gin
     t.index ["created_at"], name: "index_chargebee_events_on_created_at"
