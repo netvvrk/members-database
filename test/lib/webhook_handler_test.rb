@@ -24,6 +24,21 @@ class WebhookHandlerTest < ActiveSupport::TestCase
     end
   end
 
+  test "duplicate event does not crash" do
+    payload = File.read(Rails.root.join("test", "fixtures", "files", "subscription_created_annual.json"))
+    event = ChargeBee::Event.deserialize(payload)
+
+    assert_difference "ChargebeeEvent.count", 1 do
+      assert_difference "User.count" do
+        assert WebhookHandler.handle_payload(event)
+      end
+    end
+
+    assert_nothing_raised do
+      refute WebhookHandler.handle_payload(event)
+    end
+  end
+
   test "subscripton cancelled" do
     payload = File.read(Rails.root.join("test", "fixtures", "files", "subscription_cancelled.json"))
     event = ChargeBee::Event.deserialize(payload)
