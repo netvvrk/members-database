@@ -3,15 +3,20 @@ require "securerandom"
 class WebhookHandler
   class << self
     def handle_payload(event)
-      cb_event = ChargebeeEvent.new(
-        event_id: event.id,
-        created_at: event.occurred_at,
-        event_type: event.event_type,
-        user_email: event.content.customer&.email,
-        content: event.content
-      )
-      unless cb_event.save
-        Rails.logger.error("ChargebeeEvent failed: #{cb_event.errors.messages}")
+      begin
+        cb_event = ChargebeeEvent.new(
+          event_id: event.id,
+          created_at: event.occurred_at,
+          event_type: event.event_type,
+          user_email: event.content.customer&.email,
+          content: event.content
+        )
+        unless cb_event.save
+          Rails.logger.error("ChargebeeEvent failed: #{cb_event.errors.messages}")
+          return false
+        end
+      rescue ActiveRecord::RecordNotUnique
+        Rails.logger.error("Skipped duplicate ChargebeeEvent #{event.id}")
         return false
       end
 
