@@ -20,6 +20,13 @@ class WebhookHandler
         return false
       end
 
+      customer = event.content.customer
+
+      if !customer
+        Rails.logger.error("Chargebee Customer not found for #{event.id}")
+        return true
+      end
+
       user = find_user(event)
       if need_user(event) && !user
         Rails.logger.error("User not found for #{event.content.customer.email}")
