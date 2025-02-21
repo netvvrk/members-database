@@ -68,7 +68,10 @@ Rails.application.configure do
   # Raise error when a before_action's only/except options reference missing actions
   config.action_controller.raise_on_missing_callback_actions = true
 
-  config.hosts << "factually-dear-python.ngrok-free.app"
+  # config.hosts << "factually-dear-python.ngrok-free.app"
+  config.hosts << ->(host) {
+    host =~ /.*\.ngrok-free.app/
+  }
 
   # chargebee configuration
   config.x.chargebee.api_key = ENV["CHARGEBEE_API_KEY"]

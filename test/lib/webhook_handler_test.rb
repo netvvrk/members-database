@@ -64,6 +64,14 @@ class WebhookHandlerTest < ActiveSupport::TestCase
     refute(artwork.reload.active)
   end
 
+  test "customer changed email" do
+    payload = File.read(Rails.root.join("test", "fixtures", "files", "customer_changed.json"))
+    event = ChargeBee::Event.deserialize(payload)
+    user = users(:artist)
+    assert WebhookHandler.handle_payload(event)
+    assert user.reload.email == "carolee@gmail.com"
+  end
+
   # test "subscripton reactivated" do
   #   payload = File.read(Rails.root.join("test", "fixtures", "files", "subscription_reactivated.json"))
   #   event = ChargeBee::Event.deserialize(payload)

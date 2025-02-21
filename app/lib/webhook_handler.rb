@@ -34,8 +34,8 @@ class WebhookHandler
       end
 
       case event.event_type
-      # when "payment_succeeded"
-      #   upgrade_monthly_user(user, event)
+      when "customer_changed"
+        update_user(user, event)
       when "subscription_cancelled"
         deactivate_user(user)
       when "subscription_changed"
@@ -48,6 +48,8 @@ class WebhookHandler
       #   activate_user(event)
       # when "subscription_resumed"
       #   activate_user(event)
+      # when "payment_succeeded"
+      #   upgrade_monthly_user(user, event)
       else
         false
       end
@@ -77,6 +79,14 @@ class WebhookHandler
     def deactivate_user(user)
       user.active = false
       user.save
+    end
+
+    def update_user(user, event)
+      email = event.content.customer.email
+      if email != user.email
+        user.update!(email: email)
+      end
+      true
     end
 
     def subscription_change(user, event)
