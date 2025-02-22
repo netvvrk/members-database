@@ -13,10 +13,11 @@ module ActiveSupport
     # Add more helper methods to be used by all tests here...
     include Devise::Test::IntegrationHelpers
 
-    def create_artwork(user)
+    def create_artwork(user, medium = false)
       r = Random.new
-      user.artworks.create!(title: "Title#{r.rand(100)}", medium: Artwork::MEDIUM_LIST[r.rand(Artwork::MEDIUM_LIST.size)],
+
+      user.artworks.create!(title: "Title#{r.rand(100)}", medium: medium || Artwork::MEDIUM_LIST[r.rand(Artwork::MEDIUM_LIST.size)],
           material: "material#{r.rand(100)}", visible: true, height: 2, width: 3, location: "Brooklyn", year: 2025)
-    end
+      end
   end
 end

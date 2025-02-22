@@ -7,7 +7,8 @@ class Artwork < ApplicationRecord
     "Design", "Drawing", "Installation", "Film/Video", "Jewelry", "Performance Art",
     "Reproduction", "Ephemera or Merchandise", "Digital Art"]
 
-  validates :title, :medium, :location, :year, presence: true
+  validates :title, :medium, :year, presence: true
+  validates :location, presence: true, unless: -> { ["Digital Art", "NFT"].include?(medium) }
   validates :units, inclusion: {in: %w[in cm],
                                 message: "%{value} is not a valid unit"}
   validates :duration, numericality: {greater_than_or_equal_to: 0, allow_blank: true}

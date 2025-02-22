@@ -26,4 +26,15 @@ class ArtworkTest < ActiveSupport::TestCase
     artwork = create_artwork(user)
     assert_equal "Louise the Artist", artwork.artist_name
   end
+
+  test "location is required except for Digital Art/NFTs" do
+    user = users(:artist)
+    artwork = create_artwork(user, "Painting")
+    artwork.location = nil
+    refute artwork.valid?
+    artwork.medium = "NFT"
+    assert artwork.valid?
+    artwork.medium = "Digital Art"
+    assert artwork.valid?
+  end
 end
