@@ -30,6 +30,11 @@ class Artwork < ApplicationRecord
   scope :with_images, -> {
                         joins(:images).distinct(:artwork_id)
                       }
+  
+  scope :has_max_price, -> (price) {  where("price < ? ", price) }
+  scope :has_min_price, -> (price) {  where("price > ? ", price) }
+  scope :has_medium, -> (medium) { where("medium in (?) ", medium) }
+  scope :has_location, -> (location) { where("location in (?) ", location) }
 
   def artist_name
     user.profile.name
