@@ -65,7 +65,7 @@
                     <span class="text-slate-500 text-sm">Filter location options</span>
                     <input type="text" class="w-48 small-field mb-2" id="location-serach" />
                     <% @location_options.each do | location | %>
-                      <div data-text="<%= location.id %>" class="location-item w-full <%= "hidden opacity-0" unless location.show_by_default %> transition-opacity duration-500 delay-75 ">
+                      <div data-text="<%= location.id %>" class="location-item w-full <%= "hidden opacity-0" unless location.show_by_default or @location&.include?(location.id) %> transition-opacity duration-500 delay-75 ">
                         <label class="mr-2 text-sm leading-6 text-gray-900" for="<%= "location_#{location.id.parameterize(separator: '_')}" %>" >
                           <input class="mr-2" type="checkbox" name="location[]" value="<%= location.id %>"
                                               id="<%= "location_#{location.id.parameterize(separator: '_')}" %>" 
