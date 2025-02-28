@@ -54,6 +54,18 @@ class MainController < ApplicationController
       ))
     end
 
+
+    # if there is no item in the group just show the selected locations
+    if @location_options&.empty?
+      @location_options = @location&.map { | loc | OpenStruct.new({
+        id: loc,
+        name: loc,
+        count: 0,
+        show_by_default: true
+      }) }
+    end
+    
+
     medium_options = artworks_for_grouping.group(:medium).order(count: :desc).count
 
     @medium_options = medium_options.each_with_index.reduce([]) do |acc, (item, i)|
@@ -62,7 +74,18 @@ class MainController < ApplicationController
         name: "#{item.first} (#{item.last})",
         count: item.last
       ))
-    end    
+    end
+
+    # if there is no item in the group just show the selected medium
+    if @medium_options&.empty?
+      @medium_options = @medium&.map { | loc | OpenStruct.new({
+        id: loc,
+        name: loc,
+        count: 0,
+        show_by_default: true
+      }) }
+    end
+
   end
 
   # GET artwork/1
