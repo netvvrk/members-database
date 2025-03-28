@@ -19,7 +19,7 @@ class MainController < ApplicationController
       # with_pg_search_rank is to avoid sql error (see commit message)
       @artworks.search(@search_term).with_pg_search_rank
       # .reorder("") is needed to get rid of rank column for grouping
-      artworks_for_grouping = artworks_for_grouping.search(@search_term).reorder("") 
+      artworks_for_grouping = artworks_for_grouping.search(@search_term).reorder("")
     else
       @artworks.order(:non_search_rank)
     end
@@ -54,17 +54,21 @@ class MainController < ApplicationController
       ))
     end
 
-
     # if there is no item in the group just show the selected locations
     if @location_options&.empty?
-      @location_options = @location&.map { | loc | OpenStruct.new({
-        id: loc,
-        name: loc,
-        count: 0,
-        show_by_default: true
-      }) }
+      @location_options = if @location
+        @location&.map { |loc|
+          OpenStruct.new({
+            id: loc,
+            name: loc,
+            count: 0,
+            show_by_default: true
+          })
+        }
+      else
+        []
+      end
     end
-    
 
     medium_options = artworks_for_grouping.group(:medium).order(count: :desc).count
 
@@ -78,14 +82,19 @@ class MainController < ApplicationController
 
     # if there is no item in the group just show the selected medium
     if @medium_options&.empty?
-      @medium_options = @medium&.map { | loc | OpenStruct.new({
-        id: loc,
-        name: loc,
-        count: 0,
-        show_by_default: true
-      }) }
+      @medium_options = if @medium 
+        @medium&.map { |loc|
+          OpenStruct.new({
+            id: loc,
+            name: loc,
+            count: 0,
+            show_by_default: true
+          })
+        }
+      else
+        []
+      end
     end
-
   end
 
   # GET artwork/1
