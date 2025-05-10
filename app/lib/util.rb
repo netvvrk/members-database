@@ -1,7 +1,7 @@
 class Util
   class << self
     def subscription_is_annual_or_founding(subscription)
-      subscription_types = subscription.subscription_items.map(&:item_price_id)
+      subscription_types = subscription&.subscription_items&.map(&:item_price_id) || []
       subscription_types.any? { |t| t =~ /Annual|Founding|Netvvrk-Payment-Plan-USD-Every-6-months|Netvvrk-Payment-Plan-4385/ }
     end
 
@@ -32,7 +32,7 @@ class Util
 
         print "Should receive email: #{should_receive}"
         if !should_receive
-          print subscription.subscription_items.map(&:item_price_id)
+          print subscription&.subscription_items&.map(&:item_price_id)
         end
         puts ""
       end
