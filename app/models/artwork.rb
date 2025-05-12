@@ -5,7 +5,7 @@ class Artwork < ApplicationRecord
 
   MEDIUM_LIST = ["Painting", "Photography", "Sculpture", "Prints", "Work on Paper", "NFT",
     "Design", "Drawing", "Installation", "Film/Video", "Jewelry", "Performance Art",
-    "Reproduction", "Ephemera or Merchandise", "Digital Art"]
+    "Reproduction", "Ephemera or Merchandise", "Digital Art", "Textile"]
 
   validates :title, :medium, :year, presence: true
   validates :location, presence: true, unless: -> { ["Digital Art", "NFT"].include?(medium) }
