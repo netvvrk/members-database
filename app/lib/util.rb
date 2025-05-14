@@ -50,11 +50,12 @@ class Util
     end
 
     def check_inactive_accounts
-      File.readlines(File.join(ENV.fetch("HOME"), "check-emails.txt")).each do |email|
-        email.chomp!
-        break if email.blank?
-        subscription = check_subscription_for_email(email)
-        print email, " -- #{subscription_is_annual_or_founding(subscription)}\n"
+      User.where(active: false).each do |user|
+        subscription = check_subscription_for_email(user.email)
+        next if subscription.nil?
+        if subscription_is_annual_or_founding(subscription)
+          puts user.email
+        end
       end
     end
 
