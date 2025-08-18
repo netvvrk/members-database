@@ -44,12 +44,8 @@ class WebhookHandler
         subscription_create(event)
       when "subscription_paused"
         deactivate_user(user)
-      # when "subscription_reactivated"
-      #   activate_user(event)
-      # when "subscription_resumed"
-      #   activate_user(event)
-      # when "payment_succeeded"
-      #   upgrade_monthly_user(user, event)
+      when "payment_succeeded"
+        upgrade_monthly_user(user, event)
       else
         false
       end
@@ -67,10 +63,10 @@ class WebhookHandler
       event.event_type != "subscription_created"
     end
 
-    def activate_user(user, event)
-      active = Util.subscription_is_annual_or_founding(event.content.subscription)
+    def activate_user(user)
+      return if user.active?
 
-      user.send_welcome_email if active && Rails.configuration.x.user_creation_send_email
+      user.send_welcome_email if Rails.configuration.x.user_creation_send_email
 
       user.active = true
       user.save
@@ -92,7 +88,7 @@ class WebhookHandler
     def subscription_change(user, event)
       if Util.subscription_is_annual_or_founding(event.content.subscription)
         user = find_user(event)
-        activate_user(user, event)
+        activate_user(user)
       else
         deactivate_user(user)
       end
@@ -125,11 +121,13 @@ class WebhookHandler
     end
 
     def upgrade_monthly_user(user, event)
-      return true if Util.subscription_is_annual_or_founding(event.content.subscription)
-      started_at = event.content.subscription.started_at
-      if 2.years.ago.to_i > started_at
+      return true if user.active
+      activation_date = Time.at(event.content.subscription.activated_at).to_datetime
+      if 6.months.ago > activation_date
         activate_user(user)
+        return true
       end
+      false
     end
   end
 end
