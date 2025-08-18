@@ -120,15 +120,33 @@ class WebhookHandlerTest < ActiveSupport::TestCase
     refute user.active
   end
 
-  # test "monthly user is activated after 2 years" do
-  #   payload = File.read(Rails.root.join("test", "fixtures", "files", "payment_succeeded.json"))
-  #   event = ChargeBee::Event.deserialize(payload)
+  test "monthly user is activated after 6 months" do
+    payload = File.read(Rails.root.join("test", "fixtures", "files", "payment_succeeded.json"))
+    event = ChargeBee::Event.deserialize(payload)
 
-  #   user = users(:artist)
-  #   user.active = false
-  #   user.save
+    user = users(:artist)
+    user.active = false
+    user.save
 
-  #   assert WebhookHandler.handle_payload(event)
-  #   assert user.reload.active
-  # end
+    # the fixture file has an activation date of January 16, 2025
+    travel_to Time.parse("2025-08-01") do
+      assert WebhookHandler.handle_payload(event)
+      assert user.reload.active
+    end
+  end
+
+  test "monthly user is not activated until after 6 months" do
+    payload = File.read(Rails.root.join("test", "fixtures", "files", "payment_succeeded.json"))
+    event = ChargeBee::Event.deserialize(payload)
+
+    user = users(:artist)
+    user.active = false
+    user.save
+
+    # the fixture file has an activation date of January 16, 2025
+    travel_to Time.parse("2025-04-01") do
+      WebhookHandler.handle_payload(event)
+      refute user.reload.active
+    end
+  end
 end
