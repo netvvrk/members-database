@@ -14,7 +14,7 @@ class MainController < ApplicationController
 
     artworks_for_grouping = Artwork.is_active.is_visible.with_images.all
 
-    @artworks = Artwork.is_visible.with_images.all
+    @artworks = Artwork.is_visible.with_images.all.includes(:user, :images)
     @artworks = if @search_term.present?
       # with_pg_search_rank is to avoid sql error (see commit message)
       @artworks.search(@search_term).with_pg_search_rank

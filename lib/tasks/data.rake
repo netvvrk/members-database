@@ -1,6 +1,14 @@
 namespace :data do
-  desc "update random order for homepage artworks"
+  desc "update random order for homepage artworks, grouped by artist/user"
   task randomize_artworks: :environment do
-    ActiveRecord::Base.connection.execute("update artworks set non_search_rank = random()")
+    rank = 0
+
+    User.all.order("random()").each do |user|
+      artworks = user.artworks
+      artworks.each do |artwork|
+        artwork.update_attribute(:non_search_rank, rank)
+        rank += 1
+      end
+    end
   end
 end
