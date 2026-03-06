@@ -71,7 +71,7 @@ class ChargebeeSync
       u.profile.name = name
       u.profile.save(validate: false)
 
-      u.send_welcome_email if active && Rails.configuration.x.user_creation_send_email
+      WelcomeEmailSender.send(u)
     end
   end
 end

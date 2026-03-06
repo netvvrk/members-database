@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_02_15_031025) do
+ActiveRecord::Schema[7.2].define(version: 2026_03_06_011616) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
@@ -151,6 +151,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_15_031025) do
     t.boolean "active", default: true, null: false
     t.string "cb_customer_id"
     t.datetime "welcome_email_sent_at"
+    t.datetime "send_welcome_email_at"
     t.index ["active"], name: "index_users_on_active"
     t.index ["cb_customer_id"], name: "index_users_on_cb_customer_id"
     t.index ["email"], name: "index_users_on_email", unique: true

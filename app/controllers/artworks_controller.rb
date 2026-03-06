@@ -1,7 +1,7 @@
 class ArtworksController < ApplicationController
   before_action :authenticate_user!
   before_action :set_artwork, only: %i[show edit update destroy move_artwork]
-  skip_before_action :verify_authenticity_token, only: %i[move_artwork]  
+  skip_before_action :verify_authenticity_token, only: %i[move_artwork]
 
   # GET /artworks
   def index
@@ -55,7 +55,7 @@ class ArtworksController < ApplicationController
     new_position = params[:to_index].to_i + 1
     @artwork.update position: new_position
     render json: {}, status: 200
-  end  
+  end
 
   private
 

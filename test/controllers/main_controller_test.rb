@@ -7,7 +7,7 @@ class MainControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should load without errors on a search with 0 results" do
-    get root_url, params: { search: "asdf"}
+    get root_url, params: {search: "asdf"}
     assert_response :success
   end
 end

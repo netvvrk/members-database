@@ -66,7 +66,7 @@ class WebhookHandler
     def activate_user(user)
       return if user.active?
 
-      user.send_welcome_email if Rails.configuration.x.user_creation_send_email
+      WelcomeEmailSender.send(user)
 
       user.active = true
       user.save
@@ -111,7 +111,7 @@ class WebhookHandler
         active: active
       )
       if u.valid?
-        u.send_welcome_email if active && Rails.configuration.x.user_creation_send_email
+        WelcomeEmailSender.send(u)
         u.profile.name = name
         u.save
         true
