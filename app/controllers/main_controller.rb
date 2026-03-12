@@ -82,7 +82,7 @@ class MainController < ApplicationController
 
     # if there is no item in the group just show the selected medium
     if @medium_options&.empty?
-      @medium_options = if @medium 
+      @medium_options = if @medium
         @medium&.map { |loc|
           OpenStruct.new({
             id: loc,

@@ -24,6 +24,7 @@ gem "turbo-rails"
 group :development, :test do
   gem "byebug"
   gem "debug"
+  gem "mocha"
 end
 
 group :development do

@@ -168,6 +168,8 @@ GEM
     mime-types-data (3.2024.1001)
     mini_mime (1.1.5)
     minitest (5.25.1)
+    mocha (3.0.2)
+      ruby2_keywords (>= 0.0.5)
     msgpack (1.7.3)
     multipart-post (2.4.1)
     net-imap (0.5.7)
@@ -279,6 +281,7 @@ GEM
       rubocop (>= 1.48.1, < 2.0)
       rubocop-ast (>= 1.31.1, < 2.0)
     ruby-progressbar (1.13.0)
+    ruby2_keywords (0.0.5)
     ruby_http_client (3.5.5)
     securerandom (0.3.1)
     sendgrid-ruby (6.7.0)
@@ -349,6 +352,7 @@ DEPENDENCIES
   imagekitio
   jsbundling-rails
   kaminari
+  mocha
   net-pop!
   pg
   pg_search
