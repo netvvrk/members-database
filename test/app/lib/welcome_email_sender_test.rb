@@ -22,4 +22,12 @@ class WelcomeEmailSenderTest < ActiveSupport::TestCase
     WelcomeEmailSender.expects(:sendgrid_send).never
     WelcomeEmailSender.send(users(:artist))
   end
+
+  test "do not send email when user.welcome_email_sent_at is set" do
+    WelcomeEmailSender.expects(:sendgrid_send).never
+    user = users(:artist)
+    user.update!(welcome_email_sent_at: 1.day.ago)
+    WelcomeEmailSender.expects(:sendgrid_send).never
+    WelcomeEmailSender.send(users(:artist))
+  end
 end
