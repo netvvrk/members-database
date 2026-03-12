@@ -8,7 +8,7 @@ class WelcomeEmailSender
     end
 
     def send(user)
-      return unless Rails.application.config.x.user_creation_send_email
+      return unless Rails.application.config.x.user_creation_send_email && user.active
 
       token = user.pasword_reset_token
       # I don't know why I have to pass in the host: parameter. It should just get it from the environment.

@@ -14,4 +14,12 @@ class WelcomeEmailSenderTest < ActiveSupport::TestCase
       WelcomeEmailSender.send(users(:artist))
     end
   end
+
+  test "do not send email when user.active is false" do
+    WelcomeEmailSender.expects(:sendgrid_send).never
+    user = users(:artist)
+    user.update!(active: false)
+    WelcomeEmailSender.expects(:sendgrid_send).never
+    WelcomeEmailSender.send(users(:artist))
+  end
 end
