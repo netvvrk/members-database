@@ -41,3 +41,5 @@
 .yarn/cache
 
 .byebug_history
+
+.claude

@@ -13,7 +13,7 @@ class WelcomeEmailSender
       delay_days = Rails.application.config.x.user_creation_email_delay
 
       # delay sending email
-      if delay_days.positive?
+      if delay_days.positive? && user.send_welcome_email_at.nil?
         user.update!(send_welcome_email_at: delay_days.days.from_now)
         return
       end
@@ -37,6 +37,12 @@ class WelcomeEmailSender
         user.update!(welcome_email_sent_at: Time.now)
       rescue => e
         puts e.message
+      end
+    end
+
+    def send_delayed_emails
+      User.where("send_welcome_email_at <= ? AND welcome_email_sent_at IS NULL AND active = TRUE", Time.now).each do |user|
+        send(user)
       end
     end
 
