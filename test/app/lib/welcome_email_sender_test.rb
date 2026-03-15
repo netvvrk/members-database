@@ -19,13 +19,57 @@ class WelcomeEmailSenderTest < ActiveSupport::TestCase
     end
   end
 
-  test "sends email when delay > 0 but send_welcome_email_at has already been set" do
+  test "sends email when delay > 0 and send_welcome_email_at is in the past" do
     with_config(:user_creation_email_delay, 7) do
       with_config(:user_creation_send_email, true) do
         user = users(:artist)
         user.update!(send_welcome_email_at: 1.day.ago)
         WelcomeEmailSender.expects(:sendgrid_send).once
         WelcomeEmailSender.send(user)
+      end
+    end
+  end
+
+  test "does not send email when delay > 0 and send_welcome_email_at is in the future" do
+    with_config(:user_creation_email_delay, 7) do
+      with_config(:user_creation_send_email, true) do
+        user = users(:artist)
+        user.update!(send_welcome_email_at: 1.day.from_now)
+        WelcomeEmailSender.expects(:sendgrid_send).never
+        WelcomeEmailSender.send(user)
+      end
+    end
+  end
+
+  test "does not overwrite send_welcome_email_at when already set" do
+    with_config(:user_creation_email_delay, 7) do
+      with_config(:user_creation_send_email, true) do
+        user = users(:artist)
+        original_time = 3.days.from_now
+        user.update!(send_welcome_email_at: original_time)
+        WelcomeEmailSender.send(user)
+        assert_equal original_time.to_i, user.reload.send_welcome_email_at.to_i
+      end
+    end
+  end
+
+  test "sets send_welcome_email_at on user when delay > 0" do
+    with_config(:user_creation_email_delay, 7) do
+      with_config(:user_creation_send_email, true) do
+        user = users(:artist)
+        WelcomeEmailSender.send(user)
+        assert_not_nil user.reload.send_welcome_email_at
+      end
+    end
+  end
+
+  test "sets welcome_email_sent_at after sending" do
+    with_config(:user_creation_email_delay, 0) do
+      with_config(:user_creation_send_email, true) do
+        WelcomeEmailSender.stubs(:sendgrid_send)
+        user = users(:artist)
+        WelcomeEmailSender.send(user)
+        assert_not_nil user.reload.welcome_email_sent_at
       end
     end
   end

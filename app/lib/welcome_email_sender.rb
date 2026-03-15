@@ -13,9 +13,12 @@ class WelcomeEmailSender
       delay_days = Rails.application.config.x.user_creation_email_delay
 
       # delay sending email
-      if delay_days.positive? && user.send_welcome_email_at.nil?
-        user.update!(send_welcome_email_at: delay_days.days.from_now)
-        return
+      if delay_days.positive?
+        if user.send_welcome_email_at.nil?
+          user.update!(send_welcome_email_at: delay_days.days.from_now)
+          return
+        end
+        return if user.send_welcome_email_at > Time.now
       end
 
       token = user.pasword_reset_token
