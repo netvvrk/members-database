@@ -10,6 +10,17 @@ class WelcomeEmailSender
     def send(user)
       return unless Rails.application.config.x.user_creation_send_email && user.active && user.welcome_email_sent_at.nil?
 
+      delay_days = Rails.application.config.x.user_creation_email_delay
+
+      # delay sending email
+      if delay_days.positive?
+        if user.send_welcome_email_at.nil?
+          user.update!(send_welcome_email_at: delay_days.days.from_now)
+          return
+        end
+        return if user.send_welcome_email_at > Time.now
+      end
+
       token = user.pasword_reset_token
       # I don't know why I have to pass in the host: parameter. It should just get it from the environment.
       url = edit_user_password_url(self, reset_password_token: token, host: Rails.configuration.action_mailer.default_url_options[:host])
@@ -29,6 +40,12 @@ class WelcomeEmailSender
         user.update!(welcome_email_sent_at: Time.now)
       rescue => e
         puts e.message
+      end
+    end
+
+    def send_delayed_emails
+      User.where("send_welcome_email_at <= ? AND welcome_email_sent_at IS NULL AND active = TRUE", Time.now).each do |user|
+        send(user)
       end
     end
 

@@ -65,6 +65,8 @@ module MembersDatabase
     config.x.chargebee.webhook_user = ENV["CHARGEBEE_WEBHOOK_USER"]
     config.x.chargebee.webhook_pass = ENV["CHARGEBEE_WEBHOOK_PASS"]
     config.x.user_creation_send_email = ENV["USER_CREATION_SEND_EMAIL"]
+    # days
+    config.x.user_creation_email_delay = ENV["USER_CREATION_EMAIL_DELAY"].to_i || 7
     config.x.log_webhook_events = ENV["LOG_WEBHOOK_EVENTS"]
   end
 
