@@ -22,16 +22,20 @@ class WelcomeEmailSenderTest < ActiveSupport::TestCase
   test "does not create a welcome_email record when user.active is false" do
     user = users(:artist)
     user.update!(active: false)
-    assert_difference "WelcomeEmail.count", 0 do
-      WelcomeEmailSender.send(users(:artist))
+    with_config(:user_creation_send_email, true) do
+      assert_difference "WelcomeEmail.count", 0 do
+        WelcomeEmailSender.send(users(:artist))
+      end
     end
   end
 
   test "send_scheduled_emails sends email when record has send_at in the past" do
-    user = users(:artist)
-    WelcomeEmailSender.send(user)
-    travel_to 1.day.from_now
-    WelcomeEmailSender.expects(:sendgrid_send).once
-    WelcomeEmailSender.send_scheduled_emails
+    with_config(:user_creation_send_email, true) do
+      user = users(:artist)
+      WelcomeEmailSender.send(user)
+      travel_to 1.day.from_now
+      WelcomeEmailSender.expects(:sendgrid_send).once
+      WelcomeEmailSender.send_scheduled_emails
+    end
   end
 end

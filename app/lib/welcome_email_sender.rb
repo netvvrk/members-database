@@ -9,7 +9,13 @@ class WelcomeEmailSender
 
     def send(user)
       return unless Rails.application.config.x.user_creation_send_email && user.active
-      WelcomeEmail.create!(user: user, send_at: Time.now)
+      delay_days = Rails.application.config.x.user_creation_email_delay
+      send_email_at = if delay_days.positive?
+        delay_days.days.from_now
+      else
+        Time.now
+      end
+      WelcomeEmail.create!(user: user, send_at: send_email_at)
     end
 
     def send_scheduled_emails
