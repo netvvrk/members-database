@@ -26,4 +26,12 @@ class WelcomeEmailSenderTest < ActiveSupport::TestCase
       WelcomeEmailSender.send(users(:artist))
     end
   end
+
+  test "send_scheduled_emails sends email when record has send_at in the past" do
+    user = users(:artist)
+    WelcomeEmailSender.send(user)
+    travel_to 1.day.from_now
+    WelcomeEmailSender.expects(:sendgrid_send).once
+    WelcomeEmailSender.send_scheduled_emails
+  end
 end

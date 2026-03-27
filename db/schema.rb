@@ -164,7 +164,7 @@ ActiveRecord::Schema[7.2].define(version: 2026_03_27_030309) do
     t.datetime "sent_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_welcome_emails_on_user_id"
+    t.index ["user_id"], name: "index_welcome_emails_on_user_id", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
