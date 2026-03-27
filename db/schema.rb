@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_02_15_031025) do
+ActiveRecord::Schema[7.2].define(version: 2026_03_27_030309) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
@@ -158,8 +158,18 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_15_031025) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
+  create_table "welcome_emails", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.datetime "send_at"
+    t.datetime "sent_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_welcome_emails_on_user_id"
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "artworks", "users"
   add_foreign_key "images", "artworks"
+  add_foreign_key "welcome_emails", "users"
 end
