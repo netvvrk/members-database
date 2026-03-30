@@ -33,7 +33,7 @@ class WelcomeEmailSenderTest < ActiveSupport::TestCase
     with_config(:user_creation_send_email, true) do
       user = users(:artist)
       WelcomeEmailSender.send(user)
-      travel_to 1.day.from_now
+      travel_to 1.hour.from_now
       WelcomeEmailSender.expects(:sendgrid_send).once
       WelcomeEmailSender.send_scheduled_emails
     end
