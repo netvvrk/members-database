@@ -38,4 +38,28 @@ class WelcomeEmailSenderTest < ActiveSupport::TestCase
       WelcomeEmailSender.send_scheduled_emails
     end
   end
+
+  test "send_scheduled_emails sends email in the future user_creation_email_delay is set" do
+    with_config(:user_creation_send_email, true) do
+      with_config(:user_creation_email_delay, 7) do
+        user = users(:artist)
+        WelcomeEmailSender.send(user)
+        travel_to 7.days.from_now + 1.hour
+        WelcomeEmailSender.expects(:sendgrid_send).once
+        WelcomeEmailSender.send_scheduled_emails
+      end
+    end
+  end
+
+  test "send_scheduled_emails doesn't send email until user_creation_email_delay has passed" do
+    with_config(:user_creation_send_email, true) do
+      with_config(:user_creation_email_delay, 7) do
+        user = users(:artist)
+        WelcomeEmailSender.send(user)
+        travel_to 6.days.from_now
+        WelcomeEmailSender.expects(:sendgrid_send).never
+        WelcomeEmailSender.send_scheduled_emails
+      end
+    end
+  end
 end
