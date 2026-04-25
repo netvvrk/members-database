@@ -10,7 +10,7 @@
     "esbuild": "0.25.0",
     "fslightbox": "^3.4.1",
     "nodemon": "^3.0.1",
-    "postcss": "^8.4.31",
+    "postcss": "^8.5.10",
     "postcss-cli": "^10.1.0",
     "sass": "^1.69.5",
     "sortablejs": "^1.15.3"
