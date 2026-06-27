@@ -12,22 +12,24 @@
       <div
         class="relative w-full after:clear-both after:block after:content-['']">
         <% @artwork.images.each_with_index do | image, i | %>
-        <a data-fslightbox href="<%= image.file.url %>">
+          <% file_url = image.file_url %>
+          <% next unless file_url %>
+        <a data-fslightbox href="<%= file_url %>">
           <div
             class="relative float-left -mr-[100%] w-full transition-opacity duration-[300ms] ease-in-out motion-reduce:transition-none
                    opacity-0 cursor-default <%= "!opacity-100 pointer-events-auto" if i == 0 %>"
             data-carousel-item
             style="backface-visibility: hidden">
-            <%= image_tag image.file.url, alt: image.caption, class: "block w-full" %>
+            <%= image_tag file_url, alt: image.caption, class: "block w-full" %>
             <div
               class="absolute inset-x-1 md:inset-x-[15%] -bottom-14 py-5 text-center block">
               <h5 class="text-black leading-4"><%= image.caption %></h5>
 
             </div>
-          </div>    
+          </div>
         </a>
-        <% end %>    
-        
+        <% end %>
+
       <% if @artwork.images.length > 1 %>
       <!--Carousel indicators-->
       <div
@@ -37,17 +39,17 @@
           <button
             type="button"
             aria-label="Slide <%= i %>" data-carousel-slide-to="<%= i %>"
-            class="mx-[3px] box-content h-[3px] w-[30px] flex-initial cursor-pointer 
+            class="mx-[3px] box-content h-[3px] w-[30px] flex-initial cursor-pointer
                   border-0 border-y-[10px] border-solid border-transparent bg-black
                   bg-clip-padding p-0 -indent-[999px] opacity-50 transition-opacity
                   duration-[600ms] ease-[cubic-bezier(0.25,0.1,0.25,1.0)] motion-reduce:transition-none <%= '!opacity-100' if i == 0 %>"></button>
         <% end %>
-      </div>        
+      </div>
 
       <!--Carousel controls - prev item-->
       <button
         class="absolute bottom-0 left-0 top-0 z-[1] flex w-[15%] items-center justify-center
-          border-0 bg-none p-0 text-center text-white opacity-50 transition-opacity duration-150 
+          border-0 bg-none p-0 text-center text-white opacity-50 transition-opacity duration-150
           ease-[cubic-bezier(0.25,0.1,0.25,1.0)] hover:text-white hover:no-underline hover:opacity-90
           hover:outline-none focus:text-white focus:no-underline focus:opacity-90 focus:outline-none
           motion-reduce:transition-none"
@@ -75,7 +77,7 @@
       <!--Carousel controls - next item-->
       <button
         class="absolute bottom-0 right-0 top-0 z-[1] flex w-[15%] items-center justify-center border-0
-          bg-none p-0 text-center text-white opacity-50 transition-opacity duration-150 
+          bg-none p-0 text-center text-white opacity-50 transition-opacity duration-150
           ease-[cubic-bezier(0.25,0.1,0.25,1.0)] hover:text-white hover:no-underline hover:opacity-90
           hover:outline-none focus:text-white focus:no-underline focus:opacity-90 focus:outline-none
           motion-reduce:transition-none"
@@ -103,7 +105,7 @@
       <% end %>
     </div>
    </div>
-        
+
   </div>
 
   <div class="lg:row-start-1 lg:col-start-4 lg:row-span-2 mt-8 <%= "mt-14" if @artwork.images.length > 1 %>">
