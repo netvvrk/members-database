@@ -14,7 +14,7 @@ class MainController < ApplicationController
 
     artworks_for_grouping = Artwork.is_active.is_visible.with_images.all
 
-    @artworks = Artwork.is_visible.with_images.all.includes(:user, :images)
+    @artworks = Artwork.where("artworks.active = true").is_visible.with_images.all.includes(:user, :images)
     @artworks = if @search_term.present?
       # with_pg_search_rank is to avoid sql error (see commit message)
       @artworks.search(@search_term).with_pg_search_rank
@@ -99,10 +99,7 @@ class MainController < ApplicationController
 
   # GET artwork/1
   def show
-    @artwork = Artwork.find(params[:id])
-    if !@artwork.visible && !belongs_to_user
-      redirect_to root_url
-    end
+    @artwork = Artwork.is_active.is_visible.find(params[:id])
   end
 
   private
