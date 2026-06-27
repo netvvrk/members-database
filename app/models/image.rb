@@ -12,6 +12,12 @@ class Image < ApplicationRecord
     file&.blob&.content_type&.include?("video")
   end
 
+  def file_url
+    file.url
+  rescue
+    nil
+  end
+
   private
 
   def valid_image
