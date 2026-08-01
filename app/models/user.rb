@@ -17,6 +17,7 @@ class User < ApplicationRecord
   has_many :artworks, -> { order("position") }, dependent: :destroy
 
   has_one :profile
+  has_one :welcome_email
 
   scope :is_active, -> { where(active: true) }
 
