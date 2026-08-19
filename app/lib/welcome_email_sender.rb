@@ -40,6 +40,7 @@ class WelcomeEmailSender
           sendgrid_send(mail)
           welcome_email.update!(sent_at: Time.now)
         rescue => e
+          Honeybadger.notify(e, context: {welcome_email_id: welcome_email.id, user_id: user.id})
           puts e.message
         end
       end
@@ -47,7 +48,10 @@ class WelcomeEmailSender
 
     def sendgrid_send(mail)
       sg = SendGrid::API.new(api_key: ENV["SENDGRID_API_KEY"])
-      sg.client.mail._("send").post(request_body: mail.to_json)
+      response = sg.client.mail._("send").post(request_body: mail.to_json)
+      unless response.status_code.to_i.between?(200, 299)
+        raise "SendGrid error #{response.status_code}: #{response.body}"
+      end
     end
   end
 end

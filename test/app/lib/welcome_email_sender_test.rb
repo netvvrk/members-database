@@ -62,4 +62,30 @@ class WelcomeEmailSenderTest < ActiveSupport::TestCase
       end
     end
   end
+
+  test "send_scheduled_emails does not mark welcome_email as sent when sendgrid_send fails" do
+    with_config(:user_creation_send_email, true) do
+      user = users(:artist)
+      WelcomeEmailSender.send(user)
+      travel_to 1.hour.from_now
+      WelcomeEmailSender.stubs(:sendgrid_send).raises("boom")
+      WelcomeEmailSender.send_scheduled_emails
+      assert_nil user.reload.welcome_email.sent_at
+    end
+  end
+
+  test "sendgrid_send raises when SendGrid returns a non-2xx response" do
+    response = Struct.new(:status_code, :body).new("403", "Forbidden")
+    post_double = mock
+    post_double.stubs(:post).returns(response)
+    send_double = mock
+    send_double.stubs(:_).with("send").returns(post_double)
+    mail_double = mock
+    mail_double.stubs(:mail).returns(send_double)
+    client_double = mock
+    client_double.stubs(:client).returns(mail_double)
+    SendGrid::API.stubs(:new).returns(client_double)
+
+    assert_raises(RuntimeError) { WelcomeEmailSender.sendgrid_send(SendGrid::Mail.new) }
+  end
 end
