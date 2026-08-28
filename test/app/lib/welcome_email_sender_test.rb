@@ -28,6 +28,27 @@ class WelcomeEmailSenderTest < ActiveSupport::TestCase
     end
   end
 
+  test "send with immediate: true delivers right away regardless of the configured delay" do
+    with_config(:user_creation_send_email, true) do
+      with_config(:user_creation_email_delay, 7) do
+        user = users(:artist)
+        WelcomeEmailSender.expects(:sendgrid_send).once
+        welcome_email = WelcomeEmailSender.send(user, immediate: true)
+        assert_not_nil welcome_email.sent_at
+        assert_in_delta Time.now.to_i, welcome_email.send_at.to_i, 1
+      end
+    end
+  end
+
+  test "send without immediate: true does not deliver right away" do
+    with_config(:user_creation_send_email, true) do
+      user = users(:artist)
+      WelcomeEmailSender.expects(:sendgrid_send).never
+      welcome_email = WelcomeEmailSender.send(user)
+      assert_nil welcome_email.sent_at
+    end
+  end
+
   test "does not create a welcome_email record if user_creation_send_email flag is false" do
     with_config(:user_creation_send_email, false) do
       assert_difference "WelcomeEmail.count", 0 do

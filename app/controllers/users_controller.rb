@@ -71,8 +71,12 @@ class UsersController < ApplicationController
 
   def send_welcome_email
     @user.update!(active: true) unless @user.active
-    WelcomeEmailSender.send(@user)
-    redirect_to users_path, notice: "Welcome email sent to #{@user.email}"
+    welcome_email = WelcomeEmailSender.send(@user, immediate: true)
+    if welcome_email&.sent_at.present?
+      redirect_to users_path, notice: "Welcome email sent to #{@user.email}"
+    else
+      redirect_to users_path, alert: "Failed to send welcome email to #{@user.email}"
+    end
   end
 
   private
