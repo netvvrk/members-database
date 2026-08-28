@@ -15,7 +15,7 @@ class WelcomeEmailSender
       else
         Time.now
       end
-      WelcomeEmail.create!(user: user, send_at: send_email_at)
+      WelcomeEmail.find_or_initialize_by(user: user).update!(send_at: send_email_at, sent_at: nil)
     end
 
     def send_scheduled_emails
